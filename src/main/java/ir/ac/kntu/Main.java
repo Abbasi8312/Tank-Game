@@ -1,5 +1,6 @@
 package ir.ac.kntu;
 
+import ir.ac.kntu.logic.model.Board;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -18,7 +19,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Scene scene = new Scene(new Pane());
-
+        Board board = new Board();
+        board.start();
         primaryStage.setScene(scene);
         primaryStage.show();
     }
