@@ -12,12 +12,12 @@ public class CollisionHandler {
         this.gameObjects = gameObjects;
     }
 
-    public GameObject checkCollision(Collidable collidable) {
+    public GameObject checkCollision(Collidable collidable, double velocity) {
         for (GameObject gameObject : gameObjects) {
             if (gameObject.equals(collidable)) {
                 continue;
             }
-            if (collidable.isCollide(gameObject)) {
+            if (collidable.isColliding(gameObject, velocity)) {
                 System.out.println("Collided with: " + gameObject.getId());
                 return gameObject;
             }

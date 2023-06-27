@@ -21,8 +21,14 @@ public class Board {
     }
 
     public void start() {
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.execute((Runnable) gameObjects.get(0));
-        executor.execute((Runnable) gameObjects.get(1));
+        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(1);
+        executor.submit((Runnable) gameObjects.get(0));
+        executor.submit((Runnable) gameObjects.get(1));
+        System.out.println("salam");
+        executor.shutdown();
+    }
+
+    public List<GameObject> getGameObjects() {
+        return new ArrayList<>(gameObjects);
     }
 }

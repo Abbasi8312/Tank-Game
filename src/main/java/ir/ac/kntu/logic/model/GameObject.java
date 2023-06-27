@@ -11,11 +11,15 @@ public abstract class GameObject {
 
     protected final Timer timer;
 
-    protected int x;
+    protected double x;
 
-    protected int y;
+    protected double y;
 
-    protected GameObject(int x, int y, CollisionHandler collisionHandler, int id) {
+    protected double width;
+
+    protected double height;
+
+    protected GameObject(double x, double y, CollisionHandler collisionHandler, int id) {
         this.x = x;
         this.y = y;
         this.collisionHandler = collisionHandler;
@@ -23,23 +27,39 @@ public abstract class GameObject {
         this.id = id;
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public void setX(int x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
-    public void setY(int y) {
+    public void setY(double y) {
         this.y = y;
     }
 
     public int getId() {
         return id;
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    public double getHeight() {
+        return height;
+    }
+
+    public void setHeight(double height) {
+        this.height = height;
     }
 }

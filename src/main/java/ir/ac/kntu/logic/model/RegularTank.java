@@ -2,7 +2,6 @@ package ir.ac.kntu.logic.model;
 
 import ir.ac.kntu.logic.CollisionHandler;
 
-import java.util.Random;
 import java.util.TimerTask;
 
 public class RegularTank extends Tank {
@@ -10,45 +9,48 @@ public class RegularTank extends Tank {
         super(x, y, collisionHandler, id);
     }
 
-    @Override public boolean isCollide(GameObject gameObject) {
-        int x = this.x;
-        int y = this.y;
+    @Override public boolean isColliding(GameObject gameObject, double velocity) {
+        double x = this.x;
+        double y = this.y;
         switch (direction) {
             case UP -> y -= velocity;
             case DOWN -> y += velocity;
             case RIGHT -> x += velocity;
             case LEFT -> x -= velocity;
         }
-        return Math.abs(x - gameObject.x) < GameConstants.COLLISION_BOX_LENGTH / 2 &&
-                Math.abs(y - gameObject.y) < GameConstants.COLLISION_BOX_LENGTH / 2;
+        return Math.abs(x - gameObject.x) < GameConstants.TILE_SIZE / 2 &&
+                Math.abs(y - gameObject.y) < GameConstants.TILE_SIZE / 2;
     }
 
     @Override public void run() {
+        System.out.println(id);
         timer.schedule(new ChangeDirection(), 0, 2000);
-        timer.schedule(new MoveTask(), 5, 500);
+        System.out.println(id);
+        move();
     }
 
     @Override public void move() {
-        GameObject collided = collisionHandler.checkCollision(this);
-        if (collided == null) {
-            switch (direction) {
-                case UP -> y -= velocity;
-                case DOWN -> y += velocity;
-                case RIGHT -> x += velocity;
-                case LEFT -> x -= velocity;
+        long lastTime = System.nanoTime();
+        while (true) {
+            long currentTime = System.nanoTime();
+            double deltaTime = (currentTime - lastTime) / 10e9;
+            double velocity = this.velocity * deltaTime;
+            GameObject collided = collisionHandler.checkCollision(this, velocity);
+            if (collided == null) {
+                switch (direction) {
+                    case UP -> y -= velocity;
+                    case DOWN -> y += velocity;
+                    case RIGHT -> x += velocity;
+                    case LEFT -> x -= velocity;
+                }
             }
-        }
-        System.out.println("id: " + id + " x: " + x + " y: " + y);
-    }
-
-    private void changeDirection() {
-        Direction[] directions = Direction.values();
-        direction = directions[new Random().nextInt(directions.length)];
-    }
-
-    private class MoveTask extends TimerTask {
-        @Override public void run() {
-            move();
+            System.out.println("id: " + id + " x: " + x + " y: " + y);
+            lastTime = currentTime;
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
