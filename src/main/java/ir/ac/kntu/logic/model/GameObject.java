@@ -1,6 +1,7 @@
 package ir.ac.kntu.logic.model;
 
 import ir.ac.kntu.logic.CollisionHandler;
+import javafx.scene.canvas.GraphicsContext;
 
 import java.util.Timer;
 
@@ -18,6 +19,8 @@ public abstract class GameObject {
     protected double width;
 
     protected double height;
+
+    public abstract void draw(GraphicsContext gc, int frameIndex);
 
     protected GameObject(double x, double y, CollisionHandler collisionHandler, int id) {
         this.x = x;

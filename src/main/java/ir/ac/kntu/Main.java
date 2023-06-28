@@ -8,7 +8,11 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 
 /**
@@ -26,14 +30,15 @@ public class Main extends Application {
         Canvas canvas = new Canvas(GameConstants.GAME_WIDTH, GameConstants.GAME_HEIGHT);
         root.getChildren().add(canvas);
         GraphicsContext graphicsContext = canvas.getGraphicsContext2D();
-
-        Board board = new Board();
-        board.start();
+        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newCachedThreadPool();
+        Board board = new Board(executor);
 
         DrawObjects drawObjects = new DrawObjects(board, graphicsContext);
-        drawObjects.draw();
+        drawObjects.start();
 
+        board.update();
         primaryStage.setScene(scene);
         primaryStage.show();
+
     }
 }
