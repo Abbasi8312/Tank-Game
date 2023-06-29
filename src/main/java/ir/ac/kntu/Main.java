@@ -1,5 +1,6 @@
 package ir.ac.kntu;
 
+import ir.ac.kntu.gamecontroller.EventHandler;
 import ir.ac.kntu.graphics.DrawObjects;
 import ir.ac.kntu.logic.model.Board;
 import ir.ac.kntu.logic.model.GameConstants;
@@ -8,7 +9,6 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.util.concurrent.Executors;
@@ -37,6 +37,7 @@ public class Main extends Application {
         drawObjects.start();
 
         board.update();
+        EventHandler.getInstance().attachEventHandlers(scene);
         primaryStage.setScene(scene);
         primaryStage.show();
 

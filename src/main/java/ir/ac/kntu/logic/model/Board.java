@@ -21,9 +21,24 @@ public class Board {
         gameObjects = new ArrayList<>();
         collisionHandler = new CollisionHandler(gameObjects);
         movables = new ArrayList<>();
-        gameObjects.add(new RegularTank(50, 100, collisionHandler, 1));
-        gameObjects.add(new RegularTank(75, 150, collisionHandler, 2));
-        gameObjects.add(new RegularTank(125, 150, collisionHandler, 3));
+        gameObjects.add(new RegularTank(100, 100, collisionHandler, 1));
+        gameObjects.add(new RegularTank(400, 150, collisionHandler, 2));
+        gameObjects.add(new RegularTank(200, 400, collisionHandler, 3));
+        for (int i = 0; i < GameConstants.GAME_WIDTH / GameConstants.TILE_SIZE; i++) {
+            gameObjects.add(
+                    new BorderWall(GameConstants.TILE_SIZE * (i + 0.5), GameConstants.TILE_SIZE * 0.5, collisionHandler,
+                            gameObjects.size()));
+            gameObjects.add(new BorderWall(GameConstants.TILE_SIZE * (i + 0.5),
+                    GameConstants.GAME_HEIGHT - GameConstants.TILE_SIZE * 0.5, collisionHandler, gameObjects.size()));
+        }
+        for (int i = 1; i < GameConstants.GAME_HEIGHT / GameConstants.TILE_SIZE - 1; i++) {
+            gameObjects.add(
+                    new BorderWall(GameConstants.TILE_SIZE * 0.5, GameConstants.TILE_SIZE * (i + 0.5), collisionHandler,
+                            gameObjects.size()));
+            gameObjects.add(new BorderWall(GameConstants.GAME_WIDTH - GameConstants.TILE_SIZE * 0.5,
+                    GameConstants.TILE_SIZE * (i + 0.5), collisionHandler, gameObjects.size()));
+        }
+        gameObjects.add(new Player(500, 400, collisionHandler, gameObjects.size()));
     }
 
     public void update() {
@@ -31,6 +46,6 @@ public class Board {
     }
 
     public List<GameObject> getGameObjects() {
-        return new ArrayList<>(gameObjects);
+        return gameObjects;
     }
 }

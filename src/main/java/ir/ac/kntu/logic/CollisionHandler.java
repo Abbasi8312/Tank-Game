@@ -18,7 +18,7 @@ public class CollisionHandler {
                 continue;
             }
             if (collidable.isColliding(gameObject, velocity)) {
-                System.out.println("Collided with: " + gameObject.getId());
+                //System.out.println("Collided with: " + gameObject.getId());
                 return gameObject;
             }
         }

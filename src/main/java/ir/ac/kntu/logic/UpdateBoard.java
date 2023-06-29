@@ -1,8 +1,8 @@
 package ir.ac.kntu.logic;
 
+import ir.ac.kntu.logic.model.EnemyTank;
 import ir.ac.kntu.logic.model.GameConstants;
 import ir.ac.kntu.logic.model.GameObject;
-import ir.ac.kntu.logic.model.Movable;
 
 import java.util.List;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -20,12 +20,12 @@ public class UpdateBoard implements Runnable {
     @Override public void run() {
         while (GameConstants.gameStatus != GameConstants.GameStatus.STOPPED) {
             for (GameObject gameObject : gameObjects) {
-                if (gameObject instanceof Movable movable) {
-                    executor.submit(movable);
+                if (gameObject instanceof EnemyTank enemyTank) {
+                    executor.submit(enemyTank);
                 }
             }
             try {
-                Thread.sleep(25);
+                Thread.sleep(5);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

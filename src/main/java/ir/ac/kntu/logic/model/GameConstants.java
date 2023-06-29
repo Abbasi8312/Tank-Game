@@ -5,9 +5,9 @@ public class GameConstants {
 
     public static GameStatus gameStatus = GameStatus.RUNNING;
 
-    public static int FRAME_LENGTH = 32; //In millis
+    public static int FRAME_LENGTH = 10; //In millis
 
-    public static int VELOCITY = 50;
+    public static int VELOCITY = 25;
 
     public static int GAME_WIDTH = 800;
 

@@ -37,18 +37,22 @@ public class DrawObjects {
         for (GameObject gameObject : gameObjects) {
             gameObject.draw(graphicsContext, ++frameIndex);
         }
-        graphicsContext.fillRect(0, 0, 10, 100);
     }
 
     public void start() {
         new AnimationTimer() {
-            long lastNanoTime = System.nanoTime();
+            long lastTime = System.currentTimeMillis();
+            int frameCount = 0;
+
             @Override public void handle(long currentNanoTime) {
-                double elapsedTime = (currentNanoTime - lastNanoTime) / 1_000_000.0;
-                if (elapsedTime >= GameConstants.FRAME_LENGTH) {
-                    lastNanoTime = currentNanoTime;
-                    draw();
+                if (System.currentTimeMillis() - lastTime < 1000) {
+                    frameCount++;
+                } else {
+                    lastTime += 1000;
+                    System.out.println(frameCount);
+                    frameCount = 0;
                 }
+                draw();
             }
         }.start();
     }

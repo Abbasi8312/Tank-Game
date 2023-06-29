@@ -10,8 +10,6 @@ public abstract class GameObject {
 
     protected final CollisionHandler collisionHandler;
 
-    protected final Timer timer;
-
     protected double x;
 
     protected double y;
@@ -26,7 +24,6 @@ public abstract class GameObject {
         this.x = x;
         this.y = y;
         this.collisionHandler = collisionHandler;
-        timer = new Timer();
         this.id = id;
     }
 
