@@ -1,11 +1,8 @@
 package ir.ac.kntu.gamecontroller;
 
-import ir.ac.kntu.logic.gameconstants.Direction;
-import ir.ac.kntu.logic.model.Player;
+import ir.ac.kntu.gamelogic.gameconstants.Direction;
+import ir.ac.kntu.gamelogic.model.Player;
 import javafx.scene.input.KeyCode;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public class PlayerController implements InputManager {
     private static final PlayerController instance = new PlayerController();

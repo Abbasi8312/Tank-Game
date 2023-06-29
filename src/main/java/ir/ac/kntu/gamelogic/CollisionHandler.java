@@ -1,7 +1,7 @@
-package ir.ac.kntu.logic;
+package ir.ac.kntu.gamelogic;
 
-import ir.ac.kntu.logic.model.Collidable;
-import ir.ac.kntu.logic.model.GameObject;
+import ir.ac.kntu.gamelogic.model.Collidable;
+import ir.ac.kntu.gamelogic.model.GameObject;
 
 import java.util.List;
 

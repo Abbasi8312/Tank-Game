@@ -1,7 +1,7 @@
-package ir.ac.kntu.logic.model;
+package ir.ac.kntu.gamelogic.model;
 
-import ir.ac.kntu.logic.CollisionHandler;
-import ir.ac.kntu.logic.gameconstants.Direction;
+import ir.ac.kntu.gamelogic.CollisionHandler;
+import ir.ac.kntu.gamelogic.gameconstants.Direction;
 
 import java.util.Random;
 import java.util.Timer;

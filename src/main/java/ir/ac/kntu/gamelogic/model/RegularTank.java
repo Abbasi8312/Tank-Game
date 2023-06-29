@@ -1,6 +1,6 @@
-package ir.ac.kntu.logic.model;
+package ir.ac.kntu.gamelogic.model;
 
-import ir.ac.kntu.logic.CollisionHandler;
+import ir.ac.kntu.gamelogic.CollisionHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -13,9 +13,10 @@ public class RegularTank extends EnemyTank {
         move();
     }
 
-    @Override public void draw(GraphicsContext gc, int frameIndex) {
+    @Override public void draw(GraphicsContext gc) {
+        ++frameIndex;
         String path = "images/tile000.png";
-        if (frameIndex % 2 < 1) {
+        if (frameIndex % 10 < 5) {
             switch (direction) {
                 case UP -> path = "images/tile000.png";
                 case DOWN -> path = "images/tile004.png";

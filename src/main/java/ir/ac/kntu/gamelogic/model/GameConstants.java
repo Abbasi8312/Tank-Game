@@ -1,4 +1,4 @@
-package ir.ac.kntu.logic.model;
+package ir.ac.kntu.gamelogic.model;
 
 public class GameConstants {
     public static double TILE_SIZE = 10;

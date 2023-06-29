@@ -1,9 +1,7 @@
-package ir.ac.kntu.logic.model;
+package ir.ac.kntu.gamelogic.model;
 
-import ir.ac.kntu.logic.CollisionHandler;
+import ir.ac.kntu.gamelogic.CollisionHandler;
 import javafx.scene.canvas.GraphicsContext;
-
-import java.util.Timer;
 
 public abstract class GameObject {
     protected final int id;
@@ -18,7 +16,7 @@ public abstract class GameObject {
 
     protected double height;
 
-    public abstract void draw(GraphicsContext gc, int frameIndex);
+    protected int frameIndex = 0;
 
     protected GameObject(double x, double y, CollisionHandler collisionHandler, int id) {
         this.x = x;
@@ -26,6 +24,8 @@ public abstract class GameObject {
         this.collisionHandler = collisionHandler;
         this.id = id;
     }
+
+    public abstract void draw(GraphicsContext gc);
 
     public double getX() {
         return x;

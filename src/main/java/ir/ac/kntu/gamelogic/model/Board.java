@@ -1,7 +1,7 @@
-package ir.ac.kntu.logic.model;
+package ir.ac.kntu.gamelogic.model;
 
-import ir.ac.kntu.logic.CollisionHandler;
-import ir.ac.kntu.logic.UpdateBoard;
+import ir.ac.kntu.gamelogic.CollisionHandler;
+import ir.ac.kntu.gamelogic.UpdateBoard;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class Board {
     private final List<GameObject> gameObjects;
 
-    private final List<Movable> movables;
+    private final List<GameObject> movables;
 
     private final CollisionHandler collisionHandler;
 
@@ -39,6 +39,11 @@ public class Board {
                     GameConstants.TILE_SIZE * (i + 0.5), collisionHandler, gameObjects.size()));
         }
         gameObjects.add(new Player(500, 400, collisionHandler, gameObjects.size()));
+        for (GameObject gameObject : gameObjects) {
+            if (gameObject instanceof Movable) {
+                movables.add(gameObject);
+            }
+        }
     }
 
     public void update() {
@@ -46,6 +51,10 @@ public class Board {
     }
 
     public List<GameObject> getGameObjects() {
-        return gameObjects;
+        return new ArrayList<>(gameObjects);
+    }
+
+    public List<GameObject> getMovables() {
+        return new ArrayList<>(movables);
     }
 }

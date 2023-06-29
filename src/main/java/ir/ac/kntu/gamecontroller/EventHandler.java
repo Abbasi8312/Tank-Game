@@ -8,8 +8,6 @@ import javafx.scene.input.KeyEvent;
 public class EventHandler {
     private static final EventHandler instance = new EventHandler();
 
-    private static boolean isMoving = false;
-
     private EventHandler() {
     }
 

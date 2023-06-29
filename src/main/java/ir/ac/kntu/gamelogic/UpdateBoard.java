@@ -1,8 +1,8 @@
-package ir.ac.kntu.logic;
+package ir.ac.kntu.gamelogic;
 
-import ir.ac.kntu.logic.model.EnemyTank;
-import ir.ac.kntu.logic.model.GameConstants;
-import ir.ac.kntu.logic.model.GameObject;
+import ir.ac.kntu.gamelogic.model.EnemyTank;
+import ir.ac.kntu.gamelogic.model.GameConstants;
+import ir.ac.kntu.gamelogic.model.GameObject;
 
 import java.util.List;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -25,7 +25,7 @@ public class UpdateBoard implements Runnable {
                 }
             }
             try {
-                Thread.sleep(5);
+                Thread.sleep(16);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

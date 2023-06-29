@@ -1,4 +1,4 @@
-package ir.ac.kntu.logic.gameconstants;
+package ir.ac.kntu.gamelogic.gameconstants;
 
 public enum Direction {
     UP,

@@ -1,7 +1,7 @@
-package ir.ac.kntu.logic.model;
+package ir.ac.kntu.gamelogic.model;
 
-import ir.ac.kntu.logic.CollisionHandler;
-import ir.ac.kntu.logic.gameconstants.Direction;
+import ir.ac.kntu.gamelogic.CollisionHandler;
+import ir.ac.kntu.gamelogic.gameconstants.Direction;
 
 public abstract class Tank extends GameObject implements Collidable, Movable {
     protected double velocity = GameConstants.VELOCITY;

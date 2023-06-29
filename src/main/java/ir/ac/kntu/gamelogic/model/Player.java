@@ -1,8 +1,8 @@
-package ir.ac.kntu.logic.model;
+package ir.ac.kntu.gamelogic.model;
 
 import ir.ac.kntu.gamecontroller.PlayerController;
-import ir.ac.kntu.logic.CollisionHandler;
-import ir.ac.kntu.logic.gameconstants.Direction;
+import ir.ac.kntu.gamelogic.CollisionHandler;
+import ir.ac.kntu.gamelogic.gameconstants.Direction;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -26,9 +26,10 @@ public class Player extends Tank {
         }
     }
 
-    @Override public void draw(GraphicsContext gc, int frameIndex) {
+    @Override public void draw(GraphicsContext gc) {
+        ++frameIndex;
         String path = "images/tile000.png";
-        if (frameIndex % 4 < 2) {
+        if (frameIndex % 10 < 5) {
             switch (direction) {
                 case UP -> path = "images/tile000.png";
                 case DOWN -> path = "images/tile004.png";
