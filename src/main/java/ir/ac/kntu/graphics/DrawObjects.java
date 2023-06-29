@@ -1,7 +1,7 @@
 package ir.ac.kntu.graphics;
 
 import ir.ac.kntu.gamelogic.model.Board;
-import ir.ac.kntu.gamelogic.model.GameConstants;
+import ir.ac.kntu.gamelogic.gameconstants.GameConstants;
 import ir.ac.kntu.gamelogic.model.GameObject;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;

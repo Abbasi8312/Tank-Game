@@ -1,6 +1,6 @@
-package ir.ac.kntu.gamelogic;
+package ir.ac.kntu.gamelogic.service;
 
-import ir.ac.kntu.gamelogic.model.Collidable;
+import ir.ac.kntu.gamelogic.model.interfaces.Collidable;
 import ir.ac.kntu.gamelogic.model.GameObject;
 
 import java.util.List;

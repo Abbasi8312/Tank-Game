@@ -1,47 +1,50 @@
-package ir.ac.kntu.gamelogic.model;
+package ir.ac.kntu.gamelogic.model.tank;
 
 import ir.ac.kntu.gamecontroller.PlayerController;
-import ir.ac.kntu.gamelogic.CollisionHandler;
 import ir.ac.kntu.gamelogic.gameconstants.Direction;
+import ir.ac.kntu.gamelogic.model.GameObject;
+import ir.ac.kntu.gamelogic.service.CollisionHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class Player extends Tank {
-    protected Player(int x, int y, CollisionHandler collisionHandler, int id) {
-        super(x, y, collisionHandler, id);
+public class PlayerTank extends Tank {
+    public PlayerTank(int x, int y, CollisionHandler collisionHandler) {
+        super(x, y, collisionHandler);
         PlayerController.setPlayer1(this);
         direction = Direction.UP;
     }
 
     @Override public void move() {
-        double velocity = this.velocity / 5;
+        double velocity = this.velocity / 20;
         GameObject collided = collisionHandler.checkCollision(this, velocity);
         if (collided == null) {
+            ++frameIndex;
             switch (direction) {
                 case UP -> y -= velocity;
                 case DOWN -> y += velocity;
                 case RIGHT -> x += velocity;
                 case LEFT -> x -= velocity;
+                default -> {
+                }
             }
         }
     }
 
     @Override public void draw(GraphicsContext gc) {
-        ++frameIndex;
-        String path = "images/tile000.png";
-        if (frameIndex % 10 < 5) {
+        String path;
+        if (frameIndex % 4 < 2) {
             switch (direction) {
-                case UP -> path = "images/tile000.png";
                 case DOWN -> path = "images/tile004.png";
                 case RIGHT -> path = "images/tile006.png";
                 case LEFT -> path = "images/tile002.png";
+                default -> path = "images/tile000.png";
             }
         } else {
             switch (direction) {
-                case UP -> path = "images/tile001.png";
                 case DOWN -> path = "images/tile005.png";
                 case RIGHT -> path = "images/tile007.png";
                 case LEFT -> path = "images/tile003.png";
+                default -> path = "images/tile001.png";
             }
         }
         gc.drawImage(new Image(path), x - width / 2, y - height / 2, width, height);

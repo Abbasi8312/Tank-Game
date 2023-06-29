@@ -1,7 +1,12 @@
 package ir.ac.kntu.gamelogic.model;
 
-import ir.ac.kntu.gamelogic.CollisionHandler;
-import ir.ac.kntu.gamelogic.UpdateBoard;
+import ir.ac.kntu.gamelogic.model.interfaces.Movable;
+import ir.ac.kntu.gamelogic.service.CollisionHandler;
+import ir.ac.kntu.gamelogic.service.UpdateBoard;
+import ir.ac.kntu.gamelogic.gameconstants.GameConstants;
+import ir.ac.kntu.gamelogic.model.tank.PlayerTank;
+import ir.ac.kntu.gamelogic.model.tank.RegularTank;
+import ir.ac.kntu.gamelogic.model.wall.Border;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,24 +26,22 @@ public class Board {
         gameObjects = new ArrayList<>();
         collisionHandler = new CollisionHandler(gameObjects);
         movables = new ArrayList<>();
-        gameObjects.add(new RegularTank(100, 100, collisionHandler, 1));
-        gameObjects.add(new RegularTank(400, 150, collisionHandler, 2));
-        gameObjects.add(new RegularTank(200, 400, collisionHandler, 3));
+        gameObjects.add(new RegularTank(100, 100, collisionHandler));
+        gameObjects.add(new RegularTank(400, 150, collisionHandler));
+        gameObjects.add(new RegularTank(200, 400, collisionHandler));
         for (int i = 0; i < GameConstants.GAME_WIDTH / GameConstants.TILE_SIZE; i++) {
             gameObjects.add(
-                    new BorderWall(GameConstants.TILE_SIZE * (i + 0.5), GameConstants.TILE_SIZE * 0.5, collisionHandler,
-                            gameObjects.size()));
-            gameObjects.add(new BorderWall(GameConstants.TILE_SIZE * (i + 0.5),
-                    GameConstants.GAME_HEIGHT - GameConstants.TILE_SIZE * 0.5, collisionHandler, gameObjects.size()));
+                    new Border(GameConstants.TILE_SIZE * (i + 0.5), GameConstants.TILE_SIZE * 0.5, collisionHandler));
+            gameObjects.add(new Border(GameConstants.TILE_SIZE * (i + 0.5),
+                    GameConstants.GAME_HEIGHT - GameConstants.TILE_SIZE * 0.5, collisionHandler));
         }
         for (int i = 1; i < GameConstants.GAME_HEIGHT / GameConstants.TILE_SIZE - 1; i++) {
             gameObjects.add(
-                    new BorderWall(GameConstants.TILE_SIZE * 0.5, GameConstants.TILE_SIZE * (i + 0.5), collisionHandler,
-                            gameObjects.size()));
-            gameObjects.add(new BorderWall(GameConstants.GAME_WIDTH - GameConstants.TILE_SIZE * 0.5,
-                    GameConstants.TILE_SIZE * (i + 0.5), collisionHandler, gameObjects.size()));
+                    new Border(GameConstants.TILE_SIZE * 0.5, GameConstants.TILE_SIZE * (i + 0.5), collisionHandler));
+            gameObjects.add(new Border(GameConstants.GAME_WIDTH - GameConstants.TILE_SIZE * 0.5,
+                    GameConstants.TILE_SIZE * (i + 0.5), collisionHandler));
         }
-        gameObjects.add(new Player(500, 400, collisionHandler, gameObjects.size()));
+        gameObjects.add(new PlayerTank(500, 400, collisionHandler));
         for (GameObject gameObject : gameObjects) {
             if (gameObject instanceof Movable) {
                 movables.add(gameObject);

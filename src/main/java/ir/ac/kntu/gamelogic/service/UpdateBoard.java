@@ -1,7 +1,7 @@
-package ir.ac.kntu.gamelogic;
+package ir.ac.kntu.gamelogic.service;
 
-import ir.ac.kntu.gamelogic.model.EnemyTank;
-import ir.ac.kntu.gamelogic.model.GameConstants;
+import ir.ac.kntu.gamelogic.model.tank.EnemyTank;
+import ir.ac.kntu.gamelogic.gameconstants.GameConstants;
 import ir.ac.kntu.gamelogic.model.GameObject;
 
 import java.util.List;
@@ -25,7 +25,7 @@ public class UpdateBoard implements Runnable {
                 }
             }
             try {
-                Thread.sleep(16);
+                Thread.sleep(GameConstants.FRAME_LENGTH);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

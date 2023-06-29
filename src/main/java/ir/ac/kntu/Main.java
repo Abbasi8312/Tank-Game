@@ -3,7 +3,7 @@ package ir.ac.kntu;
 import ir.ac.kntu.gamecontroller.EventHandler;
 import ir.ac.kntu.graphics.DrawObjects;
 import ir.ac.kntu.gamelogic.model.Board;
-import ir.ac.kntu.gamelogic.model.GameConstants;
+import ir.ac.kntu.gamelogic.gameconstants.GameConstants;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;

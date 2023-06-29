@@ -1,7 +1,11 @@
-package ir.ac.kntu.gamelogic.model;
+package ir.ac.kntu.gamelogic.model.tank;
 
-import ir.ac.kntu.gamelogic.CollisionHandler;
 import ir.ac.kntu.gamelogic.gameconstants.Direction;
+import ir.ac.kntu.gamelogic.gameconstants.GameConstants;
+import ir.ac.kntu.gamelogic.model.GameObject;
+import ir.ac.kntu.gamelogic.model.interfaces.Collidable;
+import ir.ac.kntu.gamelogic.model.interfaces.Movable;
+import ir.ac.kntu.gamelogic.service.CollisionHandler;
 
 public abstract class Tank extends GameObject implements Collidable, Movable {
     protected double velocity = GameConstants.VELOCITY;
@@ -10,8 +14,8 @@ public abstract class Tank extends GameObject implements Collidable, Movable {
 
     protected Direction direction;
 
-    protected Tank(int x, int y, CollisionHandler collisionHandler, int id) {
-        super(x, y, collisionHandler, id);
+    public Tank(int x, int y, CollisionHandler collisionHandler) {
+        super(x, y, collisionHandler);
         width = 4 * GameConstants.TILE_SIZE;
         height = 4 * GameConstants.TILE_SIZE;
         lastTime = System.nanoTime();
@@ -25,9 +29,11 @@ public abstract class Tank extends GameObject implements Collidable, Movable {
             case DOWN -> y += velocity;
             case RIGHT -> x += velocity;
             case LEFT -> x -= velocity;
+            default -> {
+            }
         }
-        return Math.abs(x - gameObject.x) < width / 2 + gameObject.width / 2 &&
-                Math.abs(y - gameObject.y) < height / 2 + gameObject.height / 2;
+        return Math.abs(x - gameObject.getX()) < width / 2 + gameObject.getWidth() / 2 &&
+                Math.abs(y - gameObject.getY()) < height / 2 + gameObject.getHeight() / 2;
     }
 
     @Override public void move() {
@@ -41,6 +47,8 @@ public abstract class Tank extends GameObject implements Collidable, Movable {
                 case DOWN -> y += velocity;
                 case RIGHT -> x += velocity;
                 case LEFT -> x -= velocity;
+                default -> {
+                }
             }
         }
         //System.out.println("id: " + id + " x: " + x + " y: " + y);
