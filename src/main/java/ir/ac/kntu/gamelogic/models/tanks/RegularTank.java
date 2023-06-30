@@ -9,7 +9,6 @@ public class RegularTank extends EnemyTank {
     }
 
     @Override public void draw(GraphicsContext gc) {
-        ++frameIndex;
         String path;
         if (frameIndex % 4 < 2) {
             switch (direction) {

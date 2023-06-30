@@ -7,7 +7,7 @@ public class GameConstants {
 
     public static final int FRAME_LENGTH = 16; //In millis
 
-    public static final int VELOCITY = 30;
+    public static final int VELOCITY = 40;
 
     public static final int GAME_WIDTH = 800;
 

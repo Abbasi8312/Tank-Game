@@ -18,9 +18,11 @@ public class EventHandler {
     public void attachEventHandlers(Scene scene) {
         scene.addEventFilter(KeyEvent.KEY_PRESSED, keyEvent -> {
             KeyCode code = keyEvent.getCode();
-            PlayerController.getInstance().handlePlayerMovements(code);
+            PlayerController.getInstance().handlePressedKeys(code);
         });
         scene.addEventFilter(KeyEvent.KEY_RELEASED, keyEvent -> {
+            KeyCode code = keyEvent.getCode();
+            PlayerController.getInstance().handleReleasedKeys(code);
         });
     }
 }

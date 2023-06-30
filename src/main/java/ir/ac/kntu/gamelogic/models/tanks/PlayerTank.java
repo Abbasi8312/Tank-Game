@@ -2,31 +2,24 @@ package ir.ac.kntu.gamelogic.models.tanks;
 
 import ir.ac.kntu.gamecontroller.PlayerController;
 import ir.ac.kntu.gamelogic.gameconstants.Direction;
-import ir.ac.kntu.gamelogic.models.GameObject;
-import ir.ac.kntu.gamelogic.services.CollisionHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class PlayerTank extends Tank {
+    private boolean isMoving;
+
     public PlayerTank(int x, int y) {
         super(x, y);
-        PlayerController.setPlayer1(this);
+        PlayerController.getInstance().setPlayer1(this);
         direction = Direction.UP;
+        isMoving = false;
     }
 
     @Override public void move() {
-        double velocity = this.velocity / 20;
-        GameObject collided = CollisionHandler.getINSTANCE().checkCollision(this, velocity);
-        if (collided == null) {
-            ++frameIndex;
-            switch (direction) {
-                case UP -> y -= velocity;
-                case DOWN -> y += velocity;
-                case RIGHT -> x += velocity;
-                case LEFT -> x -= velocity;
-                default -> {
-                }
-            }
+        if (isMoving) {
+            super.move();
+        } else {
+            lastTime = System.nanoTime();
         }
     }
 
@@ -48,5 +41,13 @@ public class PlayerTank extends Tank {
             }
         }
         gc.drawImage(new Image(path), x - width / 2, y - height / 2, width, height);
+    }
+
+    public boolean isMoving() {
+        return isMoving;
+    }
+
+    public void setMoving(boolean moving) {
+        isMoving = moving;
     }
 }

@@ -7,7 +7,7 @@ import javafx.scene.input.KeyCode;
 public class PlayerController implements InputManager {
     private static final PlayerController INSTANCE = new PlayerController();
 
-    private static PlayerTank playerTank1;
+    private PlayerTank playerTank1;
 
     private PlayerController() {
     }
@@ -16,26 +16,42 @@ public class PlayerController implements InputManager {
         return INSTANCE;
     }
 
-    private static void move(PlayerTank playerTank, Direction direction) {
+    private void move(PlayerTank playerTank, Direction direction) {
         playerTank.setDirection(direction);
-        playerTank.move();
+        playerTank.setMoving(true);
     }
 
-    public static PlayerTank getPlayer1() {
+    private void stop(PlayerTank playerTank, Direction direction) {
+        if (playerTank.getDirection() == direction) {
+            playerTank.setMoving(false);
+        }
+    }
+
+    public PlayerTank getPlayer1() {
         return playerTank1;
     }
 
-    public static void setPlayer1(PlayerTank playerTank1) {
-        PlayerController.playerTank1 = playerTank1;
+    public void setPlayer1(PlayerTank playerTank1) {
+        this.playerTank1 = playerTank1;
     }
 
-    @Override public void handlePlayerMovements(KeyCode keyCode) {
+    @Override public void handlePressedKeys(KeyCode keyCode) {
         switch (keyCode) {
             case LEFT -> move(playerTank1, Direction.LEFT);
             case RIGHT -> move(playerTank1, Direction.RIGHT);
             case UP -> move(playerTank1, Direction.UP);
             case DOWN -> move(playerTank1, Direction.DOWN);
             default -> move(playerTank1, Direction.NONE);
+        }
+    }
+
+    @Override public void handleReleasedKeys(KeyCode keyCode) {
+        switch (keyCode) {
+            case LEFT -> stop(playerTank1, Direction.LEFT);
+            case RIGHT -> stop(playerTank1, Direction.RIGHT);
+            case UP -> stop(playerTank1, Direction.UP);
+            case DOWN -> stop(playerTank1, Direction.DOWN);
+            default -> stop(playerTank1, Direction.NONE);
         }
     }
 }

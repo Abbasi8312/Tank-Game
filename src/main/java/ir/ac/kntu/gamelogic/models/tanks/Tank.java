@@ -46,6 +46,8 @@ public abstract class Tank extends GameObject implements Collidable, Movable {
         distance += velocity;
         GameObject collided = CollisionHandler.getINSTANCE().checkCollision(this, velocity);
         if (collided == null) {
+            ++frameIndex;
+
             switch (direction) {
                 case UP -> this.y -= velocity;
                 case DOWN -> this.y += velocity;

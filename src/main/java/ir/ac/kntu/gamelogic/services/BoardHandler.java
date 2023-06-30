@@ -57,9 +57,7 @@ public class BoardHandler {
 
     public void updateFrame() {
         for (GameObject gameObject : movables) {
-            if (!(gameObject instanceof PlayerTank)) {
-                ((Movable) gameObject).move();
-            }
+            ((Movable) gameObject).move();
         }
     }
 
