@@ -8,8 +8,8 @@ import javafx.scene.image.Image;
 
 public class Border extends GameObject {
 
-    public Border(double x, double y, CollisionHandler collisionHandler) {
-        super(x, y, collisionHandler);
+    public Border(double x, double y) {
+        super(x, y);
         width = 2 * GameConstants.TILE_SIZE;
         height = 2 * GameConstants.TILE_SIZE;
     }

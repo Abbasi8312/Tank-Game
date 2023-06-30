@@ -1,15 +1,14 @@
 package ir.ac.kntu.gamelogic.model.tank;
 
 import ir.ac.kntu.gamelogic.gameconstants.Direction;
-import ir.ac.kntu.gamelogic.service.CollisionHandler;
 import ir.ac.kntu.gamelogic.service.TimerWrapper;
 
 import java.util.Random;
 import java.util.TimerTask;
 
 public abstract class EnemyTank extends Tank implements Runnable {
-    public EnemyTank(int x, int y, CollisionHandler collisionHandler) {
-        super(x, y, collisionHandler);
+    public EnemyTank(int x, int y) {
+        super(x, y);
         TimerWrapper.getInstance().schedule(new ChangeDirection(), 0, 2000);
     }
 

@@ -1,19 +1,18 @@
 package ir.ac.kntu.gamelogic.model.wall;
 
 import ir.ac.kntu.gamelogic.gameconstants.Direction;
-import ir.ac.kntu.gamelogic.service.CollisionHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class BrickWall extends Wall {
     protected Direction direction = Direction.NONE;
 
-    public BrickWall(double x, double y, CollisionHandler collisionHandler) {
-        super(x, y, collisionHandler);
+    public BrickWall(double x, double y) {
+        super(x, y);
     }
 
-    public BrickWall(double x, double y, CollisionHandler collisionHandler, int frameIndex) {
-        super(x, y, collisionHandler);
+    public BrickWall(double x, double y, int frameIndex) {
+        super(x, y);
         this.frameIndex = frameIndex;
     }
 

@@ -1,19 +1,20 @@
 package ir.ac.kntu.gamelogic.service;
 
-import ir.ac.kntu.gamelogic.model.interfaces.Collidable;
 import ir.ac.kntu.gamelogic.model.GameObject;
-
-import java.util.List;
+import ir.ac.kntu.gamelogic.model.interfaces.Collidable;
 
 public class CollisionHandler {
-    private final List<GameObject> gameObjects;
+    private final static CollisionHandler INSTANCE = new CollisionHandler();
 
-    public CollisionHandler(List<GameObject> gameObjects) {
-        this.gameObjects = gameObjects;
+    private CollisionHandler() {
+    }
+
+    public static CollisionHandler getINSTANCE() {
+        return INSTANCE;
     }
 
     public GameObject checkCollision(Collidable collidable, double velocity) {
-        for (GameObject gameObject : gameObjects) {
+        for (GameObject gameObject : BoardHandler.getInstance().getGameObjects()) {
             if (gameObject.equals(collidable)) {
                 continue;
             }

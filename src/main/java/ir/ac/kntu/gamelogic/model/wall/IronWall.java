@@ -8,8 +8,8 @@ import javafx.scene.image.Image;
 public class IronWall extends Wall {
     protected Direction direction = Direction.NONE;
 
-    public IronWall(double x, double y, CollisionHandler collisionHandler) {
-        super(x, y, collisionHandler);
+    public IronWall(double x, double y) {
+        super(x, y);
     }
 
     @Override public void draw(GraphicsContext gc) {

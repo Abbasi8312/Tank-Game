@@ -8,15 +8,15 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class PlayerTank extends Tank {
-    public PlayerTank(int x, int y, CollisionHandler collisionHandler) {
-        super(x, y, collisionHandler);
+    public PlayerTank(int x, int y) {
+        super(x, y);
         PlayerController.setPlayer1(this);
         direction = Direction.UP;
     }
 
     @Override public void move() {
         double velocity = this.velocity / 20;
-        GameObject collided = collisionHandler.checkCollision(this, velocity);
+        GameObject collided = CollisionHandler.getINSTANCE().checkCollision(this, velocity);
         if (collided == null) {
             ++frameIndex;
             switch (direction) {

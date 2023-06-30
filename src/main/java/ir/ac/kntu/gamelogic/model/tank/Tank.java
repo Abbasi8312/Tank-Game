@@ -14,8 +14,8 @@ public abstract class Tank extends GameObject implements Collidable, Movable {
 
     protected Direction direction;
 
-    public Tank(int x, int y, CollisionHandler collisionHandler) {
-        super(x, y, collisionHandler);
+    public Tank(int x, int y) {
+        super(x, y);
         width = 2 * GameConstants.TILE_SIZE;
         height = 2 * GameConstants.TILE_SIZE;
         lastTime = System.nanoTime();
@@ -40,7 +40,7 @@ public abstract class Tank extends GameObject implements Collidable, Movable {
         long currentTime = System.nanoTime();
         double deltaTime = (currentTime - lastTime) / 1e9;
         double velocity = this.velocity * deltaTime;
-        GameObject collided = collisionHandler.checkCollision(this, velocity);
+        GameObject collided = CollisionHandler.getINSTANCE().checkCollision(this, velocity);
         if (collided == null) {
             switch (direction) {
                 case UP -> y -= velocity;
@@ -51,7 +51,6 @@ public abstract class Tank extends GameObject implements Collidable, Movable {
                 }
             }
         }
-        //System.out.println("id: " + id + " x: " + x + " y: " + y);
         lastTime = currentTime;
     }
 

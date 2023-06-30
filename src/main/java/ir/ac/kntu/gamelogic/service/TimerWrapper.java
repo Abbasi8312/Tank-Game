@@ -17,6 +17,6 @@ public class TimerWrapper {
     }
 
     public void schedule(TimerTask task, long delay, long period) {
-        timer.schedule(task, delay, period);
+        timer.scheduleAtFixedRate(task, delay, period);
     }
 }
