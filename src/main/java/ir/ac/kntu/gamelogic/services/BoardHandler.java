@@ -1,8 +1,9 @@
 package ir.ac.kntu.gamelogic.services;
 
+import ir.ac.kntu.gamelogic.Board;
 import ir.ac.kntu.gamelogic.gameconstants.GameConstants;
-import ir.ac.kntu.gamelogic.models.Board;
 import ir.ac.kntu.gamelogic.models.GameObject;
+import ir.ac.kntu.gamelogic.models.MovingUnit;
 import ir.ac.kntu.gamelogic.models.interfaces.Movable;
 import ir.ac.kntu.gamelogic.models.tanks.PlayerTank;
 import ir.ac.kntu.gamelogic.models.tanks.RegularTank;
@@ -10,8 +11,6 @@ import ir.ac.kntu.gamelogic.models.walls.Border;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 
 public class BoardHandler {
     private final static BoardHandler INSTANCE = new BoardHandler();
@@ -24,14 +23,17 @@ public class BoardHandler {
 
     private final List<GameObject> movables;
 
-    private final ThreadPoolExecutor executor;
+    private final List<GameObject> addQueue;
+
+    private final List<GameObject> removeQueue;
 
     private BoardHandler() {
         board = new Board();
         statics = new ArrayList<>();
         updatedStatics = new ArrayList<>();
         movables = new ArrayList<>();
-        executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(2);
+        addQueue = new ArrayList<>();
+        removeQueue = new ArrayList<>();
     }
 
     public static BoardHandler getInstance() {
@@ -56,18 +58,43 @@ public class BoardHandler {
     }
 
     public void updateFrame() {
+        processQueue();
         for (GameObject gameObject : movables) {
-            ((Movable) gameObject).move();
+            ((MovingUnit) gameObject).update();
         }
     }
 
     public void addGameObject(GameObject gameObject) {
-        board.addGameObject(gameObject);
-        if (gameObject instanceof Movable) {
-            movables.add(gameObject);
-        } else {
-            updatedStatics.add(gameObject);
+        addQueue.add(gameObject);
+    }
+
+    private void processQueue() {
+        List<GameObject> added = new ArrayList<>();
+        List<GameObject> removed = new ArrayList<>();
+        for (GameObject gameObject : addQueue) {
+            board.addGameObject(gameObject);
+            if (gameObject instanceof Movable) {
+                movables.add(gameObject);
+            } else {
+                updatedStatics.add(gameObject);
+            }
+            added.add(gameObject);
         }
+        for (GameObject gameObject : removeQueue) {
+            board.removeGameObject(gameObject);
+            if (gameObject instanceof Movable) {
+                movables.remove(gameObject);
+            } else {
+                updatedStatics.remove(gameObject);
+            }
+            removed.add(gameObject);
+        }
+        addQueue.removeAll(added);
+        removeQueue.removeAll(removed);
+    }
+
+    public void removeGameObject(GameObject gameObject) {
+        removeQueue.add(gameObject);
     }
 
     public List<GameObject> getStatics() {

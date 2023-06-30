@@ -4,6 +4,8 @@ import ir.ac.kntu.gamelogic.gameconstants.Direction;
 import ir.ac.kntu.gamelogic.models.tanks.PlayerTank;
 import javafx.scene.input.KeyCode;
 
+import static ir.ac.kntu.gamecontroller.KeyMap.*;
+
 public class PlayerController implements InputManager {
     private static final PlayerController INSTANCE = new PlayerController();
 
@@ -36,22 +38,30 @@ public class PlayerController implements InputManager {
     }
 
     @Override public void handlePressedKeys(KeyCode keyCode) {
-        switch (keyCode) {
-            case LEFT -> move(playerTank1, Direction.LEFT);
-            case RIGHT -> move(playerTank1, Direction.RIGHT);
-            case UP -> move(playerTank1, Direction.UP);
-            case DOWN -> move(playerTank1, Direction.DOWN);
-            default -> move(playerTank1, Direction.NONE);
+        if (keyCode == player1Left) {
+            move(playerTank1, Direction.LEFT);
+        } else if (keyCode == player1Right) {
+            move(playerTank1, Direction.RIGHT);
+        } else if (keyCode == player1Up) {
+            move(playerTank1, Direction.UP);
+        } else if (keyCode == player1Down) {
+            move(playerTank1, Direction.DOWN);
+        } else if (keyCode == player1Fire) {
+            playerTank1.setFiring(true);
         }
     }
 
     @Override public void handleReleasedKeys(KeyCode keyCode) {
-        switch (keyCode) {
-            case LEFT -> stop(playerTank1, Direction.LEFT);
-            case RIGHT -> stop(playerTank1, Direction.RIGHT);
-            case UP -> stop(playerTank1, Direction.UP);
-            case DOWN -> stop(playerTank1, Direction.DOWN);
-            default -> stop(playerTank1, Direction.NONE);
+        if (keyCode == player1Left) {
+            stop(playerTank1, Direction.LEFT);
+        } else if (keyCode == player1Right) {
+            stop(playerTank1, Direction.RIGHT);
+        } else if (keyCode == player1Up) {
+            stop(playerTank1, Direction.UP);
+        } else if (keyCode == player1Down) {
+            stop(playerTank1, Direction.DOWN);
+        } else if (keyCode == player1Fire) {
+            playerTank1.setFiring(false);
         }
     }
 }

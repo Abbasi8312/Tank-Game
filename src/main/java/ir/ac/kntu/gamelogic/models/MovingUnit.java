@@ -1,4 +1,4 @@
-package ir.ac.kntu.gamelogic.models.tanks;
+package ir.ac.kntu.gamelogic.models;
 
 import ir.ac.kntu.gamelogic.gameconstants.Direction;
 import ir.ac.kntu.gamelogic.gameconstants.GameConstants;
@@ -7,7 +7,7 @@ import ir.ac.kntu.gamelogic.models.interfaces.Collidable;
 import ir.ac.kntu.gamelogic.models.interfaces.Movable;
 import ir.ac.kntu.gamelogic.services.CollisionHandler;
 
-public abstract class Tank extends GameObject implements Collidable, Movable {
+public abstract class MovingUnit extends GameObject implements Collidable, Movable {
     protected double velocity = GameConstants.VELOCITY;
 
     protected long lastTime;
@@ -16,12 +16,13 @@ public abstract class Tank extends GameObject implements Collidable, Movable {
 
     protected double distance;
 
-    public Tank(int x, int y) {
+    protected int damage;
+
+    public MovingUnit(double x, double y) {
         super(x, y);
         width = 2 * GameConstants.TILE_SIZE;
         height = 2 * GameConstants.TILE_SIZE;
         lastTime = System.nanoTime();
-        distance = 0;
     }
 
     @Override public boolean isColliding(GameObject gameObject, double velocity) {
@@ -39,13 +40,15 @@ public abstract class Tank extends GameObject implements Collidable, Movable {
                 Math.abs(y - gameObject.getY()) < height / 2 + gameObject.getHeight() / 2;
     }
 
+    public abstract void update();
+
     @Override public void move() {
         long currentTime = System.nanoTime();
         double deltaTime = (currentTime - lastTime) / 1e9;
         double velocity = this.velocity * deltaTime;
-        distance += velocity;
+        distance = velocity;
         GameObject collided = CollisionHandler.getINSTANCE().checkCollision(this, velocity);
-        if (collided == null) {
+        if (collided == null || collided instanceof Bullet) {
             ++frameIndex;
 
             switch (direction) {
