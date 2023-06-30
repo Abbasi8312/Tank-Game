@@ -14,11 +14,14 @@ public abstract class Tank extends GameObject implements Collidable, Movable {
 
     protected Direction direction;
 
+    protected double distance;
+
     public Tank(int x, int y) {
         super(x, y);
         width = 2 * GameConstants.TILE_SIZE;
         height = 2 * GameConstants.TILE_SIZE;
         lastTime = System.nanoTime();
+        distance = 0;
     }
 
     @Override public boolean isColliding(GameObject gameObject, double velocity) {
@@ -40,13 +43,14 @@ public abstract class Tank extends GameObject implements Collidable, Movable {
         long currentTime = System.nanoTime();
         double deltaTime = (currentTime - lastTime) / 1e9;
         double velocity = this.velocity * deltaTime;
+        distance += velocity;
         GameObject collided = CollisionHandler.getINSTANCE().checkCollision(this, velocity);
         if (collided == null) {
             switch (direction) {
-                case UP -> y -= velocity;
-                case DOWN -> y += velocity;
-                case RIGHT -> x += velocity;
-                case LEFT -> x -= velocity;
+                case UP -> this.y -= velocity;
+                case DOWN -> this.y += velocity;
+                case RIGHT -> this.x += velocity;
+                case LEFT -> this.x -= velocity;
                 default -> {
                 }
             }
