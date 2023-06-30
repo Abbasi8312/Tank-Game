@@ -1,4 +1,4 @@
-package ir.ac.kntu.gamelogic.service;
+package ir.ac.kntu.gamelogic.services;
 
 import java.util.Timer;
 import java.util.TimerTask;

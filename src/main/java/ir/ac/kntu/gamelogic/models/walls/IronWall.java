@@ -1,6 +1,5 @@
-package ir.ac.kntu.gamelogic.model.wall;
+package ir.ac.kntu.gamelogic.models.walls;
 
-import ir.ac.kntu.gamelogic.service.CollisionHandler;
 import ir.ac.kntu.gamelogic.gameconstants.Direction;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;

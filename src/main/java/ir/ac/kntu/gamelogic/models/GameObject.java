@@ -1,6 +1,7 @@
-package ir.ac.kntu.gamelogic.model;
+package ir.ac.kntu.gamelogic.models;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 
 public abstract class GameObject {
     protected double x;

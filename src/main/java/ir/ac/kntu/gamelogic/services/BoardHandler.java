@@ -1,16 +1,15 @@
-package ir.ac.kntu.gamelogic.service;
+package ir.ac.kntu.gamelogic.services;
 
 import ir.ac.kntu.gamelogic.gameconstants.GameConstants;
-import ir.ac.kntu.gamelogic.model.Board;
-import ir.ac.kntu.gamelogic.model.GameObject;
-import ir.ac.kntu.gamelogic.model.interfaces.Movable;
-import ir.ac.kntu.gamelogic.model.tank.PlayerTank;
-import ir.ac.kntu.gamelogic.model.tank.RegularTank;
-import ir.ac.kntu.gamelogic.model.wall.Border;
+import ir.ac.kntu.gamelogic.models.Board;
+import ir.ac.kntu.gamelogic.models.GameObject;
+import ir.ac.kntu.gamelogic.models.interfaces.Movable;
+import ir.ac.kntu.gamelogic.models.tanks.PlayerTank;
+import ir.ac.kntu.gamelogic.models.tanks.RegularTank;
+import ir.ac.kntu.gamelogic.models.walls.Border;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -25,11 +24,14 @@ public class BoardHandler {
 
     private final List<GameObject> movables;
 
+    private final ThreadPoolExecutor executor;
+
     private BoardHandler() {
         board = new Board();
         statics = new ArrayList<>();
         updatedStatics = new ArrayList<>();
         movables = new ArrayList<>();
+        executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(2);
     }
 
     public static BoardHandler getInstance() {
@@ -51,7 +53,14 @@ public class BoardHandler {
                     GameConstants.TILE_SIZE * (i + 0.5)));
         }
         addGameObject(new PlayerTank(500, 400));
-        TimerWrapper.getInstance().schedule(new AIMove(), 0, GameConstants.FRAME_LENGTH);
+    }
+
+    public void updateFrame() {
+        for (GameObject gameObject : movables) {
+            if (!(gameObject instanceof PlayerTank)) {
+                ((Movable) gameObject).move();
+            }
+        }
     }
 
     public void addGameObject(GameObject gameObject) {
@@ -68,10 +77,12 @@ public class BoardHandler {
     }
 
     public List<GameObject> getUpdatedStatics() {
-        List<GameObject> tmp = new ArrayList<>(updatedStatics);
+        return new ArrayList<>(updatedStatics);
+    }
+
+    public void clearUpdatedStatics() {
         statics.addAll(updatedStatics);
         updatedStatics.clear();
-        return tmp;
     }
 
     public List<GameObject> getMovables() {
@@ -80,17 +91,5 @@ public class BoardHandler {
 
     public List<GameObject> getGameObjects() {
         return board.getGameObjects();
-    }
-
-    private class AIMove extends TimerTask {
-        private final ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(2);
-
-        @Override public void run() {
-            for (GameObject gameObject : movables) {
-                if (!(gameObject instanceof PlayerTank)) {
-                    executor.submit((Runnable) gameObject);
-                }
-            }
-        }
     }
 }

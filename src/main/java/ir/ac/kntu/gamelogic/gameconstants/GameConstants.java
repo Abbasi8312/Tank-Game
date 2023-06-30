@@ -1,7 +1,7 @@
 package ir.ac.kntu.gamelogic.gameconstants;
 
 public class GameConstants {
-    public static final double TILE_SIZE = 15;
+    public static final double TILE_SIZE = 20;
 
     public static GameStatus gameStatus = GameStatus.RUNNING;
 

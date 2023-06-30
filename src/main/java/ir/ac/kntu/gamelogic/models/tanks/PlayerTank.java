@@ -1,9 +1,9 @@
-package ir.ac.kntu.gamelogic.model.tank;
+package ir.ac.kntu.gamelogic.models.tanks;
 
 import ir.ac.kntu.gamecontroller.PlayerController;
 import ir.ac.kntu.gamelogic.gameconstants.Direction;
-import ir.ac.kntu.gamelogic.model.GameObject;
-import ir.ac.kntu.gamelogic.service.CollisionHandler;
+import ir.ac.kntu.gamelogic.models.GameObject;
+import ir.ac.kntu.gamelogic.services.CollisionHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 

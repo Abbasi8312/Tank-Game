@@ -1,16 +1,11 @@
-package ir.ac.kntu.gamelogic.model.tank;
+package ir.ac.kntu.gamelogic.models.tanks;
 
-import ir.ac.kntu.gamelogic.service.CollisionHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class RegularTank extends EnemyTank {
     public RegularTank(int x, int y) {
         super(x, y);
-    }
-
-    @Override public void run() {
-        move();
     }
 
     @Override public void draw(GraphicsContext gc) {

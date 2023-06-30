@@ -1,7 +1,7 @@
-package ir.ac.kntu.gamelogic.service;
+package ir.ac.kntu.gamelogic.services;
 
-import ir.ac.kntu.gamelogic.model.GameObject;
-import ir.ac.kntu.gamelogic.model.interfaces.Collidable;
+import ir.ac.kntu.gamelogic.models.GameObject;
+import ir.ac.kntu.gamelogic.models.interfaces.Collidable;
 
 public class CollisionHandler {
     private final static CollisionHandler INSTANCE = new CollisionHandler();

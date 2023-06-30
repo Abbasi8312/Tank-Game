@@ -1,4 +1,4 @@
-package ir.ac.kntu.gamelogic.model;
+package ir.ac.kntu.gamelogic.models;
 
 import java.util.ArrayList;
 import java.util.List;
