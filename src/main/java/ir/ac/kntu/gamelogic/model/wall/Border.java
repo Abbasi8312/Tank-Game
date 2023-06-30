@@ -10,8 +10,8 @@ public class Border extends GameObject {
 
     public Border(double x, double y, CollisionHandler collisionHandler) {
         super(x, y, collisionHandler);
-        width = 4 * GameConstants.TILE_SIZE;
-        height = 4 * GameConstants.TILE_SIZE;
+        width = 2 * GameConstants.TILE_SIZE;
+        height = 2 * GameConstants.TILE_SIZE;
     }
 
     @Override public void draw(GraphicsContext gc) {

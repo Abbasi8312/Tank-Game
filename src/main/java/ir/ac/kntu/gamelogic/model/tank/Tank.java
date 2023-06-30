@@ -16,8 +16,8 @@ public abstract class Tank extends GameObject implements Collidable, Movable {
 
     public Tank(int x, int y, CollisionHandler collisionHandler) {
         super(x, y, collisionHandler);
-        width = 4 * GameConstants.TILE_SIZE;
-        height = 4 * GameConstants.TILE_SIZE;
+        width = 2 * GameConstants.TILE_SIZE;
+        height = 2 * GameConstants.TILE_SIZE;
         lastTime = System.nanoTime();
     }
 
