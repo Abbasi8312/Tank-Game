@@ -7,12 +7,12 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class GameHandler {
+public class GameScene {
     private final GraphicsContext staticGC;
 
     private final GraphicsContext movingGC;
 
-    public GameHandler(GraphicsContext staticGC, GraphicsContext movingGC) {
+    public GameScene(GraphicsContext staticGC, GraphicsContext movingGC) {
         this.staticGC = staticGC;
         this.movingGC = movingGC;
         staticGC.fillRect(0, 0, GameConstants.GAME_WIDTH, GameConstants.GAME_HEIGHT);
