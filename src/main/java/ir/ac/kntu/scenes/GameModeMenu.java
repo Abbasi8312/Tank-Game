@@ -24,7 +24,7 @@ public class GameModeMenu {
         imageView.setFitHeight(gameImage.getHeight() * 3);
 
         Button onePlayerButton = new Button("1 Player");
-        onePlayerButton.setOnAction(event -> SceneHandler.getINSTANCE().gameScene());
+        onePlayerButton.setOnAction(event -> SceneHandler.getINSTANCE().game());
         onePlayerButton.setAlignment(Pos.CENTER);
 
         Button twoPlayerButton = new Button("2 Player");

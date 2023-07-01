@@ -57,10 +57,11 @@ public class Bullet extends Unit {
         } else if (collided instanceof BrickWall brickWall) {
             brickWall.damage(direction);
             BoardHandler.getInstance().removeGameObject(this);
+        } else if (collided instanceof Flag flag) {
+            flag.damage();
         } else {
             BoardHandler.getInstance().removeGameObject(this);
-        }
-        lastTime = currentTime;
+        } lastTime = currentTime;
     }
 
     public enum Origin {

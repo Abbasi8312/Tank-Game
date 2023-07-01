@@ -1,7 +1,7 @@
 package ir.ac.kntu.gamelogic.models;
 
+import ir.ac.kntu.gamelogic.gameconstants.GameConstants;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.paint.Color;
 
 public abstract class GameObject {
     protected double x;
@@ -14,9 +14,11 @@ public abstract class GameObject {
 
     protected int frameIndex = 0;
 
-    protected GameObject(double x, double y) {
+    public GameObject(double x, double y) {
         this.x = x;
         this.y = y;
+        width = GameConstants.TILE_SIZE;
+        height = GameConstants.TILE_SIZE;
     }
 
     public abstract void draw(GraphicsContext gc);

@@ -4,14 +4,18 @@ import ir.ac.kntu.gamecontroller.EventHandler;
 import ir.ac.kntu.gamelogic.gameconstants.GameConstants;
 import ir.ac.kntu.gamelogic.services.BoardHandler;
 import ir.ac.kntu.scenes.GameModeMenu;
+import ir.ac.kntu.scenes.GameOverScene;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+
+import java.util.Timer;
 
 public class SceneHandler {
     private final static SceneHandler INSTANCE = new SceneHandler();
@@ -31,7 +35,7 @@ public class SceneHandler {
         stage.setScene(scene);
     }
 
-    public void gameScene() {
+    public void game() {
         Group root = new Group();
         Scene scene = new Scene(root);
         Canvas staticCanvas = new Canvas(GameConstants.GAME_WIDTH, GameConstants.GAME_HEIGHT);
@@ -46,6 +50,28 @@ public class SceneHandler {
         gameScene.start();
 
         EventHandler.getInstance().attachEventHandlers(scene);
+
+        stage.setScene(scene);
+    }
+
+    public void gameOver() {
+        BorderPane borderPane = new BorderPane();
+        borderPane.setPrefWidth(GameConstants.GAME_WIDTH);
+        borderPane.setPrefHeight(GameConstants.GAME_HEIGHT);
+        borderPane.setBackground(Background.EMPTY);
+        new GameOverScene(borderPane).start();
+        Scene scene = new Scene(borderPane, GameConstants.GAME_WIDTH, GameConstants.GAME_HEIGHT, Color.BLACK);
+
+        stage.setScene(scene);
+    }
+
+    public void playerScore() {
+        Pane pane = new Pane();
+        pane.setPrefWidth(GameConstants.GAME_WIDTH);
+        pane.setPrefHeight(GameConstants.GAME_HEIGHT);
+        pane.setBackground(Background.EMPTY);
+
+        Scene scene = new Scene(pane, GameConstants.GAME_WIDTH, GameConstants.GAME_HEIGHT, Color.BLACK);
 
         stage.setScene(scene);
     }

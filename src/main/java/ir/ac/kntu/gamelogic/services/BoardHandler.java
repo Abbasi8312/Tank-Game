@@ -2,6 +2,7 @@ package ir.ac.kntu.gamelogic.services;
 
 import ir.ac.kntu.gamelogic.Board;
 import ir.ac.kntu.gamelogic.gameconstants.GameConstants;
+import ir.ac.kntu.gamelogic.models.Flag;
 import ir.ac.kntu.gamelogic.models.GameObject;
 import ir.ac.kntu.gamelogic.models.Unit;
 import ir.ac.kntu.gamelogic.models.interfaces.Movable;
@@ -55,6 +56,7 @@ public class BoardHandler {
                     GameConstants.TILE_SIZE * (i + 0.5)));
         }
         addGameObject(new PlayerTank(500, 400));
+        addGameObject(new Flag(300, 400));
     }
 
     public void updateFrame() {

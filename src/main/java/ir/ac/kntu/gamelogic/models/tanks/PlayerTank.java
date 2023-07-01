@@ -1,5 +1,6 @@
 package ir.ac.kntu.gamelogic.models.tanks;
 
+import ir.ac.kntu.SceneHandler;
 import ir.ac.kntu.gamecontroller.PlayerController;
 import ir.ac.kntu.gamelogic.gameconstants.Direction;
 import ir.ac.kntu.gamelogic.models.Bullet;
@@ -74,6 +75,13 @@ public class PlayerTank extends Unit {
         }
         Bullet bullet = new Bullet(x, y, damage, direction, Bullet.Origin.PLAYER);
         BoardHandler.getInstance().addGameObject(bullet);
+    }
+
+    @Override public void damage(int damage) {
+        super.damage(damage);
+        if (health <= 0) {
+            SceneHandler.getINSTANCE().gameOver();
+        }
     }
 
     public void setMoving(boolean moving) {
