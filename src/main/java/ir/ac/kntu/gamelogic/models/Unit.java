@@ -2,12 +2,12 @@ package ir.ac.kntu.gamelogic.models;
 
 import ir.ac.kntu.gamelogic.gameconstants.Direction;
 import ir.ac.kntu.gamelogic.gameconstants.GameConstants;
-import ir.ac.kntu.gamelogic.models.GameObject;
 import ir.ac.kntu.gamelogic.models.interfaces.Collidable;
 import ir.ac.kntu.gamelogic.models.interfaces.Movable;
+import ir.ac.kntu.gamelogic.services.BoardHandler;
 import ir.ac.kntu.gamelogic.services.CollisionHandler;
 
-public abstract class MovingUnit extends GameObject implements Collidable, Movable {
+public abstract class Unit extends GameObject implements Collidable, Movable {
     protected double velocity = GameConstants.VELOCITY;
 
     protected long lastTime;
@@ -18,11 +18,20 @@ public abstract class MovingUnit extends GameObject implements Collidable, Movab
 
     protected int damage;
 
-    public MovingUnit(double x, double y) {
+    protected int health;
+
+    public Unit(double x, double y) {
         super(x, y);
         width = 2 * GameConstants.TILE_SIZE;
         height = 2 * GameConstants.TILE_SIZE;
         lastTime = System.nanoTime();
+    }
+
+    public void damage(int damage) {
+        health -= damage;
+        if (health <= 0) {
+            BoardHandler.getInstance().removeGameObject(this);
+        }
     }
 
     @Override public boolean isColliding(GameObject gameObject, double velocity) {

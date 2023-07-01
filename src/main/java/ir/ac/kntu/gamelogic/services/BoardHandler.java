@@ -3,7 +3,7 @@ package ir.ac.kntu.gamelogic.services;
 import ir.ac.kntu.gamelogic.Board;
 import ir.ac.kntu.gamelogic.gameconstants.GameConstants;
 import ir.ac.kntu.gamelogic.models.GameObject;
-import ir.ac.kntu.gamelogic.models.MovingUnit;
+import ir.ac.kntu.gamelogic.models.Unit;
 import ir.ac.kntu.gamelogic.models.interfaces.Movable;
 import ir.ac.kntu.gamelogic.models.tanks.PlayerTank;
 import ir.ac.kntu.gamelogic.models.tanks.RegularTank;
@@ -60,7 +60,7 @@ public class BoardHandler {
     public void updateFrame() {
         processQueue();
         for (GameObject gameObject : movables) {
-            ((MovingUnit) gameObject).update();
+            ((Unit) gameObject).update();
         }
     }
 

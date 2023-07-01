@@ -10,17 +10,18 @@ import ir.ac.kntu.gamelogic.services.CollisionHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class Bullet extends MovingUnit {
+public class Bullet extends Unit {
     private final Origin origin;
 
     public Bullet(double x, double y, int damage, Direction direction, Origin origin) {
         super(x, y);
         this.damage = damage;
         velocity *= 5;
-        width = GameConstants.TILE_SIZE / 2;
-        height = GameConstants.TILE_SIZE / 2;
+        width = GameConstants.TILE_SIZE / 4;
+        height = GameConstants.TILE_SIZE / 4;
         this.direction = direction;
         this.origin = origin;
+        health = 1;
     }
 
     @Override public void draw(GraphicsContext gc) {
@@ -51,7 +52,7 @@ public class Bullet extends MovingUnit {
             }
         } else if (collided instanceof PlayerTank && origin == Origin.ENEMY ||
                 collided instanceof EnemyTank && origin == Origin.PLAYER || collided instanceof Bullet) {
-            BoardHandler.getInstance().removeGameObject(collided);
+            ((Unit) collided).damage(damage);
             BoardHandler.getInstance().removeGameObject(this);
         } else if (collided instanceof BrickWall brickWall) {
             brickWall.damage(direction);

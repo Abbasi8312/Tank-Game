@@ -3,12 +3,12 @@ package ir.ac.kntu.gamelogic.models.tanks;
 import ir.ac.kntu.gamecontroller.PlayerController;
 import ir.ac.kntu.gamelogic.gameconstants.Direction;
 import ir.ac.kntu.gamelogic.models.Bullet;
-import ir.ac.kntu.gamelogic.models.MovingUnit;
+import ir.ac.kntu.gamelogic.models.Unit;
 import ir.ac.kntu.gamelogic.services.BoardHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class PlayerTank extends MovingUnit {
+public class PlayerTank extends Unit {
     private boolean isMoving;
 
     private boolean isFiring;
@@ -20,6 +20,8 @@ public class PlayerTank extends MovingUnit {
         PlayerController.getInstance().setPlayer1(this);
         direction = Direction.UP;
         isMoving = false;
+        health = 3;
+        damage = 1;
     }
 
     @Override public void update() {

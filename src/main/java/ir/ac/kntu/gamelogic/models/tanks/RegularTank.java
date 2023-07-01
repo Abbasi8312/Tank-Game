@@ -6,6 +6,8 @@ import javafx.scene.image.Image;
 public class RegularTank extends EnemyTank {
     public RegularTank(int x, int y) {
         super(x, y);
+        health = 1;
+        damage = 1;
     }
 
     @Override public void draw(GraphicsContext gc) {
