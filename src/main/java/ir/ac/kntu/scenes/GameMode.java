@@ -8,10 +8,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-public class GameModeMenu {
+public class GameMode {
     private final Pane rootPane;
 
-    public GameModeMenu(Pane rootPane) {
+    public GameMode(Pane rootPane) {
         this.rootPane = rootPane;
     }
 

@@ -3,8 +3,10 @@ package ir.ac.kntu;
 import ir.ac.kntu.gamecontroller.EventHandler;
 import ir.ac.kntu.gamelogic.gameconstants.GameConstants;
 import ir.ac.kntu.gamelogic.services.BoardHandler;
-import ir.ac.kntu.scenes.GameModeMenu;
-import ir.ac.kntu.scenes.GameOverScene;
+import ir.ac.kntu.scenes.Game;
+import ir.ac.kntu.scenes.GameMode;
+import ir.ac.kntu.scenes.GameOver;
+import ir.ac.kntu.scenes.SelectPlayer;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -15,8 +17,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import java.util.Timer;
-
 public class SceneHandler {
     private final static SceneHandler INSTANCE = new SceneHandler();
 
@@ -25,12 +25,27 @@ public class SceneHandler {
     private SceneHandler() {
     }
 
-    public void gameModeMenu() {
+    public static SceneHandler getINSTANCE() {
+        return INSTANCE;
+    }
+
+    public void selectPlayer() {
+        BorderPane borderPane = new BorderPane();
+        borderPane.setPrefWidth(GameConstants.GAME_WIDTH);
+        borderPane.setPrefHeight(GameConstants.GAME_HEIGHT);
+        borderPane.setBackground(Background.EMPTY);
+        new SelectPlayer(borderPane).start();
+        Scene scene = new Scene(borderPane, GameConstants.GAME_WIDTH, GameConstants.GAME_HEIGHT, Color.BLACK);
+
+        stage.setScene(scene);
+    }
+
+    public void gameMode() {
         Pane pane = new Pane();
         pane.setPrefWidth(GameConstants.GAME_WIDTH);
         pane.setPrefHeight(GameConstants.GAME_HEIGHT);
         pane.setBackground(Background.EMPTY);
-        new GameModeMenu(pane).start();
+        new GameMode(pane).start();
         Scene scene = new Scene(pane, GameConstants.GAME_WIDTH, GameConstants.GAME_HEIGHT, Color.BLACK);
         stage.setScene(scene);
     }
@@ -46,8 +61,8 @@ public class SceneHandler {
 
         BoardHandler.getInstance().init();
 
-        GameScene gameScene = new GameScene(staticGC, movingGC);
-        gameScene.start();
+        Game game = new Game(staticGC, movingGC);
+        game.start();
 
         EventHandler.getInstance().attachEventHandlers(scene);
 
@@ -59,7 +74,7 @@ public class SceneHandler {
         borderPane.setPrefWidth(GameConstants.GAME_WIDTH);
         borderPane.setPrefHeight(GameConstants.GAME_HEIGHT);
         borderPane.setBackground(Background.EMPTY);
-        new GameOverScene(borderPane).start();
+        new GameOver(borderPane).start();
         Scene scene = new Scene(borderPane, GameConstants.GAME_WIDTH, GameConstants.GAME_HEIGHT, Color.BLACK);
 
         stage.setScene(scene);
@@ -74,10 +89,6 @@ public class SceneHandler {
         Scene scene = new Scene(pane, GameConstants.GAME_WIDTH, GameConstants.GAME_HEIGHT, Color.BLACK);
 
         stage.setScene(scene);
-    }
-
-    public static SceneHandler getINSTANCE() {
-        return INSTANCE;
     }
 
     public Stage getStage() {

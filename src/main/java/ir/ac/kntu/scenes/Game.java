@@ -1,4 +1,4 @@
-package ir.ac.kntu;
+package ir.ac.kntu.scenes;
 
 import ir.ac.kntu.gamelogic.gameconstants.GameConstants;
 import ir.ac.kntu.gamelogic.models.GameObject;
@@ -7,12 +7,12 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class GameScene {
+public class Game {
     private final GraphicsContext staticGC;
 
     private final GraphicsContext movingGC;
 
-    public GameScene(GraphicsContext staticGC, GraphicsContext movingGC) {
+    public Game(GraphicsContext staticGC, GraphicsContext movingGC) {
         this.staticGC = staticGC;
         this.movingGC = movingGC;
         staticGC.fillRect(0, 0, GameConstants.GAME_WIDTH, GameConstants.GAME_HEIGHT);

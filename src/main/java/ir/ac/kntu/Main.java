@@ -14,7 +14,7 @@ public class Main extends Application {
 
     @Override public void start(Stage primaryStage) {
         SceneHandler.getINSTANCE().setStage(primaryStage);
-        SceneHandler.getINSTANCE().gameModeMenu();
+        SceneHandler.getINSTANCE().selectPlayer();
 
         primaryStage.show();
     }

@@ -6,10 +6,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 
-public class GameOverScene {
+public class GameOver {
     private final BorderPane rootPane;
 
-    public GameOverScene(BorderPane rootPane) {
+    public GameOver(BorderPane rootPane) {
         this.rootPane = rootPane;
     }
 

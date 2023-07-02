@@ -19,6 +19,10 @@ public class PlayerHandler {
         return INSTANCE;
     }
 
+    public Player newPlayer(String name) {
+        return new Player(name);
+    }
+
     public void addScore(int score) {
         currentPlayer.setScore(currentPlayer.getScore() + score);
         currentPlayer.setHighScore(Math.max(currentPlayer.getScore(), currentPlayer.getHighScore()));
