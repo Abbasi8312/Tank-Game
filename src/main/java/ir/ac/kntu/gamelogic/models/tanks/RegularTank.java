@@ -1,6 +1,5 @@
 package ir.ac.kntu.gamelogic.models.tanks;
 
-import ir.ac.kntu.gamelogic.services.PlayerHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
