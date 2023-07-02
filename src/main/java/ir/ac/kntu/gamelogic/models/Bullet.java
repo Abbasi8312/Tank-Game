@@ -41,7 +41,6 @@ public class Bullet extends Unit {
         GameObject collided = CollisionHandler.getINSTANCE().checkCollision(this, velocity);
         if (collided == null) {
             ++frameIndex;
-
             switch (direction) {
                 case UP -> this.y -= velocity;
                 case DOWN -> this.y += velocity;
@@ -61,7 +60,8 @@ public class Bullet extends Unit {
             flag.damage();
         } else {
             BoardHandler.getInstance().removeGameObject(this);
-        } lastTime = currentTime;
+        }
+        lastTime = currentTime;
     }
 
     public enum Origin {

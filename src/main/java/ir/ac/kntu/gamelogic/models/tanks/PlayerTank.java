@@ -3,13 +3,10 @@ package ir.ac.kntu.gamelogic.models.tanks;
 import ir.ac.kntu.SceneHandler;
 import ir.ac.kntu.gamecontroller.PlayerController;
 import ir.ac.kntu.gamelogic.gameconstants.Direction;
-import ir.ac.kntu.gamelogic.models.Bullet;
-import ir.ac.kntu.gamelogic.models.Unit;
-import ir.ac.kntu.gamelogic.services.BoardHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class PlayerTank extends Unit {
+public class PlayerTank extends Tank {
     private boolean isMoving;
 
     private boolean isFiring;
@@ -62,19 +59,6 @@ public class PlayerTank extends Unit {
             }
         }
         gc.drawImage(new Image(path), x - width / 2, y - height / 2, width, height);
-    }
-
-    public void fire() {
-        double x = this.x;
-        double y = this.y;
-        switch (direction) {
-            case RIGHT -> x += width;
-            case LEFT -> x -= width;
-            case DOWN -> y += height;
-            case UP -> y -= height;
-        }
-        Bullet bullet = new Bullet(x, y, damage, direction, Bullet.Origin.PLAYER);
-        BoardHandler.getInstance().addGameObject(bullet);
     }
 
     @Override public void die() {
