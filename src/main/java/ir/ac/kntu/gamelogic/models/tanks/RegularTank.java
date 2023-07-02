@@ -1,5 +1,6 @@
 package ir.ac.kntu.gamelogic.models.tanks;
 
+import ir.ac.kntu.gamelogic.services.PlayerHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -8,6 +9,7 @@ public class RegularTank extends EnemyTank {
         super(x, y);
         health = 1;
         damage = 1;
+        score = 100;
     }
 
     @Override public void draw(GraphicsContext gc) {

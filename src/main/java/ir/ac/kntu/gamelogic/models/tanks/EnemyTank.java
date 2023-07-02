@@ -4,13 +4,16 @@ import ir.ac.kntu.gamelogic.gameconstants.Direction;
 import ir.ac.kntu.gamelogic.models.Bullet;
 import ir.ac.kntu.gamelogic.models.Unit;
 import ir.ac.kntu.gamelogic.services.BoardHandler;
+import ir.ac.kntu.gamelogic.services.PlayerHandler;
 
 import java.util.Random;
 
 public abstract class EnemyTank extends Unit {
-    private double turningDistance;
+    protected double turningDistance;
 
-    private double firingDistance;
+    protected double firingDistance;
+
+    protected int score;
 
     public EnemyTank(int x, int y) {
         super(x, y);
@@ -35,11 +38,6 @@ public abstract class EnemyTank extends Unit {
         move();
     }
 
-    protected void changeDirection() {
-        Direction[] directions = Direction.values();
-        direction = directions[new Random().nextInt(directions.length - 1)];
-    }
-
     protected void fire() {
         double x = this.x;
         double y = this.y;
@@ -51,5 +49,15 @@ public abstract class EnemyTank extends Unit {
         }
         Bullet bullet = new Bullet(x, y, damage, direction, Bullet.Origin.ENEMY);
         BoardHandler.getInstance().addGameObject(bullet);
+    }
+
+    @Override public void die() {
+        super.die();
+        PlayerHandler.getINSTANCE().addScore(score);
+    }
+
+    protected void changeDirection() {
+        Direction[] directions = Direction.values();
+        direction = directions[new Random().nextInt(directions.length - 1)];
     }
 }

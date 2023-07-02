@@ -77,11 +77,9 @@ public class PlayerTank extends Unit {
         BoardHandler.getInstance().addGameObject(bullet);
     }
 
-    @Override public void damage(int damage) {
-        super.damage(damage);
-        if (health <= 0) {
-            SceneHandler.getINSTANCE().gameOver();
-        }
+    @Override public void die() {
+        super.die();
+        SceneHandler.getINSTANCE().gameOver();
     }
 
     public void setMoving(boolean moving) {

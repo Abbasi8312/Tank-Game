@@ -30,8 +30,12 @@ public abstract class Unit extends GameObject implements Collidable, Movable {
     public void damage(int damage) {
         health -= damage;
         if (health <= 0) {
-            BoardHandler.getInstance().removeGameObject(this);
+            die();
         }
+    }
+
+    public void die() {
+        BoardHandler.getInstance().removeGameObject(this);
     }
 
     @Override public boolean isColliding(GameObject gameObject, double velocity) {

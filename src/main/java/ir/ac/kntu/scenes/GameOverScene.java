@@ -1,5 +1,6 @@
 package ir.ac.kntu.scenes;
 
+import ir.ac.kntu.gamelogic.services.PlayerHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -17,5 +18,7 @@ public class GameOverScene {
         label.setFont(new Font(100));
         label.setAlignment(Pos.CENTER);
         rootPane.setCenter(label);
+
+        PlayerHandler.getINSTANCE().addGameCount();
     }
 }
