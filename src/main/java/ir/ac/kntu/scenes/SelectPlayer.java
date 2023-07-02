@@ -2,13 +2,11 @@ package ir.ac.kntu.scenes;
 
 import ir.ac.kntu.SceneHandler;
 import ir.ac.kntu.gamelogic.models.Player;
+import ir.ac.kntu.gamelogic.services.DataHandler;
 import ir.ac.kntu.gamelogic.services.PlayerHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.control.TextFormatter;
+import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -42,16 +40,16 @@ public class SelectPlayer {
         TextField playerNameField = new TextField();
         TextFormatter<String> textFormatter = new TextFormatter<>(change -> {
             String newText = change.getControlNewText();
-            if (newText.length() <= 40) {
+            if (newText.length() <= 16) {
                 return change;
             }
             return null;
         });
         playerNameField.setTextFormatter(textFormatter);
+
+        playerNameField.setPromptText("Enter a new name (Maximum 16 characters)");
+        playerNameField.setStyle("-fx-font-family: 'Courier New'; -fx-font-size: 14px; -fx-text-fill: white;");
         playerNameField.setAlignment(Pos.CENTER);
-        playerNameField.setPromptText("Enter a new name");
-        playerNameField.setFont(Font.font("Arial", FontWeight.BOLD, 12));
-        playerNameField.setStyle("-fx-text-fill: white");
         return playerNameField;
     }
 
@@ -62,7 +60,7 @@ public class SelectPlayer {
             String playerName = playerNameField.getText();
             Player player = PlayerHandler.getINSTANCE().newPlayer(playerName);
             PlayerHandler.getINSTANCE().setCurrentPlayer(player);
-            PlayerHandler.getINSTANCE().savePlayer();
+            PlayerHandler.getINSTANCE().updatePlayer();
             playerNameField.clear();
             SceneHandler.getINSTANCE().gameMode();
         });
@@ -120,7 +118,7 @@ public class SelectPlayer {
     }
 
     private void setupPlayerList(VBox playerList) {
-        List<Player> existingPlayers = PlayerHandler.getINSTANCE().getCurrentPlayers();
+        List<Player> existingPlayers = DataHandler.getINSTANCE().getPlayers();
         for (Player player : existingPlayers) {
             Button playerButton = createPlayerButton(player);
             setupPlayerButton(playerButton, player);
@@ -129,8 +127,11 @@ public class SelectPlayer {
     }
 
     private Button createPlayerButton(Player player) {
-        Button playerButton = new Button(player.getName());
-        playerButton.setAlignment(Pos.CENTER);
+        Label playerName = new Label("%-16s".formatted(player.getName()));
+        playerName.setStyle("-fx-font-family: 'Courier New';" + "-fx-font-size: 14px;" + "-fx-text-fill: white;");
+        Button playerButton = new Button("%05d".formatted(player.getHighScore()), playerName);
+        playerButton.setStyle("-fx-font-family: 'Courier New';" + "-fx-font-size: 14px;" + "-fx-text-fill: white;");
+        playerButton.setAlignment(Pos.CENTER_LEFT);
         playerButton.setPrefWidth(200);
         playerButton.setBackground(Background.EMPTY);
         playerButton.setBorder(new Border(
@@ -152,6 +153,7 @@ public class SelectPlayer {
     private ScrollPane createScrollPane(VBox playerList) {
         ScrollPane scrollPane = new ScrollPane(playerList);
         scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
         scrollPane.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, new Insets(0))));
         scrollPane.setStyle("-fx-background-color: black; fx-background: black");
         scrollPane.getContent().setStyle("-fx-background-color: black; fx-background: black");

@@ -1,6 +1,7 @@
 package ir.ac.kntu.scenes;
 
 import ir.ac.kntu.SceneHandler;
+import ir.ac.kntu.gamelogic.services.PlayerHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -24,7 +25,10 @@ public class GameMode {
         imageView.setFitHeight(gameImage.getHeight() * 3);
 
         Button onePlayerButton = new Button("1 Player");
-        onePlayerButton.setOnAction(event -> SceneHandler.getINSTANCE().game());
+        onePlayerButton.setOnAction(event -> {
+            PlayerHandler.getINSTANCE().resetScore();
+            SceneHandler.getINSTANCE().game();
+        });
         onePlayerButton.setAlignment(Pos.CENTER);
 
         Button twoPlayerButton = new Button("2 Player");

@@ -20,6 +20,6 @@ public class GameOver {
         rootPane.setCenter(label);
 
         PlayerHandler.getINSTANCE().addGameCount();
-        PlayerHandler.getINSTANCE().savePlayer();
+        PlayerHandler.getINSTANCE().updatePlayer();
     }
 }
