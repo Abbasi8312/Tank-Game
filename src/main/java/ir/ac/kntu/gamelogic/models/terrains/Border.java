@@ -1,4 +1,4 @@
-package ir.ac.kntu.gamelogic.models.walls;
+package ir.ac.kntu.gamelogic.models.terrains;
 
 import ir.ac.kntu.gamelogic.models.GameObject;
 import javafx.scene.canvas.GraphicsContext;

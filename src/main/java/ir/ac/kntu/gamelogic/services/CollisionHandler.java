@@ -25,4 +25,13 @@ public class CollisionHandler {
         }
         return null;
     }
+
+    public GameObject checkPoint(double x, double y) {
+        for (GameObject gameObject : BoardHandler.getInstance().getGameObjects()) {
+            if (gameObject.isAtPoint(x, y)) {
+                return gameObject;
+            }
+        }
+        return null;
+    }
 }

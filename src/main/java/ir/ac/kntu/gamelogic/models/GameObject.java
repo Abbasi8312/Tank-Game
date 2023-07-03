@@ -24,6 +24,11 @@ public abstract class GameObject {
         collisionRect = new CollisionRectangle(width, height);
     }
 
+    public boolean isAtPoint(double x, double y) {
+        return Math.abs(x - (this.x + collisionRect.relativeX)) < collisionRect.width &&
+                Math.abs(y - (this.y + collisionRect.relativeY)) < collisionRect.height;
+    }
+
     public abstract void draw(GraphicsContext gc);
 
     public double getX() {

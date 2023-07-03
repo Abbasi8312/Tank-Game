@@ -7,9 +7,8 @@ import ir.ac.kntu.gamelogic.models.GameObject;
 import ir.ac.kntu.gamelogic.models.Unit;
 import ir.ac.kntu.gamelogic.models.interfaces.Movable;
 import ir.ac.kntu.gamelogic.models.tanks.PlayerTank;
-import ir.ac.kntu.gamelogic.models.tanks.RegularTank;
-import ir.ac.kntu.gamelogic.models.walls.Border;
-import ir.ac.kntu.gamelogic.models.walls.BrickWall;
+import ir.ac.kntu.gamelogic.models.terrains.Border;
+import ir.ac.kntu.gamelogic.models.terrains.BrickWall;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,8 +56,7 @@ public class BoardHandler {
         addGameObject(new Flag(300, 400));
         addGameObject(new BrickWall(250, 250));
         addGameObject(new BrickWall(250 + GameConstants.TILE_SIZE, 250));
-        addGameObject(new BrickWall(250, 250 + GameConstants.TILE_SIZE));
-        addGameObject(new BrickWall(250 + GameConstants.TILE_SIZE, 250 + GameConstants.TILE_SIZE));
+        addGameObject(new BrickWall(250 + 3 * GameConstants.TILE_SIZE, 250));
     }
 
     public void updateFrame() {

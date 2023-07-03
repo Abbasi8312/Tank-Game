@@ -1,4 +1,4 @@
-package ir.ac.kntu.gamelogic.models.walls;
+package ir.ac.kntu.gamelogic.models.terrains;
 
 import ir.ac.kntu.gamelogic.gameconstants.Direction;
 import javafx.scene.canvas.GraphicsContext;
@@ -16,7 +16,6 @@ public class IronWall extends Wall {
         gc.drawImage(new Image(path), x - width / 2, y - height / 2, width, height);
     }
 
-    public void damage(Direction direction) {
-
+    public void damage(Direction direction, boolean isFirst) {
     }
 }

@@ -1,7 +1,6 @@
-package ir.ac.kntu.gamelogic.models.walls;
+package ir.ac.kntu.gamelogic.models.terrains;
 
 import ir.ac.kntu.gamelogic.gameconstants.Direction;
-import ir.ac.kntu.gamelogic.gameconstants.GameConstants;
 import ir.ac.kntu.gamelogic.models.GameObject;
 
 public abstract class Wall extends GameObject {
@@ -9,5 +8,5 @@ public abstract class Wall extends GameObject {
         super(x, y);
     }
 
-    public abstract void damage(Direction direction);
+    public abstract void damage(Direction direction, boolean isFirst);
 }

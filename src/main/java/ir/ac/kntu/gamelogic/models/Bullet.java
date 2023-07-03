@@ -4,7 +4,7 @@ import ir.ac.kntu.gamelogic.gameconstants.Direction;
 import ir.ac.kntu.gamelogic.gameconstants.GameConstants;
 import ir.ac.kntu.gamelogic.models.tanks.EnemyTank;
 import ir.ac.kntu.gamelogic.models.tanks.PlayerTank;
-import ir.ac.kntu.gamelogic.models.walls.BrickWall;
+import ir.ac.kntu.gamelogic.models.terrains.BrickWall;
 import ir.ac.kntu.gamelogic.services.BoardHandler;
 import ir.ac.kntu.gamelogic.services.CollisionHandler;
 import javafx.scene.canvas.GraphicsContext;
@@ -17,8 +17,8 @@ public class Bullet extends Unit {
         super(x, y);
         this.damage = damage;
         velocity *= 5;
-        width = GameConstants.TILE_SIZE / 2;
-        height = GameConstants.TILE_SIZE / 2;
+        width = GameConstants.TILE_SIZE / 4;
+        height = GameConstants.TILE_SIZE / 4;
         collisionRect.width = width;
         collisionRect.height = height;
         switch (direction) {
@@ -60,7 +60,7 @@ public class Bullet extends Unit {
             ((Unit) collided).damage(damage);
             BoardHandler.getInstance().removeGameObject(this);
         } else if (collided instanceof BrickWall brickWall) {
-            brickWall.damage(direction);
+            brickWall.damage(direction, true);
             BoardHandler.getInstance().removeGameObject(this);
         } else if (collided instanceof Flag flag) {
             flag.damage();

@@ -4,6 +4,7 @@ import ir.ac.kntu.gamelogic.gameconstants.Direction;
 import ir.ac.kntu.gamelogic.gameconstants.GameConstants;
 import ir.ac.kntu.gamelogic.models.interfaces.Collidable;
 import ir.ac.kntu.gamelogic.models.interfaces.Movable;
+import ir.ac.kntu.gamelogic.models.terrains.Wall;
 import ir.ac.kntu.gamelogic.services.BoardHandler;
 import ir.ac.kntu.gamelogic.services.CollisionHandler;
 
@@ -22,10 +23,6 @@ public abstract class Unit extends GameObject implements Collidable, Movable {
 
     public Unit(double x, double y) {
         super(x, y);
-        width = 2 * GameConstants.TILE_SIZE;
-        height = 2 * GameConstants.TILE_SIZE;
-        collisionRect.width = width;
-        collisionRect.height = height;
         lastTime = System.nanoTime();
     }
 
@@ -67,12 +64,52 @@ public abstract class Unit extends GameObject implements Collidable, Movable {
         GameObject collided = CollisionHandler.getINSTANCE().checkCollision(this, velocity);
         if (collided == null || collided instanceof Bullet) {
             ++frameIndex;
-
             switch (direction) {
-                case UP -> this.y -= velocity;
-                case DOWN -> this.y += velocity;
-                case RIGHT -> this.x += velocity;
-                case LEFT -> this.x -= velocity;
+                case UP -> y -= velocity;
+                case DOWN -> y += velocity;
+                case RIGHT -> x += velocity;
+                case LEFT -> x -= velocity;
+                default -> {
+                }
+            }
+        } else if (collided instanceof Wall || collided instanceof Flag) {
+            switch (direction) {
+                case UP -> {
+                    if ((x <= (collided.x - (0.85 * GameConstants.TILE_SIZE))) && !(CollisionHandler.getINSTANCE()
+                            .checkPoint(collided.x - width, y - velocity) instanceof Wall)) {
+                        x = collided.x - width;
+                    } else if (x >= collided.x + 0.85 * GameConstants.TILE_SIZE && !(CollisionHandler.getINSTANCE()
+                            .checkPoint(collided.x + width, y - velocity) instanceof Wall)) {
+                        x = collided.x + width;
+                    }
+                }
+                case DOWN -> {
+                    if (x <= collided.x - 0.85 * GameConstants.TILE_SIZE && !(CollisionHandler.getINSTANCE()
+                            .checkPoint(collided.x - width, y + velocity) instanceof Wall)) {
+                        x = collided.x - width;
+                    } else if (x >= collided.x + 0.85 * GameConstants.TILE_SIZE && !(CollisionHandler.getINSTANCE()
+                            .checkPoint(collided.x + width, y + velocity) instanceof Wall)) {
+                        x = collided.x + width;
+                    }
+                }
+                case RIGHT -> {
+                    if (y <= collided.y - 0.85 * GameConstants.TILE_SIZE && !(CollisionHandler.getINSTANCE()
+                            .checkPoint(collided.y - height, x + velocity) instanceof Wall)) {
+                        y = collided.y - height;
+                    } else if (y >= collided.y + 0.85 * GameConstants.TILE_SIZE && !(CollisionHandler.getINSTANCE()
+                            .checkPoint(collided.y + height, x + velocity) instanceof Wall)) {
+                        y = collided.y + height;
+                    }
+                }
+                case LEFT -> {
+                    if (y <= collided.y - 0.85 * GameConstants.TILE_SIZE && !(CollisionHandler.getINSTANCE()
+                            .checkPoint(collided.y - height, x - velocity) instanceof Wall)) {
+                        y = collided.y - height;
+                    } else if (y >= collided.y + 0.85 * GameConstants.TILE_SIZE && !(CollisionHandler.getINSTANCE()
+                            .checkPoint(collided.y + height, x - velocity) instanceof Wall)) {
+                        y = collided.y + height;
+                    }
+                }
                 default -> {
                 }
             }
