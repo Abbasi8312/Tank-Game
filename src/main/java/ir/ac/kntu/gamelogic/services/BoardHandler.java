@@ -9,6 +9,7 @@ import ir.ac.kntu.gamelogic.models.interfaces.Movable;
 import ir.ac.kntu.gamelogic.models.tanks.PlayerTank;
 import ir.ac.kntu.gamelogic.models.tanks.RegularTank;
 import ir.ac.kntu.gamelogic.models.walls.Border;
+import ir.ac.kntu.gamelogic.models.walls.BrickWall;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +18,6 @@ public class BoardHandler {
     private final static BoardHandler INSTANCE = new BoardHandler();
 
     private final Board board;
-
-    private final List<GameObject> statics;
 
     private final List<GameObject> updatedStatics;
 
@@ -30,7 +29,6 @@ public class BoardHandler {
 
     private BoardHandler() {
         board = new Board();
-        statics = new ArrayList<>();
         updatedStatics = new ArrayList<>();
         movables = new ArrayList<>();
         addQueue = new ArrayList<>();
@@ -42,9 +40,9 @@ public class BoardHandler {
     }
 
     public void init() {
-        addGameObject(new RegularTank(100, 100));
-        addGameObject(new RegularTank(400, 150));
-        addGameObject(new RegularTank(200, 400));
+//        addGameObject(new RegularTank(100, 100));
+//        addGameObject(new RegularTank(400, 150));
+//        addGameObject(new RegularTank(200, 400));
         for (int i = 0; i < GameConstants.GAME_WIDTH / GameConstants.TILE_SIZE; i++) {
             addGameObject(new Border(GameConstants.TILE_SIZE * (i + 0.5), GameConstants.TILE_SIZE * 0.5));
             addGameObject(new Border(GameConstants.TILE_SIZE * (i + 0.5),
@@ -57,6 +55,10 @@ public class BoardHandler {
         }
         addGameObject(new PlayerTank(500, 400));
         addGameObject(new Flag(300, 400));
+        addGameObject(new BrickWall(250, 250));
+        addGameObject(new BrickWall(250 + GameConstants.TILE_SIZE, 250));
+        addGameObject(new BrickWall(250, 250 + GameConstants.TILE_SIZE));
+        addGameObject(new BrickWall(250 + GameConstants.TILE_SIZE, 250 + GameConstants.TILE_SIZE));
     }
 
     public void updateFrame() {
@@ -86,8 +88,8 @@ public class BoardHandler {
             board.removeGameObject(gameObject);
             if (gameObject instanceof Movable) {
                 movables.remove(gameObject);
-            } else {
-                updatedStatics.remove(gameObject);
+            } else if (gameObject instanceof BrickWall) {
+                updatedStatics.add(gameObject);
             }
             removed.add(gameObject);
         }
@@ -99,16 +101,17 @@ public class BoardHandler {
         removeQueue.add(gameObject);
     }
 
-    public List<GameObject> getStatics() {
-        return new ArrayList<>(statics);
-    }
-
     public List<GameObject> getUpdatedStatics() {
         return new ArrayList<>(updatedStatics);
     }
 
+    public void updateStatic(GameObject gameObject) {
+        if (!(gameObject instanceof Movable)) {
+            updatedStatics.add(gameObject);
+        }
+    }
+
     public void clearUpdatedStatics() {
-        statics.addAll(updatedStatics);
         updatedStatics.clear();
     }
 

@@ -9,7 +9,6 @@ public abstract class Wall extends GameObject {
         super(x, y);
         width = GameConstants.TILE_SIZE;
         height = GameConstants.TILE_SIZE;
-        frameIndex = 5;
     }
 
     public abstract void damage(Direction direction);

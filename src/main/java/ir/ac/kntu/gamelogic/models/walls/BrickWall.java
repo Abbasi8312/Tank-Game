@@ -1,14 +1,14 @@
 package ir.ac.kntu.gamelogic.models.walls;
 
 import ir.ac.kntu.gamelogic.gameconstants.Direction;
+import ir.ac.kntu.gamelogic.services.BoardHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class BrickWall extends Wall {
-    protected Direction direction = Direction.NONE;
-
     public BrickWall(double x, double y) {
         super(x, y);
+        frameIndex = 5;
     }
 
     public BrickWall(double x, double y, int frameIndex) {
@@ -29,7 +29,9 @@ public class BrickWall extends Wall {
             case 8 -> path = "images/sprites/Terrain/brick8.png";
             default -> path = "images/sprites/Terrain/brick9.png";
         }
-        gc.drawImage(new Image(path), x - width / 2, y - height / 2, width, height);
+        if (frameIndex != 0) {
+            gc.drawImage(new Image(path), x - width / 2, y - height / 2, width, height);
+        }
     }
 
     public void damage(Direction direction) {
@@ -39,37 +41,42 @@ public class BrickWall extends Wall {
             case LEFT -> leftDamage();
             default -> rightDamage();
         }
+        if (frameIndex == 0) {
+            BoardHandler.getInstance().removeGameObject(this);
+        } else {
+            BoardHandler.getInstance().updateStatic(this);
+        }
     }
 
     private void rightDamage() {
-        width /= 2;
-        x += width / 2;
         if (frameIndex == 2 || frameIndex == 5 || frameIndex == 8) {
             frameIndex += 1;
+        } else {
+            frameIndex = 0;
         }
     }
 
     private void leftDamage() {
-        width /= 2;
-        x -= width / 2;
         if (frameIndex == 2 || frameIndex == 5 || frameIndex == 8) {
             frameIndex -= 1;
+        } else {
+            frameIndex = 0;
         }
     }
 
     private void downDamage() {
-        height /= 2;
-        y += height / 2;
         if (frameIndex == 4 || frameIndex == 5 || frameIndex == 6) {
             frameIndex -= 3;
+        } else {
+            frameIndex = 0;
         }
     }
 
     private void upDamage() {
-        height /= 2;
-        y -= height / 2;
         if (frameIndex == 4 || frameIndex == 5 || frameIndex == 6) {
             frameIndex += 3;
+        } else {
+            frameIndex = 0;
         }
     }
 }

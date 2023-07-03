@@ -65,9 +65,9 @@ public class Game {
                 }
 
                 clearStatics();
+                drawStatics();
                 clearMovables();
                 BoardHandler.getInstance().updateFrame();
-                drawStatics();
                 drawMovables();
             }
         }.start();
