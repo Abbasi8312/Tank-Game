@@ -28,33 +28,33 @@ public class SceneHandler {
 
     public void selectPlayer() {
         BorderPane borderPane = new BorderPane();
-        borderPane.setPrefWidth(GameVariables.GAME_WIDTH);
-        borderPane.setPrefHeight(GameVariables.GAME_HEIGHT);
+        borderPane.setPrefWidth(GameVariables.gameWidth);
+        borderPane.setPrefHeight(GameVariables.gameHeight);
         borderPane.setBackground(Background.EMPTY);
         new SelectPlayer(borderPane).start();
-        Scene scene = new Scene(borderPane, GameVariables.GAME_WIDTH, GameVariables.GAME_HEIGHT, Color.BLACK);
+        Scene scene = new Scene(borderPane, GameVariables.gameWidth, GameVariables.gameHeight, Color.BLACK);
 
         stage.setScene(scene);
     }
 
     public void selectGameMode() {
         BorderPane borderPane = new BorderPane();
-        borderPane.setPrefWidth(GameVariables.GAME_WIDTH);
-        borderPane.setPrefHeight(GameVariables.GAME_HEIGHT);
+        borderPane.setPrefWidth(GameVariables.gameWidth);
+        borderPane.setPrefHeight(GameVariables.gameHeight);
         borderPane.setBackground(Background.EMPTY);
         new SelectGameMode(borderPane).start();
-        Scene scene = new Scene(borderPane, GameVariables.GAME_WIDTH, GameVariables.GAME_HEIGHT, Color.BLACK);
+        Scene scene = new Scene(borderPane, GameVariables.gameWidth, GameVariables.gameHeight, Color.BLACK);
 
         stage.setScene(scene);
     }
 
     public void selectStage() {
         BorderPane borderPane = new BorderPane();
-        borderPane.setPrefWidth(GameVariables.GAME_WIDTH);
-        borderPane.setPrefHeight(GameVariables.GAME_HEIGHT);
+        borderPane.setPrefWidth(GameVariables.gameWidth);
+        borderPane.setPrefHeight(GameVariables.gameHeight);
         borderPane.setBackground(Background.EMPTY);
         new SelectStage(borderPane).start();
-        Scene scene = new Scene(borderPane, GameVariables.GAME_WIDTH, GameVariables.GAME_HEIGHT, Color.BLACK);
+        Scene scene = new Scene(borderPane, GameVariables.gameWidth, GameVariables.gameHeight, Color.BLACK);
 
         stage.setScene(scene);
     }
@@ -64,8 +64,8 @@ public class SceneHandler {
 
         Group root = new Group();
         Scene scene = new Scene(root);
-        Canvas staticCanvas = new Canvas(GameVariables.GAME_WIDTH, GameVariables.GAME_HEIGHT);
-        Canvas movingCanvas = new Canvas(GameVariables.GAME_WIDTH, GameVariables.GAME_HEIGHT);
+        Canvas staticCanvas = new Canvas(GameVariables.gameWidth, GameVariables.gameHeight);
+        Canvas movingCanvas = new Canvas(GameVariables.gameWidth, GameVariables.gameHeight);
         root.getChildren().addAll(staticCanvas, movingCanvas);
         GraphicsContext staticGC = staticCanvas.getGraphicsContext2D();
         GraphicsContext movingGC = movingCanvas.getGraphicsContext2D();
@@ -80,22 +80,22 @@ public class SceneHandler {
 
     public void gameOver() {
         BorderPane borderPane = new BorderPane();
-        borderPane.setPrefWidth(GameVariables.GAME_WIDTH);
-        borderPane.setPrefHeight(GameVariables.GAME_HEIGHT);
+        borderPane.setPrefWidth(GameVariables.gameWidth);
+        borderPane.setPrefHeight(GameVariables.gameHeight);
         borderPane.setBackground(Background.EMPTY);
         new GameOver(borderPane).start();
-        Scene scene = new Scene(borderPane, GameVariables.GAME_WIDTH, GameVariables.GAME_HEIGHT, Color.BLACK);
+        Scene scene = new Scene(borderPane, GameVariables.gameWidth, GameVariables.gameHeight, Color.BLACK);
 
         stage.setScene(scene);
     }
 
     public void playerScore() {
         Pane pane = new Pane();
-        pane.setPrefWidth(GameVariables.GAME_WIDTH);
-        pane.setPrefHeight(GameVariables.GAME_HEIGHT);
+        pane.setPrefWidth(GameVariables.gameWidth);
+        pane.setPrefHeight(GameVariables.gameHeight);
         pane.setBackground(Background.EMPTY);
 
-        Scene scene = new Scene(pane, GameVariables.GAME_WIDTH, GameVariables.GAME_HEIGHT, Color.BLACK);
+        Scene scene = new Scene(pane, GameVariables.gameWidth, GameVariables.gameHeight, Color.BLACK);
 
         stage.setScene(scene);
     }

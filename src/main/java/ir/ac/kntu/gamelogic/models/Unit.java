@@ -72,49 +72,70 @@ public abstract class Unit extends GameObject implements Collidable, Movable {
                 }
             }
         } else if (collided instanceof Wall || collided instanceof Flag) {
-            switch (direction) {
-                case UP -> {
-                    if ((x <= (collided.x - (0.8 * GameVariables.TILE_SIZE))) && !(CollisionHandler.getINSTANCE()
-                            .checkPoint(collided.x - width, y - velocity) instanceof Wall)) {
-                        x = collided.x - width;
-                    } else if (x >= collided.x + 0.8 * GameVariables.TILE_SIZE && !(CollisionHandler.getINSTANCE()
-                            .checkPoint(collided.x + width, y - velocity) instanceof Wall)) {
-                        x = collided.x + width;
-                    }
-                }
-                case DOWN -> {
-                    if (x <= collided.x - 0.8 * GameVariables.TILE_SIZE && !(CollisionHandler.getINSTANCE()
-                            .checkPoint(collided.x - width, y + velocity) instanceof Wall)) {
-                        x = collided.x - width;
-                    } else if (x >= collided.x + 0.8 * GameVariables.TILE_SIZE && !(CollisionHandler.getINSTANCE()
-                            .checkPoint(collided.x + width, y + velocity) instanceof Wall)) {
-                        x = collided.x + width;
-                    }
-                }
-                case RIGHT -> {
-                    if (y <= collided.y - 0.8 * GameVariables.TILE_SIZE && !(CollisionHandler.getINSTANCE()
-                            .checkPoint(collided.y - height, x + velocity) instanceof Wall)) {
-                        y = collided.y - height;
-                    } else if (y >= collided.y + 0.8 * GameVariables.TILE_SIZE && !(CollisionHandler.getINSTANCE()
-                            .checkPoint(collided.y + height, x + velocity) instanceof Wall)) {
-                        y = collided.y + height;
-                    }
-                }
-                case LEFT -> {
-                    if (y <= collided.y - 0.8 * GameVariables.TILE_SIZE && !(CollisionHandler.getINSTANCE()
-                            .checkPoint(collided.y - height, x - velocity) instanceof Wall)) {
-                        y = collided.y - height;
-                    } else if (y >= collided.y + 0.8 * GameVariables.TILE_SIZE && !(CollisionHandler.getINSTANCE()
-                            .checkPoint(collided.y + height, x - velocity) instanceof Wall)) {
-                        y = collided.y + height;
-                    }
-                }
-                default -> {
-                }
-            }
+            moveHelper(velocity, collided);
         }
         lastTime = currentTime;
     }
+
+    private void moveHelper(double velocity, GameObject collided) {
+        switch (direction) {
+            case UP -> upHelper(velocity, collided);
+            case DOWN -> downHelper(velocity, collided);
+            case RIGHT -> rightHelper(velocity, collided);
+            case LEFT -> leftHelper(velocity, collided);
+            default -> {
+            }
+        }
+    }
+
+    private void upHelper(double velocity, GameObject collided) {
+        double leftLimit = collided.x - (0.8 * GameVariables.TILE_SIZE);
+        double rightLimit = collided.x + (0.8 * GameVariables.TILE_SIZE);
+        if (x <= leftLimit &&
+                !(CollisionHandler.getINSTANCE().checkPoint(collided.x - width, y - velocity) instanceof Wall)) {
+            x = collided.x - width;
+        } else if (x >= rightLimit &&
+                !(CollisionHandler.getINSTANCE().checkPoint(collided.x + width, y - velocity) instanceof Wall)) {
+            x = collided.x + width;
+        }
+    }
+
+    private void downHelper(double velocity, GameObject collided) {
+        double leftLimit = collided.x - (0.8 * GameVariables.TILE_SIZE);
+        double rightLimit = collided.x + (0.8 * GameVariables.TILE_SIZE);
+        if (x <= leftLimit &&
+                !(CollisionHandler.getINSTANCE().checkPoint(collided.x - width, y + velocity) instanceof Wall)) {
+            x = collided.x - width;
+        } else if (x >= rightLimit &&
+                !(CollisionHandler.getINSTANCE().checkPoint(collided.x + width, y + velocity) instanceof Wall)) {
+            x = collided.x + width;
+        }
+    }
+
+    private void rightHelper(double velocity, GameObject collided) {
+        double topLimit = collided.y - (0.8 * GameVariables.TILE_SIZE);
+        double bottomLimit = collided.y + (0.8 * GameVariables.TILE_SIZE);
+        if (y <= topLimit &&
+                !(CollisionHandler.getINSTANCE().checkPoint(collided.y - height, x + velocity) instanceof Wall)) {
+            y = collided.y - height;
+        } else if (y >= bottomLimit &&
+                !(CollisionHandler.getINSTANCE().checkPoint(collided.y + height, x + velocity) instanceof Wall)) {
+            y = collided.y + height;
+        }
+    }
+
+    private void leftHelper(double velocity, GameObject collided) {
+        double topLimit = collided.y - (0.8 * GameVariables.TILE_SIZE);
+        double bottomLimit = collided.y + (0.8 * GameVariables.TILE_SIZE);
+        if (y <= topLimit &&
+                !(CollisionHandler.getINSTANCE().checkPoint(collided.y - height, x - velocity) instanceof Wall)) {
+            y = collided.y - height;
+        } else if (y >= bottomLimit &&
+                !(CollisionHandler.getINSTANCE().checkPoint(collided.y + height, x - velocity) instanceof Wall)) {
+            y = collided.y + height;
+        }
+    }
+
 
     public double getVelocity() {
         return velocity;

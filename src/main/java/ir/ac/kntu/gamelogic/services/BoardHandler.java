@@ -38,14 +38,14 @@ public class BoardHandler {
 
     public void init() {
         addQueue.addAll(DataHandler.getINSTANCE().loadGameObjectsFromFile());
-        for (int i = 0; i < GameVariables.GAME_WIDTH / GameVariables.TILE_SIZE; i++) {
+        for (int i = 0; i < GameVariables.gameWidth / GameVariables.TILE_SIZE; i++) {
             addGameObject(new Border(GameVariables.TILE_SIZE * (i + 0.5), GameVariables.TILE_SIZE * 0.5));
             addGameObject(new Border(GameVariables.TILE_SIZE * (i + 0.5),
-                    GameVariables.GAME_HEIGHT - GameVariables.TILE_SIZE * 0.5));
+                    GameVariables.gameHeight - GameVariables.TILE_SIZE * 0.5));
         }
-        for (int i = 1; i < GameVariables.GAME_HEIGHT / GameVariables.TILE_SIZE - 1; i++) {
+        for (int i = 1; i < GameVariables.gameHeight / GameVariables.TILE_SIZE - 1; i++) {
             addGameObject(new Border(GameVariables.TILE_SIZE * 0.5, GameVariables.TILE_SIZE * (i + 0.5)));
-            addGameObject(new Border(GameVariables.GAME_WIDTH - GameVariables.TILE_SIZE * 0.5,
+            addGameObject(new Border(GameVariables.gameWidth - GameVariables.TILE_SIZE * 0.5,
                     GameVariables.TILE_SIZE * (i + 0.5)));
         }
     }

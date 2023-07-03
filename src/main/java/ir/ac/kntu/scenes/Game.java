@@ -15,7 +15,7 @@ public class Game {
     public Game(GraphicsContext staticGC, GraphicsContext movingGC) {
         this.staticGC = staticGC;
         this.movingGC = movingGC;
-        staticGC.fillRect(0, 0, GameVariables.GAME_WIDTH, GameVariables.GAME_HEIGHT);
+        staticGC.fillRect(0, 0, GameVariables.gameWidth, GameVariables.gameHeight);
     }
 
     private void clearStatics() {

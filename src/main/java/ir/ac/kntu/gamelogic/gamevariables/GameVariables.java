@@ -5,9 +5,9 @@ public class GameVariables {
 
     public static final int VELOCITY = 120;
 
-    public static int GAME_WIDTH = 600;
+    public static int gameWidth = 600;
 
-    public static int GAME_HEIGHT = 600;
+    public static int gameHeight = 600;
 
     public static GameStatus gameStatus = GameStatus.RUNNING;
 

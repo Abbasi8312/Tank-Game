@@ -68,8 +68,8 @@ public class DataHandler {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        GameVariables.GAME_WIDTH = GameVariables.TILE_SIZE * (maxColumn + 2);
-        GameVariables.GAME_HEIGHT = GameVariables.TILE_SIZE * (maxRow + 2);
+        GameVariables.gameWidth = GameVariables.TILE_SIZE * (maxColumn + 2);
+        GameVariables.gameHeight = GameVariables.TILE_SIZE * (maxRow + 2);
         return gameObjects;
     }
 
