@@ -21,7 +21,7 @@ public abstract class GameObject {
         this.y = y;
         width = GameVariables.TILE_SIZE;
         height = GameVariables.TILE_SIZE;
-        collisionRect = new CollisionRectangle(width, height);
+        collisionRect = new CollisionRectangle(width * 0.95, height * 0.95);
     }
 
     public boolean isAtPoint(double x, double y) {
