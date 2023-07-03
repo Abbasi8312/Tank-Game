@@ -17,8 +17,12 @@ public class Bullet extends Unit {
         super(x, y);
         this.damage = damage;
         velocity *= 5;
-        width = GameConstants.TILE_SIZE / 4;
-        height = GameConstants.TILE_SIZE / 4;
+        width = GameConstants.TILE_SIZE / 2;
+        height = GameConstants.TILE_SIZE / 2;
+        switch (direction) {
+            case UP, DOWN -> width *= 3.0 /4;
+            default -> height *= 3.0 /4;
+        }
         this.direction = direction;
         this.origin = origin;
         health = 1;

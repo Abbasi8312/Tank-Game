@@ -15,17 +15,17 @@ public class RegularTank extends EnemyTank {
         String path;
         if (frameIndex % 4 < 2) {
             switch (direction) {
-                case UP -> path = "images/tile000.png";
-                case DOWN -> path = "images/tile004.png";
-                case RIGHT -> path = "images/tile006.png";
-                default -> path = "images/tile002.png";
+                case DOWN -> path = "images/sprites/Regular Enemy/down1.png";
+                case RIGHT -> path = "images/sprites/Regular Enemy/right1.png";
+                case LEFT -> path = "images/sprites/Regular Enemy/left1.png";
+                default -> path = "images/sprites/Regular Enemy/up1.png";
             }
         } else {
             switch (direction) {
-                case UP -> path = "images/tile001.png";
-                case DOWN -> path = "images/tile005.png";
-                case RIGHT -> path = "images/tile007.png";
-                default -> path = "images/tile003.png";
+                case DOWN -> path = "images/sprites/Regular Enemy/down2.png";
+                case RIGHT -> path = "images/sprites/Regular Enemy/right2.png";
+                case LEFT -> path = "images/sprites/Regular Enemy/left2.png";
+                default -> path = "images/sprites/Regular Enemy/up2.png";
             }
         }
         gc.drawImage(new Image(path), x - width / 2, y - height / 2, width, height);

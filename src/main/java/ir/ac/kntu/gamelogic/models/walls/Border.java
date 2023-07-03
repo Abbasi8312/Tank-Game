@@ -14,6 +14,6 @@ public class Border extends GameObject {
     }
 
     @Override public void draw(GraphicsContext gc) {
-        gc.drawImage(new Image("images/tile023.png"), x - width / 2, y - height / 2, width, height);
+        gc.drawImage(new Image("images/sprites/Terrain/border.png"), x - width / 2, y - height / 2, width, height);
     }
 }

@@ -12,7 +12,7 @@ public class IronWall extends Wall {
     }
 
     @Override public void draw(GraphicsContext gc) {
-        String path = "";
+        String path = "images/sprites/Terrain/iron.png";
         gc.drawImage(new Image(path), x - width / 2, y - height / 2, width, height);
     }
 

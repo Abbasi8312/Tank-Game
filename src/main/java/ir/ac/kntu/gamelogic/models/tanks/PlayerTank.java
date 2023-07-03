@@ -63,17 +63,17 @@ public class PlayerTank extends Unit {
         String path;
         if (frameIndex % 4 < 2) {
             switch (direction) {
-                case DOWN -> path = "images/tile004.png";
-                case RIGHT -> path = "images/tile006.png";
-                case LEFT -> path = "images/tile002.png";
-                default -> path = "images/tile000.png";
+                case DOWN -> path = "images/sprites/Regular Player 1/down1.png";
+                case RIGHT -> path = "images/sprites/Regular Player 1/right1.png";
+                case LEFT -> path = "images/sprites/Regular Player 1/left1.png";
+                default -> path = "images/sprites/Regular Player 1/up1.png";
             }
         } else {
             switch (direction) {
-                case DOWN -> path = "images/tile005.png";
-                case RIGHT -> path = "images/tile007.png";
-                case LEFT -> path = "images/tile003.png";
-                default -> path = "images/tile001.png";
+                case DOWN -> path = "images/sprites/Regular Player 1/down2.png";
+                case RIGHT -> path = "images/sprites/Regular Player 1/right2.png";
+                case LEFT -> path = "images/sprites/Regular Player 1/left2.png";
+                default -> path = "images/sprites/Regular Player 1/up2.png";
             }
         }
         gc.drawImage(new Image(path), x - width / 2, y - height / 2, width, height);
