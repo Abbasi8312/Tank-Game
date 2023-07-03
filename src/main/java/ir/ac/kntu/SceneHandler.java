@@ -3,10 +3,7 @@ package ir.ac.kntu;
 import ir.ac.kntu.gamecontroller.EventHandler;
 import ir.ac.kntu.gamelogic.gameconstants.GameConstants;
 import ir.ac.kntu.gamelogic.services.BoardHandler;
-import ir.ac.kntu.scenes.Game;
-import ir.ac.kntu.scenes.GameMode;
-import ir.ac.kntu.scenes.GameOver;
-import ir.ac.kntu.scenes.SelectPlayer;
+import ir.ac.kntu.scenes.*;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -40,13 +37,25 @@ public class SceneHandler {
         stage.setScene(scene);
     }
 
-    public void gameMode() {
-        Pane pane = new Pane();
-        pane.setPrefWidth(GameConstants.GAME_WIDTH);
-        pane.setPrefHeight(GameConstants.GAME_HEIGHT);
-        pane.setBackground(Background.EMPTY);
-        new GameMode(pane).start();
-        Scene scene = new Scene(pane, GameConstants.GAME_WIDTH, GameConstants.GAME_HEIGHT, Color.BLACK);
+    public void selectGameMode() {
+        BorderPane borderPane = new BorderPane();
+        borderPane.setPrefWidth(GameConstants.GAME_WIDTH);
+        borderPane.setPrefHeight(GameConstants.GAME_HEIGHT);
+        borderPane.setBackground(Background.EMPTY);
+        new SelectGameMode(borderPane).start();
+        Scene scene = new Scene(borderPane, GameConstants.GAME_WIDTH, GameConstants.GAME_HEIGHT, Color.BLACK);
+
+        stage.setScene(scene);
+    }
+
+    public void selectStage() {
+        BorderPane borderPane = new BorderPane();
+        borderPane.setPrefWidth(GameConstants.GAME_WIDTH);
+        borderPane.setPrefHeight(GameConstants.GAME_HEIGHT);
+        borderPane.setBackground(Background.EMPTY);
+        new SelectStage(borderPane).start();
+        Scene scene = new Scene(borderPane, GameConstants.GAME_WIDTH, GameConstants.GAME_HEIGHT, Color.BLACK);
+
         stage.setScene(scene);
     }
 

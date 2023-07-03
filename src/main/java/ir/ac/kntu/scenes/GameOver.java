@@ -4,7 +4,6 @@ import ir.ac.kntu.gamelogic.services.PlayerHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.text.Font;
 
 public class GameOver {
     private final BorderPane rootPane;
@@ -15,7 +14,7 @@ public class GameOver {
 
     public void start() {
         Label label = new Label("GAME OVER");
-        label.setFont(new Font(100));
+        label.setStyle("-fx-font-family: 'Courier New';" + "-fx-font-size: 100px;" + "-fx-text-fill: white;");
         label.setAlignment(Pos.CENTER);
         rootPane.setCenter(label);
 

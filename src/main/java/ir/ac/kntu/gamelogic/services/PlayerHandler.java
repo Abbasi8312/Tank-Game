@@ -20,6 +20,10 @@ public class PlayerHandler {
         return new Player(name);
     }
 
+    public String getName() {
+        return currentPlayer.getName();
+    }
+
     public void addScore(int score) {
         currentPlayer.setScore(currentPlayer.getScore() + score);
     }
