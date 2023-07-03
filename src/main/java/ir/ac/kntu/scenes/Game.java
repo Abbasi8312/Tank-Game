@@ -1,6 +1,6 @@
 package ir.ac.kntu.scenes;
 
-import ir.ac.kntu.gamelogic.gameconstants.GameConstants;
+import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
 import ir.ac.kntu.gamelogic.models.GameObject;
 import ir.ac.kntu.gamelogic.services.BoardHandler;
 import javafx.animation.AnimationTimer;
@@ -15,7 +15,7 @@ public class Game {
     public Game(GraphicsContext staticGC, GraphicsContext movingGC) {
         this.staticGC = staticGC;
         this.movingGC = movingGC;
-        staticGC.fillRect(0, 0, GameConstants.GAME_WIDTH, GameConstants.GAME_HEIGHT);
+        staticGC.fillRect(0, 0, GameVariables.GAME_WIDTH, GameVariables.GAME_HEIGHT);
     }
 
     private void clearStatics() {

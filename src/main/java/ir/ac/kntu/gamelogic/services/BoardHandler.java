@@ -1,12 +1,10 @@
 package ir.ac.kntu.gamelogic.services;
 
 import ir.ac.kntu.gamelogic.Board;
-import ir.ac.kntu.gamelogic.gameconstants.GameConstants;
-import ir.ac.kntu.gamelogic.models.Flag;
+import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
 import ir.ac.kntu.gamelogic.models.GameObject;
 import ir.ac.kntu.gamelogic.models.Unit;
 import ir.ac.kntu.gamelogic.models.interfaces.Movable;
-import ir.ac.kntu.gamelogic.models.tanks.PlayerTank;
 import ir.ac.kntu.gamelogic.models.terrains.Border;
 import ir.ac.kntu.gamelogic.models.terrains.BrickWall;
 
@@ -39,24 +37,17 @@ public class BoardHandler {
     }
 
     public void init() {
-//        addGameObject(new RegularTank(100, 100));
-//        addGameObject(new RegularTank(400, 150));
-//        addGameObject(new RegularTank(200, 400));
-        for (int i = 0; i < GameConstants.GAME_WIDTH / GameConstants.TILE_SIZE; i++) {
-            addGameObject(new Border(GameConstants.TILE_SIZE * (i + 0.5), GameConstants.TILE_SIZE * 0.5));
-            addGameObject(new Border(GameConstants.TILE_SIZE * (i + 0.5),
-                    GameConstants.GAME_HEIGHT - GameConstants.TILE_SIZE * 0.5));
+        addQueue.addAll(DataHandler.getINSTANCE().loadGameObjectsFromFile());
+        for (int i = 0; i < GameVariables.GAME_WIDTH / GameVariables.TILE_SIZE; i++) {
+            addGameObject(new Border(GameVariables.TILE_SIZE * (i + 0.5), GameVariables.TILE_SIZE * 0.5));
+            addGameObject(new Border(GameVariables.TILE_SIZE * (i + 0.5),
+                    GameVariables.GAME_HEIGHT - GameVariables.TILE_SIZE * 0.5));
         }
-        for (int i = 1; i < GameConstants.GAME_HEIGHT / GameConstants.TILE_SIZE - 1; i++) {
-            addGameObject(new Border(GameConstants.TILE_SIZE * 0.5, GameConstants.TILE_SIZE * (i + 0.5)));
-            addGameObject(new Border(GameConstants.GAME_WIDTH - GameConstants.TILE_SIZE * 0.5,
-                    GameConstants.TILE_SIZE * (i + 0.5)));
+        for (int i = 1; i < GameVariables.GAME_HEIGHT / GameVariables.TILE_SIZE - 1; i++) {
+            addGameObject(new Border(GameVariables.TILE_SIZE * 0.5, GameVariables.TILE_SIZE * (i + 0.5)));
+            addGameObject(new Border(GameVariables.GAME_WIDTH - GameVariables.TILE_SIZE * 0.5,
+                    GameVariables.TILE_SIZE * (i + 0.5)));
         }
-        addGameObject(new PlayerTank(500, 400));
-        addGameObject(new Flag(300, 400));
-        addGameObject(new BrickWall(250, 250));
-        addGameObject(new BrickWall(250 + GameConstants.TILE_SIZE, 250));
-        addGameObject(new BrickWall(250 + 3 * GameConstants.TILE_SIZE, 250));
     }
 
     public void updateFrame() {

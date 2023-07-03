@@ -1,6 +1,6 @@
 package ir.ac.kntu.gamecontroller;
 
-import ir.ac.kntu.gamelogic.gameconstants.Direction;
+import ir.ac.kntu.gamelogic.models.Direction;
 import ir.ac.kntu.gamelogic.models.tanks.PlayerTank;
 import javafx.scene.input.KeyCode;
 

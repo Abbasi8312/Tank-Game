@@ -1,9 +1,7 @@
 package ir.ac.kntu.gamelogic.models.terrains;
 
-import ir.ac.kntu.gamelogic.gameconstants.Direction;
-import ir.ac.kntu.gamelogic.models.GameObject;
+import ir.ac.kntu.gamelogic.models.Direction;
 import ir.ac.kntu.gamelogic.services.BoardHandler;
-import ir.ac.kntu.gamelogic.services.CollisionHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 

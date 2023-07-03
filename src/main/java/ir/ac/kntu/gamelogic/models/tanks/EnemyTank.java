@@ -1,7 +1,7 @@
 package ir.ac.kntu.gamelogic.models.tanks;
 
-import ir.ac.kntu.gamelogic.gameconstants.Direction;
 import ir.ac.kntu.gamelogic.models.Bullet;
+import ir.ac.kntu.gamelogic.models.Direction;
 import ir.ac.kntu.gamelogic.models.Unit;
 import ir.ac.kntu.gamelogic.services.BoardHandler;
 import ir.ac.kntu.gamelogic.services.PlayerHandler;
@@ -15,7 +15,7 @@ public abstract class EnemyTank extends Unit {
 
     protected int score;
 
-    public EnemyTank(int x, int y) {
+    public EnemyTank(double x, double y) {
         super(x, y);
         changeDirection();
         turningDistance = 0;

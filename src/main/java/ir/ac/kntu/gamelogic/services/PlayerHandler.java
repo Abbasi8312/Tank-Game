@@ -57,7 +57,7 @@ public class PlayerHandler {
         players.remove(currentPlayer);
         players.add(currentPlayer);
         currentPlayer.setHighScore(Math.max(currentPlayer.getScore(), currentPlayer.getHighScore()));
-        players.sort((a,b) -> b.getHighScore() - a.getHighScore());
+        players.sort((a, b) -> b.getHighScore() - a.getHighScore());
         DataHandler.getINSTANCE().savePlayers(players);
     }
 }

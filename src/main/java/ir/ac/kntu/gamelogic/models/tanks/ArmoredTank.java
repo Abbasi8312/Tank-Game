@@ -4,7 +4,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class ArmoredTank extends EnemyTank {
-    public ArmoredTank(int x, int y) {
+    public ArmoredTank(double x, double y) {
         super(x, y);
         health = 2;
         damage = 1;

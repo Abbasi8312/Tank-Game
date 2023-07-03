@@ -61,7 +61,6 @@ public class SelectGameMode {
         Text text = new Text(String.format(format, args));
         text.setFill(Color.WHITE);
         text.setFont(Font.font("Courier New", FontWeight.NORMAL, 14));
-        ;
         return text;
     }
 

@@ -4,7 +4,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class RegularTank extends EnemyTank {
-    public RegularTank(int x, int y) {
+    public RegularTank(double x, double y) {
         super(x, y);
         health = 1;
         damage = 1;

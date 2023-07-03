@@ -1,7 +1,6 @@
 package ir.ac.kntu.gamelogic.models;
 
-import ir.ac.kntu.gamelogic.gameconstants.Direction;
-import ir.ac.kntu.gamelogic.gameconstants.GameConstants;
+import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
 import ir.ac.kntu.gamelogic.models.tanks.EnemyTank;
 import ir.ac.kntu.gamelogic.models.tanks.PlayerTank;
 import ir.ac.kntu.gamelogic.models.terrains.BrickWall;
@@ -17,8 +16,8 @@ public class Bullet extends Unit {
         super(x, y);
         this.damage = damage;
         velocity *= 5;
-        width = GameConstants.TILE_SIZE / 4;
-        height = GameConstants.TILE_SIZE / 4;
+        width = GameVariables.TILE_SIZE / 4;
+        height = GameVariables.TILE_SIZE / 4;
         collisionRect.width = width;
         collisionRect.height = height;
         switch (direction) {

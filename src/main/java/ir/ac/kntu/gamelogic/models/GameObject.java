@@ -1,6 +1,6 @@
 package ir.ac.kntu.gamelogic.models;
 
-import ir.ac.kntu.gamelogic.gameconstants.GameConstants;
+import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
 import javafx.scene.canvas.GraphicsContext;
 
 public abstract class GameObject {
@@ -19,8 +19,8 @@ public abstract class GameObject {
     public GameObject(double x, double y) {
         this.x = x;
         this.y = y;
-        width = GameConstants.TILE_SIZE;
-        height = GameConstants.TILE_SIZE;
+        width = GameVariables.TILE_SIZE;
+        height = GameVariables.TILE_SIZE;
         collisionRect = new CollisionRectangle(width, height);
     }
 

@@ -2,8 +2,8 @@ package ir.ac.kntu.gamelogic.models.tanks;
 
 import ir.ac.kntu.SceneHandler;
 import ir.ac.kntu.gamecontroller.PlayerController;
-import ir.ac.kntu.gamelogic.gameconstants.Direction;
 import ir.ac.kntu.gamelogic.models.Bullet;
+import ir.ac.kntu.gamelogic.models.Direction;
 import ir.ac.kntu.gamelogic.models.Unit;
 import ir.ac.kntu.gamelogic.services.BoardHandler;
 import javafx.scene.canvas.GraphicsContext;
@@ -16,7 +16,7 @@ public class PlayerTank extends Unit {
 
     private double firingDistance;
 
-    public PlayerTank(int x, int y) {
+    public PlayerTank(double x, double y) {
         super(x, y);
         PlayerController.getInstance().setPlayer1(this);
         direction = Direction.UP;
