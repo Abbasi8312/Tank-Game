@@ -24,6 +24,8 @@ public abstract class Unit extends GameObject implements Collidable, Movable {
         super(x, y);
         width = 2 * GameConstants.TILE_SIZE;
         height = 2 * GameConstants.TILE_SIZE;
+        collisionRect.width = width;
+        collisionRect.height = height;
         lastTime = System.nanoTime();
     }
 
@@ -49,8 +51,10 @@ public abstract class Unit extends GameObject implements Collidable, Movable {
             default -> {
             }
         }
-        return Math.abs(x - gameObject.getX()) < width / 2 + gameObject.getWidth() / 2 &&
-                Math.abs(y - gameObject.getY()) < height / 2 + gameObject.getHeight() / 2;
+        return Math.abs(x + collisionRect.relativeX - (gameObject.getX() + collisionRect.relativeX)) <
+                collisionRect.width / 2 + gameObject.collisionRect.width / 2 &&
+                Math.abs(y + collisionRect.relativeY - (gameObject.getY() + collisionRect.relativeY)) <
+                        collisionRect.height / 2 + gameObject.collisionRect.height / 2;
     }
 
     public abstract void update();

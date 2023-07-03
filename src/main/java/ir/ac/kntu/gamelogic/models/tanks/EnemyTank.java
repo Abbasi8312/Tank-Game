@@ -42,10 +42,10 @@ public abstract class EnemyTank extends Unit {
         double x = this.x;
         double y = this.y;
         switch (direction) {
-            case RIGHT -> x += width;
-            case LEFT -> x -= width;
-            case DOWN -> y += height;
-            case UP -> y -= height;
+            case RIGHT -> x += width * 0.5;
+            case LEFT -> x -= width * 0.5;
+            case DOWN -> y += height * 0.5;
+            case UP -> y -= height * 0.5;
             default -> {
             }
         }

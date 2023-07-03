@@ -19,9 +19,11 @@ public class Bullet extends Unit {
         velocity *= 5;
         width = GameConstants.TILE_SIZE / 2;
         height = GameConstants.TILE_SIZE / 2;
+        collisionRect.width = width;
+        collisionRect.height = height;
         switch (direction) {
-            case UP, DOWN -> width *= 3.0 /4;
-            default -> height *= 3.0 /4;
+            case UP, DOWN -> width *= 3.0 / 4;
+            default -> height *= 3.0 / 4;
         }
         this.direction = direction;
         this.origin = origin;
@@ -43,7 +45,8 @@ public class Bullet extends Unit {
         double velocity = this.velocity * deltaTime;
         distance += velocity;
         GameObject collided = CollisionHandler.getINSTANCE().checkCollision(this, velocity);
-        if (collided == null) {
+        if (collided == null || collided instanceof PlayerTank && origin == Origin.PLAYER ||
+                collided instanceof EnemyTank && origin == Origin.ENEMY) {
             ++frameIndex;
             switch (direction) {
                 case UP -> this.y -= velocity;
@@ -53,8 +56,7 @@ public class Bullet extends Unit {
                 default -> {
                 }
             }
-        } else if (collided instanceof PlayerTank && origin == Origin.ENEMY ||
-                collided instanceof EnemyTank && origin == Origin.PLAYER || collided instanceof Bullet) {
+        } else if (collided instanceof PlayerTank || collided instanceof EnemyTank || collided instanceof Bullet) {
             ((Unit) collided).damage(damage);
             BoardHandler.getInstance().removeGameObject(this);
         } else if (collided instanceof BrickWall brickWall) {

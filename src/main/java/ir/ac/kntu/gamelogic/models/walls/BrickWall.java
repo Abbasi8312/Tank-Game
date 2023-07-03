@@ -49,6 +49,8 @@ public class BrickWall extends Wall {
     }
 
     private void rightDamage() {
+        collisionRect.width /= 2;
+        collisionRect.relativeX -= width / 2;
         if (frameIndex == 2 || frameIndex == 5 || frameIndex == 8) {
             frameIndex += 1;
         } else {
@@ -57,6 +59,8 @@ public class BrickWall extends Wall {
     }
 
     private void leftDamage() {
+        collisionRect.width /= 2;
+        collisionRect.relativeX += width / 2;
         if (frameIndex == 2 || frameIndex == 5 || frameIndex == 8) {
             frameIndex -= 1;
         } else {
@@ -65,6 +69,8 @@ public class BrickWall extends Wall {
     }
 
     private void downDamage() {
+        collisionRect.height /= 2;
+        collisionRect.relativeX += height / 2;
         if (frameIndex == 4 || frameIndex == 5 || frameIndex == 6) {
             frameIndex -= 3;
         } else {
@@ -73,6 +79,8 @@ public class BrickWall extends Wall {
     }
 
     private void upDamage() {
+        collisionRect.height /= 2;
+        collisionRect.relativeX -= height / 2;
         if (frameIndex == 4 || frameIndex == 5 || frameIndex == 6) {
             frameIndex += 3;
         } else {
