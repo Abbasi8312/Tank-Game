@@ -36,12 +36,12 @@ public class BrickWall extends Wall {
         }
     }
 
-    public void damage(Direction direction, boolean isFirst) {
+    public void damage(Direction direction) {
         switch (direction) {
-            case UP -> upDamage(isFirst);
-            case DOWN -> downDamage(isFirst);
-            case LEFT -> leftDamage(isFirst);
-            default -> rightDamage(isFirst);
+            case UP -> upDamage();
+            case DOWN -> downDamage();
+            case LEFT -> leftDamage();
+            default -> rightDamage();
         }
         if (frameIndex == 0) {
             BoardHandler.getInstance().removeGameObject(this);
@@ -50,17 +50,7 @@ public class BrickWall extends Wall {
         }
     }
 
-    private void rightDamage(boolean isFirst) {
-        GameObject up = CollisionHandler.getINSTANCE()
-                .checkPoint(x + collisionRect.relativeX, y + collisionRect.relativeY - collisionRect.height);
-        GameObject down = CollisionHandler.getINSTANCE()
-                .checkPoint(x + collisionRect.relativeX, y + collisionRect.relativeY + collisionRect.height);
-        if (isFirst && up instanceof BrickWall brickWall && !brickWall.equals(this)) {
-            brickWall.damage(Direction.RIGHT, false);
-        }
-        if (isFirst && down instanceof BrickWall brickWall && !brickWall.equals(this)) {
-            brickWall.damage(Direction.RIGHT, false);
-        }
+    private void rightDamage() {
         collisionRect.width /= 2;
         collisionRect.relativeX -= width / 2;
         if (frameIndex == 2 || frameIndex == 5 || frameIndex == 8) {
@@ -70,17 +60,7 @@ public class BrickWall extends Wall {
         }
     }
 
-    private void leftDamage(boolean isFirst) {
-        GameObject up = CollisionHandler.getINSTANCE()
-                .checkPoint(x + collisionRect.relativeX, y + collisionRect.relativeY - collisionRect.height);
-        GameObject down = CollisionHandler.getINSTANCE()
-                .checkPoint(x + collisionRect.relativeX, y + collisionRect.relativeY + collisionRect.height);
-        if (isFirst && up instanceof BrickWall brickWall && !brickWall.equals(this)) {
-            brickWall.damage(Direction.LEFT, false);
-        }
-        if (isFirst && down instanceof BrickWall brickWall && !brickWall.equals(this)) {
-            brickWall.damage(Direction.LEFT, false);
-        }
+    private void leftDamage() {
         collisionRect.width /= 2;
         collisionRect.relativeX += width / 2;
         if (frameIndex == 2 || frameIndex == 5 || frameIndex == 8) {
@@ -90,17 +70,7 @@ public class BrickWall extends Wall {
         }
     }
 
-    private void downDamage(boolean isFirst) {
-        GameObject right = CollisionHandler.getINSTANCE()
-                .checkPoint(x + collisionRect.relativeX + collisionRect.width, y + collisionRect.relativeY);
-        GameObject left = CollisionHandler.getINSTANCE()
-                .checkPoint(x + collisionRect.relativeX - collisionRect.width, y + collisionRect.relativeY);
-        if (isFirst && right instanceof BrickWall brickWall && !brickWall.equals(this)) {
-            brickWall.damage(Direction.DOWN, false);
-        }
-        if (isFirst && left instanceof BrickWall brickWall && !brickWall.equals(this)) {
-            brickWall.damage(Direction.DOWN, false);
-        }
+    private void downDamage() {
         collisionRect.height /= 2;
         collisionRect.relativeX += height / 2;
         if (frameIndex == 4 || frameIndex == 5 || frameIndex == 6) {
@@ -110,17 +80,7 @@ public class BrickWall extends Wall {
         }
     }
 
-    private void upDamage(boolean isFirst) {
-        GameObject right = CollisionHandler.getINSTANCE()
-                .checkPoint(x + collisionRect.relativeX + collisionRect.width, y + collisionRect.relativeY);
-        GameObject left = CollisionHandler.getINSTANCE()
-                .checkPoint(x + collisionRect.relativeX - collisionRect.width, y + collisionRect.relativeY);
-        if (isFirst && right instanceof BrickWall brickWall && !brickWall.equals(this)) {
-            brickWall.damage(Direction.UP, false);
-        }
-        if (isFirst && left instanceof BrickWall brickWall && !brickWall.equals(this)) {
-            brickWall.damage(Direction.UP, false);
-        }
+    private void upDamage() {
         collisionRect.height /= 2;
         collisionRect.relativeX -= height / 2;
         if (frameIndex == 4 || frameIndex == 5 || frameIndex == 6) {

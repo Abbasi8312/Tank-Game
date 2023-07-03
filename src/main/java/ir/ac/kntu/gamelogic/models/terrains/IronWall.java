@@ -5,8 +5,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class IronWall extends Wall {
-    protected Direction direction = Direction.NONE;
-
     public IronWall(double x, double y) {
         super(x, y);
     }
@@ -16,6 +14,6 @@ public class IronWall extends Wall {
         gc.drawImage(new Image(path), x - width / 2, y - height / 2, width, height);
     }
 
-    public void damage(Direction direction, boolean isFirst) {
+    public void damage(Direction direction) {
     }
 }

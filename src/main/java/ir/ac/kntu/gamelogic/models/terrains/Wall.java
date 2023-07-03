@@ -8,5 +8,5 @@ public abstract class Wall extends GameObject {
         super(x, y);
     }
 
-    public abstract void damage(Direction direction, boolean isFirst);
+    public abstract void damage(Direction direction);
 }

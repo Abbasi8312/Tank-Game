@@ -60,7 +60,7 @@ public class Bullet extends Unit {
             ((Unit) collided).damage(damage);
             BoardHandler.getInstance().removeGameObject(this);
         } else if (collided instanceof BrickWall brickWall) {
-            brickWall.damage(direction, true);
+            brickWall.damage(direction);
             BoardHandler.getInstance().removeGameObject(this);
         } else if (collided instanceof Flag flag) {
             flag.damage();
