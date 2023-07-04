@@ -1,5 +1,7 @@
 package ir.ac.kntu.scenes;
 
+import ir.ac.kntu.SceneHandler;
+import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -44,8 +46,20 @@ public class ScoreBoard {
         BorderPane.setMargin(scoreboard, new Insets(20, 0, 0, 0));
     }
 
-    public void updateScores() {
+    public static void transition() {
+        if (GameVariables.gameStatus == GameVariables.GameStatus.WON) {
+            if (GameVariables.stageNumber == 10) {
+                SceneHandler.getINSTANCE().currentStage(GameVariables.stageNumber + 1);
+            } else {
+                SceneHandler.getINSTANCE().selectGameMode();
+            }
+        } else {
+            SceneHandler.getINSTANCE().selectGameMode();
+        }
+        GameVariables.gameStatus = GameVariables.GameStatus.RUNNING;
+    }
 
+    public void updateScores() {
         player1ScoreLabel.setText("Score: ");
         player2ScoreLabel.setText("Score: ");
         player1DestroyedLabel.setText("Destroyed: ");

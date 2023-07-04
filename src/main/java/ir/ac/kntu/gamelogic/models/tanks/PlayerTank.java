@@ -26,7 +26,6 @@ public class PlayerTank extends Unit {
 
     public PlayerTank(double x, double y) {
         super(x, y);
-        PlayerController.getInstance().setPlayer1(this);
         direction = Direction.UP;
         isMoving = false;
         health = 3;
@@ -110,13 +109,17 @@ public class PlayerTank extends Unit {
         if (health <= 0) {
             die();
         } else {
-            x = spawner.getX();
-            y = spawner.getY();
-            isMoving = false;
-            isFiring = false;
+            reset();
             GridHandler.getInstance().removeGameObject(this);
             spawner.respawn(this);
         }
+    }
+
+    public void reset() {
+        x = spawner.getX();
+        y = spawner.getY();
+        isMoving = false;
+        isFiring = false;
     }
 
     @Override public void die() {

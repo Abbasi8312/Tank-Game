@@ -31,4 +31,8 @@ public class Grid {
     public void setGameObjects(List<GameObject> gameObjects) {
         this.gameObjects = new ArrayList<>(gameObjects);
     }
+
+    public void clear() {
+        gameObjects.clear();
+    }
 }

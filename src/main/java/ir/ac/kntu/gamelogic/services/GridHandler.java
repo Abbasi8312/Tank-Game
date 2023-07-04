@@ -12,7 +12,7 @@ import ir.ac.kntu.gamelogic.models.terrains.Spawner;
 import java.util.*;
 
 public class GridHandler {
-    private final static GridHandler INSTANCE = new GridHandler();
+    private static GridHandler INSTANCE = new GridHandler();
 
     private final Grid grid;
 
@@ -40,7 +40,11 @@ public class GridHandler {
     }
 
     public void init() {
+        clear();
         addQueue.addAll(DataHandler.getINSTANCE().loadGameObjectsFromFile());
+        if (GameVariables.playerTank1 != null) {
+            addQueue.add(GameVariables.playerTank1);
+        }
         initSpawners();
         for (int i = 0; i < GameVariables.gameWidth / GameVariables.TILE_SIZE; i++) {
             addGameObject(new Border(GameVariables.TILE_SIZE * (i + 0.5), GameVariables.TILE_SIZE * 0.5));
@@ -52,6 +56,15 @@ public class GridHandler {
             addGameObject(new Border(GameVariables.gameWidth - GameVariables.TILE_SIZE * 0.5,
                     GameVariables.TILE_SIZE * (i + 0.5)));
         }
+    }
+
+    public void clear() {
+        grid.clear();
+        updatedStatics.clear();
+        movables.clear();
+        addQueue.clear();
+        removeQueue.clear();
+        spawners.clear();
     }
 
     private void initSpawners() {

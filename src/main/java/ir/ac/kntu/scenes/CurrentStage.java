@@ -2,6 +2,7 @@ package ir.ac.kntu.scenes;
 
 import ir.ac.kntu.SceneHandler;
 import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
+import ir.ac.kntu.gamelogic.services.GridHandler;
 import javafx.animation.PauseTransition;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -26,10 +27,16 @@ public class CurrentStage {
 
         GameVariables.stageNumber = currentStage;
         GameVariables.remainingTanks = 6 + currentStage * 4;
+        GameVariables.gameStatus = GameVariables.GameStatus.PAUSED;
+        GridHandler.getInstance().init();
+        GameVariables.playerTank1.reset();
 
         PauseTransition delay = new PauseTransition(Duration.seconds(5));
 
-        delay.setOnFinished(e -> SceneHandler.getINSTANCE().game());
+        delay.setOnFinished(e -> {
+            GameVariables.gameStatus = GameVariables.GameStatus.RUNNING;
+            SceneHandler.getINSTANCE().game();
+        });
         delay.play();
     }
 }

@@ -6,11 +6,10 @@ import ir.ac.kntu.gamelogic.models.tanks.PlayerTank;
 import javafx.scene.input.KeyCode;
 
 import static ir.ac.kntu.gamecontroller.KeyMap.*;
+import static ir.ac.kntu.gamelogic.gamevariables.GameVariables.playerTank1;
 
 public class PlayerController implements InputManager {
     private static final PlayerController INSTANCE = new PlayerController();
-
-    private PlayerTank playerTank1;
 
     private PlayerController() {
     }
@@ -28,14 +27,6 @@ public class PlayerController implements InputManager {
         if (playerTank.getDirection() == direction) {
             playerTank.setMoving(false);
         }
-    }
-
-    public PlayerTank getPlayer1() {
-        return playerTank1;
-    }
-
-    public void setPlayer1(PlayerTank playerTank1) {
-        this.playerTank1 = playerTank1;
     }
 
     @Override public void handlePressedKeys(KeyCode keyCode) {

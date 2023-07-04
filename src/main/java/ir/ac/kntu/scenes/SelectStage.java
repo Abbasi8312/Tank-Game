@@ -1,6 +1,7 @@
 package ir.ac.kntu.scenes;
 
 import ir.ac.kntu.SceneHandler;
+import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -19,6 +20,7 @@ public class SelectStage {
     }
 
     public void start() {
+        GameVariables.playerTank1 = null;
         setupBackground();
         VBox stageList = createStageList();
         setupStageList(stageList);

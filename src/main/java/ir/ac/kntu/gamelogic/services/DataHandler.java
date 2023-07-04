@@ -62,14 +62,19 @@ public class DataHandler {
                     if (gameObject != null) {
                         gameObjects.add(gameObject);
                     }
-                    if (character == 'P' && gameObject instanceof PlayerTank playerTank) {
+                    if (character == 'P' && gameObject instanceof PlayerTank playerTank &&
+                            GameVariables.playerTank1 == null) {
                         GameVariables.playerTank1 = playerTank;
                     }
-                    if (character == 'p' && gameObject instanceof PlayerTank playerTank) {
+                    if (character == 'p' && gameObject instanceof PlayerTank playerTank &&
+                            GameVariables.playerTank2 == null) {
                         GameVariables.playerTank2 = playerTank;
                     }
                     if (gameObject instanceof EnemyTank) {
                         --GameVariables.remainingTanks;
+                    }
+                    if (gameObject instanceof PlayerTank playerTank) {
+                        gameObjects.remove(playerTank);
                     }
                 }
                 y++;
