@@ -6,8 +6,9 @@ import ir.ac.kntu.gamelogic.models.tanks.EnemyTank;
 import ir.ac.kntu.gamelogic.models.tanks.PlayerTank;
 import ir.ac.kntu.gamelogic.models.terrains.BrickWall;
 import ir.ac.kntu.gamelogic.models.terrains.Flag;
-import ir.ac.kntu.gamelogic.services.GridHandler;
+import ir.ac.kntu.gamelogic.models.terrains.Spawner;
 import ir.ac.kntu.gamelogic.services.CollisionHandler;
+import ir.ac.kntu.gamelogic.services.GridHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
@@ -48,7 +49,8 @@ public class Bullet extends Unit {
         distance += velocity;
         GameObject collided = CollisionHandler.getINSTANCE().checkCollision(this);
         if (collided == null || collided instanceof PlayerTank && origin == Origin.PLAYER ||
-                collided instanceof EnemyTank && origin == Origin.ENEMY || collided instanceof Element) {
+                collided instanceof EnemyTank && origin == Origin.ENEMY || collided instanceof Element ||
+                collided instanceof Spawner) {
             ++frameIndex;
             switch (direction) {
                 case UP -> this.y -= velocity;

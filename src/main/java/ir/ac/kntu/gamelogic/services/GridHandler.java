@@ -116,7 +116,7 @@ public class GridHandler {
             Spawner spawner;
             do {
                 spawner = spawners.get(new Random().nextInt(spawners.size()));
-            } while (CollisionHandler.getINSTANCE().checkCollision(spawner) != null || !spawner.spawn());
+            } while (!spawner.spawn());
             return;
         }
         for (GameObject gameObject : movables) {

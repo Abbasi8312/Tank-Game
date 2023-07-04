@@ -7,6 +7,7 @@ import ir.ac.kntu.gamelogic.services.CollisionHandler;
 import ir.ac.kntu.gamelogic.services.GridHandler;
 import ir.ac.kntu.gamelogic.services.TimerWrapper;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 import java.util.Random;
@@ -19,8 +20,7 @@ public class Spawner extends GameObject {
 
     @Override public void draw(GraphicsContext gc) {
         if (frameIndex == 1) {
-            gc.setFill(Color.BLUE);
-            gc.fillRect(x - width / 2, y - height / 2, width, height);
+            gc.drawImage(new Image("images/sprites/Terrain/water.png"), x - width / 2, y - height / 2, width, height);
         }
     }
 
@@ -32,16 +32,16 @@ public class Spawner extends GameObject {
         GridHandler.getInstance().addGameObject(this);
         TimerWrapper.getInstance().schedule(new TimerTask() {
             @Override public void run() {
-                scheduleEnemyTank();
+                boolean done = scheduleEnemyTank();
+                if (done) {
+                    cancel();
+                }
             }
-        }, 1000);
+        }, 1000, 100);
         return true;
     }
 
-    public boolean respawn(Unit unit) {
-        if (frameIndex == 1) {
-            return false;
-        }
+    public void respawn(Unit unit) {
         frameIndex = 1;
         GridHandler.getInstance().addGameObject(this);
         TimerWrapper.getInstance().schedule(new TimerTask() {
@@ -52,15 +52,18 @@ public class Spawner extends GameObject {
                 }
             }
         }, 1000, 100);
-        return true;
     }
 
-    private void scheduleEnemyTank() {
+    private boolean scheduleEnemyTank() {
+        if (CollisionHandler.getINSTANCE().checkCollision(this) != null) {
+            return false;
+        }
         EnemyTank[] enemyTanks =
                 {new RegularTank(x, y), new ArmoredTank(x, y), new RegularLuckyTank(x, y), new ArmoredLuckyTank(x, y)};
         GridHandler.getInstance().addGameObject(enemyTanks[new Random().nextInt(enemyTanks.length)]);
         GridHandler.getInstance().removeGameObject(this);
         frameIndex = 0;
+        return true;
     }
 
     private boolean schedulePlayer(Unit unit) {

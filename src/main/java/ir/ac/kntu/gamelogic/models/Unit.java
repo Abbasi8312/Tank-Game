@@ -2,9 +2,9 @@ package ir.ac.kntu.gamelogic.models;
 
 import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
 import ir.ac.kntu.gamelogic.models.elements.Element;
-import ir.ac.kntu.gamelogic.models.interfaces.Collidable;
 import ir.ac.kntu.gamelogic.models.interfaces.Movable;
 import ir.ac.kntu.gamelogic.models.terrains.Flag;
+import ir.ac.kntu.gamelogic.models.terrains.Spawner;
 import ir.ac.kntu.gamelogic.models.terrains.Wall;
 import ir.ac.kntu.gamelogic.services.CollisionHandler;
 import ir.ac.kntu.gamelogic.services.GridHandler;
@@ -60,7 +60,8 @@ public abstract class Unit extends GameObject implements Movable {
     @Override public void move() {
         distance = velocity;
         GameObject collided = CollisionHandler.getINSTANCE().checkCollision(this);
-        if (collided == null || collided instanceof Bullet || collided instanceof Element) {
+        if (collided == null || collided instanceof Bullet || collided instanceof Element ||
+                collided instanceof Spawner) {
             ++frameIndex;
             switch (direction) {
                 case UP -> y -= velocity;
