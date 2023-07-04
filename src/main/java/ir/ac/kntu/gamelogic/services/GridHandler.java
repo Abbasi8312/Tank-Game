@@ -129,7 +129,7 @@ public class GridHandler {
             @Override public void run() {
                 GameVariables.gameStatus = GameVariables.GameStatus.WON;
             }
-        }, 1000);
+        }, 250);
     }
 
     public void removeGameObject(GameObject gameObject) {

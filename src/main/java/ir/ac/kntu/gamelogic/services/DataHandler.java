@@ -62,6 +62,12 @@ public class DataHandler {
                     if (gameObject != null) {
                         gameObjects.add(gameObject);
                     }
+                    if (character == 'P' && gameObject instanceof PlayerTank playerTank) {
+                        GameVariables.playerTank1 = playerTank;
+                    }
+                    if (character == 'p' && gameObject instanceof PlayerTank playerTank) {
+                        GameVariables.playerTank2 = playerTank;
+                    }
                 }
                 y++;
             }
@@ -77,6 +83,7 @@ public class DataHandler {
     private GameObject createGameObject(char character, double x, double y) {
         return switch (character) {
             case 'P' -> new PlayerTank(x, y);
+            case 'p' -> GameVariables.isTwoPlayer ? new PlayerTank(x, y) : null;
             case 'O' -> new RegularTank(x, y);
             case 'A' -> new ArmoredTank(x, y);
             case 'c' -> new RegularLuckyTank(x, y);

@@ -4,11 +4,13 @@ import ir.ac.kntu.gamecontroller.EventHandler;
 import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
 import ir.ac.kntu.gamelogic.services.GridHandler;
 import ir.ac.kntu.scenes.*;
+import javafx.animation.PauseTransition;
 import javafx.scene.Scene;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class SceneHandler {
     private final static SceneHandler INSTANCE = new SceneHandler();
@@ -59,11 +61,11 @@ public class SceneHandler {
         GridHandler.getInstance().init();
 
         BorderPane borderPane = new BorderPane();
-        borderPane.setPrefWidth(GameVariables.gameWidth + 100);
-        borderPane.setPrefHeight(GameVariables.gameHeight + 20);
+        borderPane.setPrefWidth(GameVariables.gameWidth + 75);
+        borderPane.setPrefHeight(GameVariables.gameHeight + 25);
         borderPane.setBackground(Background.EMPTY);
         new Game(borderPane).start();
-        Scene scene = new Scene(borderPane, GameVariables.gameWidth + 100, GameVariables.gameHeight + 20, Color.BLACK);
+        Scene scene = new Scene(borderPane, GameVariables.gameWidth + 75, GameVariables.gameHeight + 25, Color.BLACK);
 
         EventHandler.getInstance().attachEventHandlers(scene);
 
@@ -72,20 +74,20 @@ public class SceneHandler {
 
     public void gameOver() {
         BorderPane borderPane = new BorderPane();
-        borderPane.setPrefWidth(GameVariables.gameWidth);
-        borderPane.setPrefHeight(GameVariables.gameHeight);
+        borderPane.setPrefWidth(GameVariables.gameWidth + 75);
+        borderPane.setPrefHeight(GameVariables.gameHeight + 25);
         borderPane.setBackground(Background.EMPTY);
+        Scene scene = new Scene(borderPane, GameVariables.gameWidth + 75, GameVariables.gameHeight + 25, Color.BLACK);
         new GameOver(borderPane).start();
-        Scene scene = new Scene(borderPane, GameVariables.gameWidth, GameVariables.gameHeight, Color.BLACK);
 
         stage.setScene(scene);
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        playerScore();
+        PauseTransition delay = new PauseTransition(Duration.seconds(2));
+
+        delay.setOnFinished(e -> {
+            playerScore();
+        });
+        delay.play();
     }
 
     public void playerScore() {

@@ -3,7 +3,6 @@ package ir.ac.kntu.gamelogic.models.terrains;
 import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
 import ir.ac.kntu.gamelogic.models.GameObject;
 import ir.ac.kntu.gamelogic.services.GridHandler;
-import ir.ac.kntu.gamelogic.services.TimerWrapper;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -23,7 +22,7 @@ public class Flag extends GameObject {
             @Override public void run() {
                 GameVariables.gameStatus = GameVariables.GameStatus.LOST;
             }
-        }, 1000);
+        }, 250);
     }
 
     @Override public void draw(GraphicsContext gc) {
@@ -35,5 +34,4 @@ public class Flag extends GameObject {
         }
         gc.drawImage(new Image(path), x - width / 2, y - height / 2, width, height);
     }
-
 }

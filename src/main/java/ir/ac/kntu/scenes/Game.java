@@ -13,8 +13,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
@@ -23,13 +22,20 @@ public class Game {
     private final BorderPane borderPane;
     private final AnimationTimer animationTimer;
     private final GameRenderer gameRenderer;
-    private final VBox uiBox;
+    private final VBox vBox;
     private final Label infoLabel;
     private final ImageView playerImageView;
     private final Label healthLabel;
 
+    private final ImageView enemyImageView;
+
+    private final Label enemyCountLabel;
+
+    private final Label stageNumberLabel;
+
     public Game(BorderPane borderPane) {
         this.borderPane = borderPane;
+        borderPane.setBackground(new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
 
         Group root = new Group();
         Canvas staticCanvas = new Canvas(GameVariables.gameWidth, GameVariables.gameHeight);
@@ -47,39 +53,51 @@ public class Game {
 
         infoLabel = new Label("Press 'P' to pause/unpause");
         infoLabel.setFont(Font.font(16));
+        infoLabel.setAlignment(Pos.CENTER);
 
-        uiBox = new VBox(10);
-        uiBox.setPadding(new Insets(10));
-        uiBox.setAlignment(Pos.CENTER);
+        vBox = new VBox(10);
+        vBox.setPadding(new Insets(10));
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setSpacing(100);
+
+        enemyImageView = new ImageView(new Image("images/sprites/Lucky Regular Enemy/down1.png"));
+        enemyImageView.setFitWidth(20);
+        enemyImageView.setPreserveRatio(true);
+
+        enemyCountLabel = new Label();
+        enemyCountLabel.setFont(Font.font(14));
 
         playerImageView = new ImageView(new Image("images/sprites/Regular Player 1/down1.png"));
-        playerImageView.setFitWidth(50);
+        playerImageView.setFitWidth(20);
         playerImageView.setPreserveRatio(true);
 
         healthLabel = new Label();
         healthLabel.setFont(Font.font(14));
 
-        uiBox.getChildren().addAll(playerImageView, healthLabel);
+        stageNumberLabel = new Label();
+        stageNumberLabel.setFont(Font.font(14));
 
-        borderPane.setRight(uiBox);
+        HBox playerBox = new HBox(10);
+        playerBox.setAlignment(Pos.CENTER);
+        playerBox.getChildren().addAll(playerImageView, healthLabel);
 
-        infoLabel.setAlignment(Pos.CENTER);
+        HBox enemyBox = new HBox(10);
+        enemyBox.setAlignment(Pos.CENTER);
+        enemyBox.getChildren().addAll(enemyImageView, enemyCountLabel);
+
+        vBox.getChildren().addAll(enemyBox, playerBox, stageNumberLabel);
+
+        borderPane.setRight(vBox);
+
         borderPane.setBottom(infoLabel);
+        BorderPane.setAlignment(infoLabel, Pos.CENTER);
     }
 
     public void start() {
         animationTimer.start();
     }
 
-    private static class GameRenderer {
-        private final GraphicsContext staticGC;
-        private final GraphicsContext movingGC;
-
-        public GameRenderer(GraphicsContext staticGC, GraphicsContext movingGC) {
-            this.staticGC = staticGC;
-            this.movingGC = movingGC;
-        }
-
+    private record GameRenderer(GraphicsContext staticGC, GraphicsContext movingGC) {
         public void clearStatics() {
             for (GameObject gameObject : GridHandler.getInstance().getUpdatedStatics()) {
                 staticGC.setFill(Color.BLACK);
@@ -133,6 +151,10 @@ public class Game {
                 System.out.println(secondCount + "\tFPS: " + frameCount);
                 frameCount = 0;
             }
+
+            healthLabel.textProperty().set(String.valueOf(GameVariables.playerTank1.getHealth()));
+            enemyCountLabel.textProperty().set(String.valueOf(GameVariables.remainingTanks));
+            stageNumberLabel.textProperty().set("Stage: " + GameVariables.stageNumber);
 
             gameRenderer.clearStatics();
             gameRenderer.drawStatics();

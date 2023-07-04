@@ -126,7 +126,7 @@ public class PlayerTank extends Unit {
             @Override public void run() {
                 GameVariables.gameStatus = GameVariables.GameStatus.LOST;
             }
-        }, 1000);
+        }, 250);
     }
 
     public void setMoving(boolean moving) {
