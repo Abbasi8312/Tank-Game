@@ -1,9 +1,12 @@
 package ir.ac.kntu.scenes;
 
+import ir.ac.kntu.SceneHandler;
 import ir.ac.kntu.gamelogic.services.PlayerHandler;
+import javafx.animation.PauseTransition;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.util.Duration;
 
 public class GameOver {
     private final BorderPane rootPane;
@@ -20,5 +23,10 @@ public class GameOver {
 
         PlayerHandler.getINSTANCE().addGameCount();
         PlayerHandler.getINSTANCE().updatePlayer();
+
+        PauseTransition delay = new PauseTransition(Duration.seconds(2));
+
+        delay.setOnFinished(e -> SceneHandler.getINSTANCE().playerScore());
+        delay.play();
     }
 }

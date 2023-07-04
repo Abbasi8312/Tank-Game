@@ -56,6 +56,17 @@ public class SceneHandler {
 
         stage.setScene(scene);
     }
+    
+    public void currentStage(int stageNumber) {
+        BorderPane borderPane = new BorderPane();
+        borderPane.setPrefWidth(GameVariables.gameWidth);
+        borderPane.setPrefHeight(GameVariables.gameHeight);
+        borderPane.setBackground(Background.EMPTY);
+        new CurrentStage(borderPane, stageNumber).start();
+        Scene scene = new Scene(borderPane, GameVariables.gameWidth, GameVariables.gameHeight, Color.BLACK);
+
+        stage.setScene(scene);
+    }
 
     public void game() {
         GridHandler.getInstance().init();
@@ -81,13 +92,6 @@ public class SceneHandler {
         new GameOver(borderPane).start();
 
         stage.setScene(scene);
-
-        PauseTransition delay = new PauseTransition(Duration.seconds(2));
-
-        delay.setOnFinished(e -> {
-            playerScore();
-        });
-        delay.play();
     }
 
     public void playerScore() {
