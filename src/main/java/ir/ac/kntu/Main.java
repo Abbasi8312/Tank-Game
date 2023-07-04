@@ -16,6 +16,7 @@ public class Main extends Application {
         SceneHandler.getINSTANCE().setStage(primaryStage);
         SceneHandler.getINSTANCE().selectPlayer();
 
+        primaryStage.setTitle("Battle City");
         primaryStage.show();
     }
 }
