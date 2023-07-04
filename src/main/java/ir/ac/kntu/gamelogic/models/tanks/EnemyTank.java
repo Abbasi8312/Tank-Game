@@ -35,9 +35,9 @@ public abstract class EnemyTank extends Unit {
             changeDirection();
             turningDistance -= 60 * velocity;
         }
-        if (firingDistance >= 15 * velocity) {
+        if (firingDistance >= 30 * velocity) {
             fire();
-            firingDistance -= 15 * velocity;
+            firingDistance -= 30 * velocity;
         }
 
         move();
