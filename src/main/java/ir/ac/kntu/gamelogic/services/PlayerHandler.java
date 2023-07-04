@@ -12,7 +12,7 @@ public class PlayerHandler {
     private PlayerHandler() {
     }
 
-    public static PlayerHandler getINSTANCE() {
+    public static PlayerHandler getInstance() {
         return INSTANCE;
     }
 
@@ -53,11 +53,11 @@ public class PlayerHandler {
     }
 
     public void updatePlayer() {
-        List<Player> players = DataHandler.getINSTANCE().getPlayers();
+        List<Player> players = DataHandler.getInstance().getPlayers();
         players.remove(currentPlayer);
         players.add(currentPlayer);
         currentPlayer.setHighScore(Math.max(currentPlayer.getScore(), currentPlayer.getHighScore()));
         players.sort((a, b) -> b.getHighScore() - a.getHighScore());
-        DataHandler.getINSTANCE().savePlayers(players);
+        DataHandler.getInstance().savePlayers(players);
     }
 }

@@ -1,6 +1,5 @@
 package ir.ac.kntu.gamelogic.models.tanks;
 
-import ir.ac.kntu.gamecontroller.PlayerController;
 import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
 import ir.ac.kntu.gamelogic.models.Bullet;
 import ir.ac.kntu.gamelogic.models.Direction;
@@ -20,8 +19,13 @@ import java.util.TimerTask;
 
 public class PlayerTank extends Unit {
     private final Spawner spawner;
+
+    private final TanksDestroyed destroyed;
+
     private boolean isMoving;
+
     private boolean isFiring;
+
     private double firingDistance;
 
     public PlayerTank(double x, double y) {
@@ -31,6 +35,7 @@ public class PlayerTank extends Unit {
         health = 3;
         damage = 1;
         spawner = new Spawner(this.x, this.y);
+        destroyed = new TanksDestroyed();
     }
 
     @Override public void update() {
@@ -65,7 +70,7 @@ public class PlayerTank extends Unit {
             return;
         }
         distance = velocity;
-        GameObject collided = CollisionHandler.getINSTANCE().checkCollision(this);
+        GameObject collided = CollisionHandler.getInstance().checkCollision(this);
         if (collided == null || collided instanceof Bullet) {
             ++frameIndex;
             switch (direction) {
@@ -138,5 +143,69 @@ public class PlayerTank extends Unit {
 
     public void setFiring(boolean firing) {
         isFiring = firing;
+    }
+
+    public TanksDestroyed getDestroyed() {
+        return destroyed;
+    }
+
+    public static class TanksDestroyed {
+        private int regular = 0;
+
+        private int armored = 0;
+
+        private int luckyRegular = 0;
+
+        private int luckyArmored = 0;
+
+        private int total = 0;
+
+        public int getRegular() {
+            return regular;
+        }
+
+        public void addRegular() {
+            ++regular;
+            ++total;
+        }
+
+        public int getArmored() {
+            return armored;
+        }
+
+        public void addArmored() {
+            ++armored;
+            ++total;
+        }
+
+        public int getLuckyRegular() {
+            return luckyRegular;
+        }
+
+        public void addLuckyRegular() {
+            ++luckyRegular;
+            ++total;
+        }
+
+        public int getLuckyArmored() {
+            return luckyArmored;
+        }
+
+        public void addLuckyArmored() {
+            ++luckyArmored;
+            ++total;
+        }
+
+        public int getTotal() {
+            return total;
+        }
+
+        public void reset() {
+            regular = 0;
+            armored = 0;
+            luckyRegular = 0;
+            luckyArmored = 0;
+            total = 0;
+        }
     }
 }

@@ -59,9 +59,9 @@ public class SelectPlayer {
 
         playerNameField.setOnAction(event -> {
             String playerName = playerNameField.getText();
-            Player player = PlayerHandler.getINSTANCE().newPlayer(playerName);
-            PlayerHandler.getINSTANCE().setCurrentPlayer(player);
-            PlayerHandler.getINSTANCE().updatePlayer();
+            Player player = PlayerHandler.getInstance().newPlayer(playerName);
+            PlayerHandler.getInstance().setCurrentPlayer(player);
+            PlayerHandler.getInstance().updatePlayer();
             playerNameField.clear();
             SceneHandler.getINSTANCE().selectGameMode();
         });
@@ -76,7 +76,7 @@ public class SelectPlayer {
     }
 
     private void setupPlayerList(VBox playerList) {
-        List<Player> existingPlayers = DataHandler.getINSTANCE().getPlayers();
+        List<Player> existingPlayers = DataHandler.getInstance().getPlayers();
         for (Player player : existingPlayers) {
             Button playerButton = createPlayerButton(player);
             setupPlayerButton(playerButton, player);
@@ -99,7 +99,7 @@ public class SelectPlayer {
         setupFocusAndMouseEvents(playerButton);
 
         playerButton.setOnAction(event -> {
-            PlayerHandler.getINSTANCE().setCurrentPlayer(player);
+            PlayerHandler.getInstance().setCurrentPlayer(player);
             SceneHandler.getINSTANCE().selectGameMode();
         });
     }

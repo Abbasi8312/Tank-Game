@@ -30,6 +30,7 @@ public class CurrentStage {
         GameVariables.gameStatus = GameVariables.GameStatus.PAUSED;
         GridHandler.getInstance().init();
         GameVariables.playerTank1.reset();
+        GameVariables.playerTank1.getDestroyed().reset();
 
         PauseTransition delay = new PauseTransition(Duration.seconds(5));
 

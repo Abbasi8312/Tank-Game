@@ -9,7 +9,7 @@ public class CollisionHandler {
     private CollisionHandler() {
     }
 
-    public static CollisionHandler getINSTANCE() {
+    public static CollisionHandler getInstance() {
         return INSTANCE;
     }
 

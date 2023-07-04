@@ -1,7 +1,6 @@
 package ir.ac.kntu.gamecontroller;
 
 import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
-import ir.ac.kntu.gamelogic.services.TimerWrapper;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;

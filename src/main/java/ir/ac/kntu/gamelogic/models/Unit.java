@@ -59,7 +59,7 @@ public abstract class Unit extends GameObject implements Movable {
 
     @Override public void move() {
         distance = velocity;
-        GameObject collided = CollisionHandler.getINSTANCE().checkCollision(this);
+        GameObject collided = CollisionHandler.getInstance().checkCollision(this);
         if (collided == null || collided instanceof Bullet || collided instanceof Element ||
                 collided instanceof Spawner) {
             ++frameIndex;
@@ -91,10 +91,10 @@ public abstract class Unit extends GameObject implements Movable {
         double leftLimit = collided.x - (0.5 * GameVariables.TILE_SIZE);
         double rightLimit = collided.x + (0.5 * GameVariables.TILE_SIZE);
         if (x <= leftLimit &&
-                !(CollisionHandler.getINSTANCE().checkPoint(collided.x - width, y - velocity) instanceof Wall)) {
+                !(CollisionHandler.getInstance().checkPoint(collided.x - width, y - velocity) instanceof Wall)) {
             x = collided.x - width;
         } else if (x >= rightLimit &&
-                !(CollisionHandler.getINSTANCE().checkPoint(collided.x + width, y - velocity) instanceof Wall)) {
+                !(CollisionHandler.getInstance().checkPoint(collided.x + width, y - velocity) instanceof Wall)) {
             x = collided.x + width;
         }
     }
@@ -103,10 +103,10 @@ public abstract class Unit extends GameObject implements Movable {
         double leftLimit = collided.x - (0.5 * GameVariables.TILE_SIZE);
         double rightLimit = collided.x + (0.5 * GameVariables.TILE_SIZE);
         if (x <= leftLimit &&
-                !(CollisionHandler.getINSTANCE().checkPoint(collided.x - width, y + velocity) instanceof Wall)) {
+                !(CollisionHandler.getInstance().checkPoint(collided.x - width, y + velocity) instanceof Wall)) {
             x = collided.x - width;
         } else if (x >= rightLimit &&
-                !(CollisionHandler.getINSTANCE().checkPoint(collided.x + width, y + velocity) instanceof Wall)) {
+                !(CollisionHandler.getInstance().checkPoint(collided.x + width, y + velocity) instanceof Wall)) {
             x = collided.x + width;
         }
     }
@@ -115,10 +115,10 @@ public abstract class Unit extends GameObject implements Movable {
         double topLimit = collided.y - (0.5 * GameVariables.TILE_SIZE);
         double bottomLimit = collided.y + (0.5 * GameVariables.TILE_SIZE);
         if (y <= topLimit &&
-                !(CollisionHandler.getINSTANCE().checkPoint(x + velocity, collided.y - height) instanceof Wall)) {
+                !(CollisionHandler.getInstance().checkPoint(x + velocity, collided.y - height) instanceof Wall)) {
             y = collided.y - height;
         } else if (y >= bottomLimit &&
-                !(CollisionHandler.getINSTANCE().checkPoint(x + velocity, collided.y + height) instanceof Wall)) {
+                !(CollisionHandler.getInstance().checkPoint(x + velocity, collided.y + height) instanceof Wall)) {
             y = collided.y + height;
         }
     }
@@ -127,10 +127,10 @@ public abstract class Unit extends GameObject implements Movable {
         double topLimit = collided.y - (0.5 * GameVariables.TILE_SIZE);
         double bottomLimit = collided.y + (0.5 * GameVariables.TILE_SIZE);
         if (y <= topLimit &&
-                !(CollisionHandler.getINSTANCE().checkPoint(x - velocity, collided.y - height) instanceof Wall)) {
+                !(CollisionHandler.getInstance().checkPoint(x - velocity, collided.y - height) instanceof Wall)) {
             y = collided.y - height;
         } else if (y >= bottomLimit &&
-                !(CollisionHandler.getINSTANCE().checkPoint(x + velocity, collided.y + height) instanceof Wall)) {
+                !(CollisionHandler.getInstance().checkPoint(x + velocity, collided.y + height) instanceof Wall)) {
             y = collided.y + height;
         }
     }

@@ -49,9 +49,9 @@ public class SelectGameMode {
         topBox.setAlignment(Pos.CENTER);
         topBox.setPadding(new Insets(10));
 
-        Text lastScoreText = createTopBoxText("Last Score: %05d", PlayerHandler.getINSTANCE().getScore());
-        Text playerNameText = createTopBoxText("Player Name: %s", PlayerHandler.getINSTANCE().getName());
-        Text highScoreText = createTopBoxText("High Score: %05d", PlayerHandler.getINSTANCE().getHighScore());
+        Text lastScoreText = createTopBoxText("Last Score: %05d", PlayerHandler.getInstance().getScore());
+        Text playerNameText = createTopBoxText("Player Name: %s", PlayerHandler.getInstance().getName());
+        Text highScoreText = createTopBoxText("High Score: %05d", PlayerHandler.getInstance().getHighScore());
 
         topBox.getChildren().addAll(lastScoreText, playerNameText, highScoreText);
         return topBox;
@@ -82,7 +82,7 @@ public class SelectGameMode {
     }
 
     private void handleOnePlayerButton() {
-        PlayerHandler.getINSTANCE().resetScore();
+        PlayerHandler.getInstance().resetScore();
         SceneHandler.getINSTANCE().selectStage();
     }
 

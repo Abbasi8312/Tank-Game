@@ -2,7 +2,6 @@ package ir.ac.kntu.gamelogic.models.terrains;
 
 import ir.ac.kntu.gamelogic.models.GameObject;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 public class Border extends GameObject {

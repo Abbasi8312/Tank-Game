@@ -25,7 +25,7 @@ public abstract class LuckyTank extends EnemyTank {
             y = random.nextInt(1, GameVariables.gameHeight / GameVariables.TILE_SIZE - 1);
             x = (x + 0.5) * GameVariables.TILE_SIZE;
             y = (y + 0.5) * GameVariables.TILE_SIZE;
-        } while (CollisionHandler.getINSTANCE().checkPoint(x, y) != null);
+        } while (CollisionHandler.getInstance().checkPoint(x, y) != null);
         Element[] elements = {new TimeFreeze(x, y), new Firepower(x, y), new Health(x, y)};
         GridHandler.getInstance().addGameObject(elements[random.nextInt(elements.length)]);
     }

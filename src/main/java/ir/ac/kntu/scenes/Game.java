@@ -18,13 +18,18 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class Game {
-
     private final BorderPane borderPane;
+
     private final AnimationTimer animationTimer;
+
     private final GameRenderer gameRenderer;
+
     private final VBox vBox;
+
     private final Label infoLabel;
+
     private final ImageView playerImageView;
+
     private final Label healthLabel;
 
     private final ImageView enemyImageView;
@@ -129,7 +134,9 @@ public class Game {
 
     private class GameLoop extends AnimationTimer {
         long lastTime = System.currentTimeMillis();
+
         int frameCount = 0;
+
         int secondCount = 0;
 
         @Override public void handle(long currentNanoTime) {

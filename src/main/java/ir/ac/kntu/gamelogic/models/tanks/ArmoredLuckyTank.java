@@ -1,5 +1,6 @@
 package ir.ac.kntu.gamelogic.models.tanks;
 
+import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -9,6 +10,11 @@ public class ArmoredLuckyTank extends LuckyTank {
         health = 2;
         damage = 1;
         score = 200;
+    }
+
+    @Override public void die() {
+        super.die();
+        GameVariables.playerTank1.getDestroyed().addLuckyArmored();
     }
 
     @Override public void draw(GraphicsContext gc) {

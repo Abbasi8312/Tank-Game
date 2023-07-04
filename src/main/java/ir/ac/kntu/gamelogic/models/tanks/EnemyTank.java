@@ -60,7 +60,7 @@ public abstract class EnemyTank extends Unit {
 
     @Override public void die() {
         super.die();
-        PlayerHandler.getINSTANCE().addScore(score);
+        PlayerHandler.getInstance().addScore(score);
     }
 
     protected void changeDirection() {

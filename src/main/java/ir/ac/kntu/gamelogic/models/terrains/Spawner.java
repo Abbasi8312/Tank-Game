@@ -9,7 +9,6 @@ import ir.ac.kntu.gamelogic.services.GridHandler;
 import ir.ac.kntu.gamelogic.services.TimerWrapper;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.paint.Color;
 
 import java.util.Random;
 import java.util.TimerTask;
@@ -57,11 +56,14 @@ public class Spawner extends GameObject {
     }
 
     private boolean scheduleEnemyTank() {
-        if (CollisionHandler.getINSTANCE().checkCollision(this) != null) {
+        if (CollisionHandler.getInstance().checkCollision(this) != null) {
             return false;
         }
-        EnemyTank[] enemyTanks =
-                {new RegularTank(x, y), new ArmoredTank(x, y), new RegularLuckyTank(x, y), new ArmoredLuckyTank(x, y)};
+        EnemyTank[] enemyTanks = new EnemyTank[4];
+        enemyTanks[0] = new RegularTank(x, y);
+        enemyTanks[1] = new ArmoredTank(x, y);
+        enemyTanks[2] = new RegularLuckyTank(x, y);
+        enemyTanks[3] = new ArmoredLuckyTank(x, y);
         GridHandler.getInstance().addGameObject(enemyTanks[new Random().nextInt(enemyTanks.length)]);
         GridHandler.getInstance().removeGameObject(this);
         frameIndex = 0;
@@ -69,7 +71,7 @@ public class Spawner extends GameObject {
     }
 
     private boolean schedulePlayer(Unit unit) {
-        if (CollisionHandler.getINSTANCE().checkCollision(this) != null) {
+        if (CollisionHandler.getInstance().checkCollision(this) != null) {
             return false;
         }
         GridHandler.getInstance().addGameObject(unit);

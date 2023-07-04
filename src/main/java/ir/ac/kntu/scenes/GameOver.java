@@ -21,8 +21,8 @@ public class GameOver {
         label.setAlignment(Pos.CENTER);
         rootPane.setCenter(label);
 
-        PlayerHandler.getINSTANCE().addGameCount();
-        PlayerHandler.getINSTANCE().updatePlayer();
+        PlayerHandler.getInstance().addGameCount();
+        PlayerHandler.getInstance().updatePlayer();
 
         PauseTransition delay = new PauseTransition(Duration.seconds(2));
 

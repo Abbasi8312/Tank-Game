@@ -47,7 +47,7 @@ public class Bullet extends Unit {
 
     @Override public void move() {
         distance += velocity;
-        GameObject collided = CollisionHandler.getINSTANCE().checkCollision(this);
+        GameObject collided = CollisionHandler.getInstance().checkCollision(this);
         if (collided == null || collided instanceof PlayerTank && origin == Origin.PLAYER ||
                 collided instanceof EnemyTank && origin == Origin.ENEMY || collided instanceof Element ||
                 collided instanceof Spawner) {
