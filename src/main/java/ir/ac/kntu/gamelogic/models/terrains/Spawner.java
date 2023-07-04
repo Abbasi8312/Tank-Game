@@ -1,7 +1,9 @@
 package ir.ac.kntu.gamelogic.models.terrains;
 
 import ir.ac.kntu.gamelogic.models.GameObject;
+import ir.ac.kntu.gamelogic.models.Unit;
 import ir.ac.kntu.gamelogic.models.tanks.*;
+import ir.ac.kntu.gamelogic.services.CollisionHandler;
 import ir.ac.kntu.gamelogic.services.GridHandler;
 import ir.ac.kntu.gamelogic.services.TimerWrapper;
 import javafx.scene.canvas.GraphicsContext;
@@ -30,17 +32,44 @@ public class Spawner extends GameObject {
         GridHandler.getInstance().addGameObject(this);
         TimerWrapper.getInstance().schedule(new TimerTask() {
             @Override public void run() {
-                schedule();
+                scheduleEnemyTank();
             }
-        }, 5000);
+        }, 1000);
         return true;
     }
 
-    private void schedule() {
-        EnemyTank[] enemyTanks = {new RegularTank(x, y), new ArmoredTank(x, y), new RegularLuckyTank(x, y),
-                new ArmoredLuckyTank(x, y)};
+    public boolean respawn(Unit unit) {
+        if (frameIndex == 1) {
+            return false;
+        }
+        frameIndex = 1;
+        GridHandler.getInstance().addGameObject(this);
+        TimerWrapper.getInstance().schedule(new TimerTask() {
+            @Override public void run() {
+                boolean done = schedulePlayer(unit);
+                if (done) {
+                    cancel();
+                }
+            }
+        }, 1000, 100);
+        return true;
+    }
+
+    private void scheduleEnemyTank() {
+        EnemyTank[] enemyTanks =
+                {new RegularTank(x, y), new ArmoredTank(x, y), new RegularLuckyTank(x, y), new ArmoredLuckyTank(x, y)};
         GridHandler.getInstance().addGameObject(enemyTanks[new Random().nextInt(enemyTanks.length)]);
         GridHandler.getInstance().removeGameObject(this);
         frameIndex = 0;
+    }
+
+    private boolean schedulePlayer(Unit unit) {
+        if (CollisionHandler.getINSTANCE().checkCollision(this) != null) {
+            return false;
+        }
+        GridHandler.getInstance().addGameObject(unit);
+        GridHandler.getInstance().removeGameObject(this);
+        frameIndex = 0;
+        return true;
     }
 }

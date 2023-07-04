@@ -1,22 +1,27 @@
 package ir.ac.kntu.gamelogic.models.tanks;
 
-import ir.ac.kntu.SceneHandler;
 import ir.ac.kntu.gamecontroller.PlayerController;
 import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
-import ir.ac.kntu.gamelogic.models.*;
+import ir.ac.kntu.gamelogic.models.Bullet;
+import ir.ac.kntu.gamelogic.models.Direction;
+import ir.ac.kntu.gamelogic.models.GameObject;
+import ir.ac.kntu.gamelogic.models.Unit;
 import ir.ac.kntu.gamelogic.models.elements.Element;
 import ir.ac.kntu.gamelogic.models.terrains.Flag;
+import ir.ac.kntu.gamelogic.models.terrains.Spawner;
 import ir.ac.kntu.gamelogic.models.terrains.Wall;
-import ir.ac.kntu.gamelogic.services.GridHandler;
 import ir.ac.kntu.gamelogic.services.CollisionHandler;
+import ir.ac.kntu.gamelogic.services.GridHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class PlayerTank extends Unit {
+    private final Spawner spawner;
     private boolean isMoving;
-
     private boolean isFiring;
-
     private double firingDistance;
 
     public PlayerTank(double x, double y) {
@@ -26,13 +31,10 @@ public class PlayerTank extends Unit {
         isMoving = false;
         health = 3;
         damage = 1;
+        spawner = new Spawner(this.x, this.y);
     }
 
     @Override public void update() {
-        if (GameVariables.gameStatus == GameVariables.GameStatus.PAUSED) {
-            return;
-        }
-
         firingDistance += distance;
 
         if (firingDistance >= 15 * velocity && isFiring) {
@@ -102,10 +104,29 @@ public class PlayerTank extends Unit {
         gc.drawImage(new Image(path), x - width / 2, y - height / 2, width, height);
     }
 
+    @Override public void damage(int damage) {
+        --health;
+        this.damage = 1;
+        if (health <= 0) {
+            die();
+        } else {
+            x = spawner.getX();
+            y = spawner.getY();
+            isMoving = false;
+            isFiring = false;
+            GridHandler.getInstance().removeGameObject(this);
+            spawner.respawn(this);
+        }
+    }
+
     @Override public void die() {
         super.die();
-        damage = 1;
-        SceneHandler.getINSTANCE().gameOver();
+        GameVariables.gameStatus = GameVariables.GameStatus.PAUSED;
+        new Timer().schedule(new TimerTask() {
+            @Override public void run() {
+                GameVariables.gameStatus = GameVariables.GameStatus.LOST;
+            }
+        }, 1000);
     }
 
     public void setMoving(boolean moving) {
