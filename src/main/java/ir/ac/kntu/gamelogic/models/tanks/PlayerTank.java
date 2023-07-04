@@ -5,6 +5,7 @@ import ir.ac.kntu.gamecontroller.PlayerController;
 import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
 import ir.ac.kntu.gamelogic.models.*;
 import ir.ac.kntu.gamelogic.models.elements.Element;
+import ir.ac.kntu.gamelogic.models.terrains.Flag;
 import ir.ac.kntu.gamelogic.models.terrains.Wall;
 import ir.ac.kntu.gamelogic.services.GridHandler;
 import ir.ac.kntu.gamelogic.services.CollisionHandler;

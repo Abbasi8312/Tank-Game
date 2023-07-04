@@ -5,6 +5,7 @@ import ir.ac.kntu.gamelogic.models.elements.Element;
 import ir.ac.kntu.gamelogic.models.tanks.EnemyTank;
 import ir.ac.kntu.gamelogic.models.tanks.PlayerTank;
 import ir.ac.kntu.gamelogic.models.terrains.BrickWall;
+import ir.ac.kntu.gamelogic.models.terrains.Flag;
 import ir.ac.kntu.gamelogic.services.GridHandler;
 import ir.ac.kntu.gamelogic.services.CollisionHandler;
 import javafx.scene.canvas.GraphicsContext;

@@ -1,5 +1,6 @@
 package ir.ac.kntu.scenes;
 
+import ir.ac.kntu.SceneHandler;
 import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
 import ir.ac.kntu.gamelogic.models.GameObject;
 import ir.ac.kntu.gamelogic.services.GridHandler;
@@ -11,6 +12,7 @@ public class Game {
     private final GraphicsContext staticGC;
 
     private final GraphicsContext movingGC;
+
     private final AnimationTimer animationTimer;
 
     public Game(GraphicsContext staticGC, GraphicsContext movingGC) {
@@ -26,6 +28,11 @@ public class Game {
             int secondCount = 0;
 
             @Override public void handle(long currentNanoTime) {
+                if (GameVariables.gameStatus == GameVariables.GameStatus.ENDED) {
+                    stop();
+                    SceneHandler.getINSTANCE().gameOver();
+                }
+
                 if (System.currentTimeMillis() - lastTime < 1000) {
                     frameCount++;
                 } else {
@@ -74,9 +81,5 @@ public class Game {
 
     public void start() {
         animationTimer.start();
-    }
-
-    public void stop() {
-        animationTimer.stop();
     }
 }

@@ -14,7 +14,7 @@ public class GameVariables {
     public enum GameStatus {
         PAUSED,
         RUNNING,
-        STOPPED,
+        ENDED,
         FROZE
     }
 }

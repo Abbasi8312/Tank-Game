@@ -1,7 +1,7 @@
 package ir.ac.kntu.gamelogic.services;
 
 import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
-import ir.ac.kntu.gamelogic.models.Flag;
+import ir.ac.kntu.gamelogic.models.terrains.Flag;
 import ir.ac.kntu.gamelogic.models.GameObject;
 import ir.ac.kntu.gamelogic.models.Player;
 import ir.ac.kntu.gamelogic.models.tanks.*;

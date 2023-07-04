@@ -1,16 +1,16 @@
 package ir.ac.kntu.gamelogic.services;
 
+import ir.ac.kntu.SceneHandler;
 import ir.ac.kntu.gamelogic.Grid;
 import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
 import ir.ac.kntu.gamelogic.models.GameObject;
 import ir.ac.kntu.gamelogic.models.Unit;
-import ir.ac.kntu.gamelogic.models.elements.Element;
 import ir.ac.kntu.gamelogic.models.interfaces.Movable;
 import ir.ac.kntu.gamelogic.models.terrains.Border;
-import ir.ac.kntu.gamelogic.models.terrains.Wall;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimerTask;
 
 public class GridHandler {
     private final static GridHandler INSTANCE = new GridHandler();
@@ -53,6 +53,9 @@ public class GridHandler {
 
     public void updateFrame() {
         processQueue();
+        if (GameVariables.gameStatus == GameVariables.GameStatus.PAUSED) {
+            return;
+        }
         for (GameObject gameObject : movables) {
             ((Unit) gameObject).update();
         }
