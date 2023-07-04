@@ -50,7 +50,7 @@ public class BrickWall extends Wall {
 
     private void rightDamage() {
         collisionRect.width /= 2;
-        collisionRect.relativeX -= width / 2;
+        collisionRect.relativeX += width / 2;
         if (frameIndex == 2 || frameIndex == 5 || frameIndex == 8) {
             frameIndex += 1;
         } else {
@@ -60,7 +60,7 @@ public class BrickWall extends Wall {
 
     private void leftDamage() {
         collisionRect.width /= 2;
-        collisionRect.relativeX += width / 2;
+        collisionRect.relativeX -= width / 2;
         if (frameIndex == 2 || frameIndex == 5 || frameIndex == 8) {
             frameIndex -= 1;
         } else {

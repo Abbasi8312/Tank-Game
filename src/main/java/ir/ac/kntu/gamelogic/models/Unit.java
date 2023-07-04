@@ -86,8 +86,8 @@ public abstract class Unit extends GameObject implements Collidable, Movable {
     }
 
     private void upHelper(double velocity, GameObject collided) {
-        double leftLimit = collided.x - (0.8 * GameVariables.TILE_SIZE);
-        double rightLimit = collided.x + (0.8 * GameVariables.TILE_SIZE);
+        double leftLimit = collided.x - (0.5 * GameVariables.TILE_SIZE);
+        double rightLimit = collided.x + (0.5 * GameVariables.TILE_SIZE);
         if (x <= leftLimit &&
                 !(CollisionHandler.getINSTANCE().checkPoint(collided.x - width, y - velocity) instanceof Wall)) {
             x = collided.x - width;
@@ -98,8 +98,8 @@ public abstract class Unit extends GameObject implements Collidable, Movable {
     }
 
     private void downHelper(double velocity, GameObject collided) {
-        double leftLimit = collided.x - (0.8 * GameVariables.TILE_SIZE);
-        double rightLimit = collided.x + (0.8 * GameVariables.TILE_SIZE);
+        double leftLimit = collided.x - (0.5 * GameVariables.TILE_SIZE);
+        double rightLimit = collided.x + (0.5 * GameVariables.TILE_SIZE);
         if (x <= leftLimit &&
                 !(CollisionHandler.getINSTANCE().checkPoint(collided.x - width, y + velocity) instanceof Wall)) {
             x = collided.x - width;
@@ -110,8 +110,8 @@ public abstract class Unit extends GameObject implements Collidable, Movable {
     }
 
     private void rightHelper(double velocity, GameObject collided) {
-        double topLimit = collided.y - (0.8 * GameVariables.TILE_SIZE);
-        double bottomLimit = collided.y + (0.8 * GameVariables.TILE_SIZE);
+        double topLimit = collided.y - (0.5 * GameVariables.TILE_SIZE);
+        double bottomLimit = collided.y + (0.5 * GameVariables.TILE_SIZE);
         if (y <= topLimit &&
                 !(CollisionHandler.getINSTANCE().checkPoint(collided.y - height, x + velocity) instanceof Wall)) {
             y = collided.y - height;
@@ -122,8 +122,8 @@ public abstract class Unit extends GameObject implements Collidable, Movable {
     }
 
     private void leftHelper(double velocity, GameObject collided) {
-        double topLimit = collided.y - (0.8 * GameVariables.TILE_SIZE);
-        double bottomLimit = collided.y + (0.8 * GameVariables.TILE_SIZE);
+        double topLimit = collided.y - (0.5 * GameVariables.TILE_SIZE);
+        double bottomLimit = collided.y + (0.5 * GameVariables.TILE_SIZE);
         if (y <= topLimit &&
                 !(CollisionHandler.getINSTANCE().checkPoint(collided.y - height, x - velocity) instanceof Wall)) {
             y = collided.y - height;
