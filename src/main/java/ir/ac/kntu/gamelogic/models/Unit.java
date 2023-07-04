@@ -9,7 +9,7 @@ import ir.ac.kntu.gamelogic.models.terrains.Wall;
 import ir.ac.kntu.gamelogic.services.CollisionHandler;
 import ir.ac.kntu.gamelogic.services.GridHandler;
 
-public abstract class Unit extends GameObject implements Collidable, Movable {
+public abstract class Unit extends GameObject implements Movable {
     protected double velocity = GameVariables.VELOCITY;
 
     protected long lastTime;

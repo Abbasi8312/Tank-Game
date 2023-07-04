@@ -23,4 +23,16 @@ public class TimerWrapper {
     public void schedule(TimerTask task, long delay) {
         timer.schedule(task, delay);
     }
+
+    public void sleep() {
+        try {
+            timer.wait();
+        } catch (Exception ignored) {
+            System.out.println("Paused");
+        }
+    }
+
+    public void resume() {
+        timer.notify();
+    }
 }

@@ -1,16 +1,15 @@
 package ir.ac.kntu.gamelogic.services;
 
-import ir.ac.kntu.SceneHandler;
 import ir.ac.kntu.gamelogic.Grid;
 import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
 import ir.ac.kntu.gamelogic.models.GameObject;
 import ir.ac.kntu.gamelogic.models.Unit;
 import ir.ac.kntu.gamelogic.models.interfaces.Movable;
+import ir.ac.kntu.gamelogic.models.tanks.EnemyTank;
 import ir.ac.kntu.gamelogic.models.terrains.Border;
+import ir.ac.kntu.gamelogic.models.terrains.Spawner;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.TimerTask;
+import java.util.*;
 
 public class GridHandler {
     private final static GridHandler INSTANCE = new GridHandler();
@@ -25,12 +24,15 @@ public class GridHandler {
 
     private final List<GameObject> removeQueue;
 
+    private final List<Spawner> spawners;
+
     private GridHandler() {
         grid = new Grid();
         updatedStatics = new ArrayList<>();
         movables = new ArrayList<>();
         addQueue = new ArrayList<>();
         removeQueue = new ArrayList<>();
+        spawners = new ArrayList<>();
     }
 
     public static GridHandler getInstance() {
@@ -39,6 +41,7 @@ public class GridHandler {
 
     public void init() {
         addQueue.addAll(DataHandler.getINSTANCE().loadGameObjectsFromFile());
+        initSpawners();
         for (int i = 0; i < GameVariables.gameWidth / GameVariables.TILE_SIZE; i++) {
             addGameObject(new Border(GameVariables.TILE_SIZE * (i + 0.5), GameVariables.TILE_SIZE * 0.5));
             addGameObject(new Border(GameVariables.TILE_SIZE * (i + 0.5),
@@ -49,6 +52,18 @@ public class GridHandler {
             addGameObject(new Border(GameVariables.gameWidth - GameVariables.TILE_SIZE * 0.5,
                     GameVariables.TILE_SIZE * (i + 0.5)));
         }
+    }
+
+    private void initSpawners() {
+        for (GameObject gameObject : addQueue) {
+            if (gameObject instanceof Spawner spawner) {
+                spawners.add(spawner);
+            }
+        }
+        if (spawners.size() == 0) {
+            spawners.add(new Spawner(GameVariables.TILE_SIZE * 1.5, GameVariables.TILE_SIZE * 1.5));
+        }
+        addQueue.removeAll(spawners);
     }
 
     public void updateFrame() {
@@ -76,6 +91,9 @@ public class GridHandler {
                 updatedStatics.add(gameObject);
             }
             added.add(gameObject);
+            if (gameObject instanceof EnemyTank) {
+                --GameVariables.remainingTanks;
+            }
         }
         for (GameObject gameObject : removeQueue) {
             grid.removeGameObject(gameObject);
@@ -85,9 +103,33 @@ public class GridHandler {
                 updatedStatics.add(gameObject);
             }
             removed.add(gameObject);
+            if (gameObject instanceof EnemyTank) {
+                handleEnemyTank();
+            }
         }
         addQueue.removeAll(added);
         removeQueue.removeAll(removed);
+    }
+
+    private void handleEnemyTank() {
+        if (GameVariables.remainingTanks > 0) {
+            Spawner spawner;
+            do {
+                spawner = spawners.get(new Random().nextInt(spawners.size()));
+            } while (CollisionHandler.getINSTANCE().checkCollision(spawner) != null || !spawner.spawn());
+            return;
+        }
+        for (GameObject gameObject : movables) {
+            if (gameObject instanceof EnemyTank) {
+                return;
+            }
+        }
+        GameVariables.gameStatus = GameVariables.GameStatus.PAUSED;
+        new Timer().schedule(new TimerTask() {
+            @Override public void run() {
+                GameVariables.gameStatus = GameVariables.GameStatus.WON;
+            }
+        }, 1000);
     }
 
     public void removeGameObject(GameObject gameObject) {

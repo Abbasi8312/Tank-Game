@@ -1,11 +1,11 @@
-     c      O
- B B M M B B
+S    c      O
+ B B MSM B B
  B B MMM B B
 CB B M M B B
  B B     B B
          A
 M MM     MM M
-     B B
+S    B B    S
  B B MBM B B
  B B B B B B
  B B     B B

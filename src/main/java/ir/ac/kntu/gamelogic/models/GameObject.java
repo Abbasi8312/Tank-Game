@@ -1,9 +1,10 @@
 package ir.ac.kntu.gamelogic.models;
 
 import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
+import ir.ac.kntu.gamelogic.models.interfaces.Collidable;
 import javafx.scene.canvas.GraphicsContext;
 
-public abstract class GameObject {
+public abstract class GameObject implements Collidable {
     protected final CollisionRectangle collisionRect;
 
     protected double x;
@@ -27,6 +28,13 @@ public abstract class GameObject {
     public boolean isAtPoint(double x, double y) {
         return Math.abs(x - (this.x + collisionRect.relativeX)) < collisionRect.width &&
                 Math.abs(y - (this.y + collisionRect.relativeY)) < collisionRect.height;
+    }
+
+    public boolean isColliding(GameObject gameObject) {
+        return Math.abs(x + collisionRect.relativeX - (gameObject.getX() + collisionRect.relativeX)) <
+                collisionRect.width / 2 + gameObject.collisionRect.width / 2 &&
+                Math.abs(y + collisionRect.relativeY - (gameObject.getY() + collisionRect.relativeY)) <
+                        collisionRect.height / 2 + gameObject.collisionRect.height / 2;
     }
 
     public abstract void draw(GraphicsContext gc);

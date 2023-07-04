@@ -1,6 +1,7 @@
 package ir.ac.kntu.scenes;
 
 import ir.ac.kntu.SceneHandler;
+import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -60,6 +61,8 @@ public class SelectStage {
     private void setupStageButton(Button stageButton, int stageNumber) {
         setupFocusAndMouseEvents(stageButton);
         stageButton.setOnAction(event -> {
+            GameVariables.stageNumber = stageNumber;
+            GameVariables.remainingTanks = 6 + stageNumber * 4;
             SceneHandler.getINSTANCE().game();
         });
     }

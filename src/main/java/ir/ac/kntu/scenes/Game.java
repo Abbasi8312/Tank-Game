@@ -115,9 +115,14 @@ public class Game {
         int secondCount = 0;
 
         @Override public void handle(long currentNanoTime) {
-            if (GameVariables.gameStatus == GameVariables.GameStatus.ENDED) {
-                stop();
+            if (GameVariables.gameStatus == GameVariables.GameStatus.LOST) {
+                this.stop();
                 SceneHandler.getINSTANCE().gameOver();
+                return;
+            } else if (GameVariables.gameStatus == GameVariables.GameStatus.WON) {
+                this.stop();
+                SceneHandler.getINSTANCE().playerScore();
+                return;
             }
 
             if (System.currentTimeMillis() - lastTime < 1000) {

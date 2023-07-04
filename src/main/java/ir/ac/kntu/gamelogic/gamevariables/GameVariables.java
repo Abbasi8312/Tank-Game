@@ -13,10 +13,15 @@ public class GameVariables {
 
     public static GameStatus lastStatus;
 
+    public static int stageNumber;
+
+    public static int remainingTanks;
+
     public enum GameStatus {
         PAUSED,
         RUNNING,
-        ENDED,
+        LOST,
+        WON,
         FROZE
     }
 }

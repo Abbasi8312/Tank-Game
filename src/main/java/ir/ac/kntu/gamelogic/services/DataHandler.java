@@ -1,12 +1,13 @@
 package ir.ac.kntu.gamelogic.services;
 
 import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
-import ir.ac.kntu.gamelogic.models.terrains.Flag;
 import ir.ac.kntu.gamelogic.models.GameObject;
 import ir.ac.kntu.gamelogic.models.Player;
 import ir.ac.kntu.gamelogic.models.tanks.*;
 import ir.ac.kntu.gamelogic.models.terrains.BrickWall;
+import ir.ac.kntu.gamelogic.models.terrains.Flag;
 import ir.ac.kntu.gamelogic.models.terrains.IronWall;
+import ir.ac.kntu.gamelogic.models.terrains.Spawner;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -83,6 +84,7 @@ public class DataHandler {
             case 'B' -> new BrickWall(x, y);
             case 'M' -> new IronWall(x, y);
             case 'F' -> new Flag(x, y);
+            case 'S' -> new Spawner(x, y);
             default -> null;
         };
     }
