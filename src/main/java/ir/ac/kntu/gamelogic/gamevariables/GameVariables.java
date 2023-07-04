@@ -11,6 +11,8 @@ public class GameVariables {
 
     public static GameStatus gameStatus = GameStatus.RUNNING;
 
+    public static GameStatus lastStatus;
+
     public enum GameStatus {
         PAUSED,
         RUNNING,

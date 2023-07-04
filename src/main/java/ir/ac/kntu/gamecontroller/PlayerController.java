@@ -1,5 +1,6 @@
 package ir.ac.kntu.gamecontroller;
 
+import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
 import ir.ac.kntu.gamelogic.models.Direction;
 import ir.ac.kntu.gamelogic.models.tanks.PlayerTank;
 import javafx.scene.input.KeyCode;
@@ -38,6 +39,9 @@ public class PlayerController implements InputManager {
     }
 
     @Override public void handlePressedKeys(KeyCode keyCode) {
+        if (GameVariables.gameStatus == GameVariables.GameStatus.PAUSED) {
+            return;
+        }
         if (keyCode == player1Left) {
             move(playerTank1, Direction.LEFT);
         } else if (keyCode == player1Right) {
@@ -52,6 +56,9 @@ public class PlayerController implements InputManager {
     }
 
     @Override public void handleReleasedKeys(KeyCode keyCode) {
+        if (GameVariables.gameStatus == GameVariables.GameStatus.PAUSED) {
+            return;
+        }
         if (keyCode == player1Left) {
             stop(playerTank1, Direction.LEFT);
         } else if (keyCode == player1Right) {

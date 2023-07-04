@@ -12,4 +12,6 @@ public class KeyMap {
     public static KeyCode player1Right = KeyCode.D;
 
     public static KeyCode player1Fire = KeyCode.SPACE;
+
+    public static KeyCode pause = KeyCode.P;
 }
