@@ -113,10 +113,10 @@ public abstract class Unit extends GameObject implements Collidable, Movable {
         double topLimit = collided.y - (0.5 * GameVariables.TILE_SIZE);
         double bottomLimit = collided.y + (0.5 * GameVariables.TILE_SIZE);
         if (y <= topLimit &&
-                !(CollisionHandler.getINSTANCE().checkPoint(collided.y - height, x + velocity) instanceof Wall)) {
+                !(CollisionHandler.getINSTANCE().checkPoint(x + velocity, collided.y - height) instanceof Wall)) {
             y = collided.y - height;
         } else if (y >= bottomLimit &&
-                !(CollisionHandler.getINSTANCE().checkPoint(collided.y + height, x + velocity) instanceof Wall)) {
+                !(CollisionHandler.getINSTANCE().checkPoint(x + velocity, collided.y + height) instanceof Wall)) {
             y = collided.y + height;
         }
     }
@@ -125,10 +125,10 @@ public abstract class Unit extends GameObject implements Collidable, Movable {
         double topLimit = collided.y - (0.5 * GameVariables.TILE_SIZE);
         double bottomLimit = collided.y + (0.5 * GameVariables.TILE_SIZE);
         if (y <= topLimit &&
-                !(CollisionHandler.getINSTANCE().checkPoint(collided.y - height, x - velocity) instanceof Wall)) {
+                !(CollisionHandler.getINSTANCE().checkPoint(x - velocity, collided.y - height) instanceof Wall)) {
             y = collided.y - height;
         } else if (y >= bottomLimit &&
-                !(CollisionHandler.getINSTANCE().checkPoint(collided.y + height, x - velocity) instanceof Wall)) {
+                !(CollisionHandler.getINSTANCE().checkPoint(x + velocity, collided.y + height) instanceof Wall)) {
             y = collided.y + height;
         }
     }
@@ -156,5 +156,21 @@ public abstract class Unit extends GameObject implements Collidable, Movable {
 
     public void setDirection(Direction direction) {
         this.direction = direction;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 }
