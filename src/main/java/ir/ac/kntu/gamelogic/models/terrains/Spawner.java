@@ -1,5 +1,6 @@
 package ir.ac.kntu.gamelogic.models.terrains;
 
+import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
 import ir.ac.kntu.gamelogic.models.GameObject;
 import ir.ac.kntu.gamelogic.models.Unit;
 import ir.ac.kntu.gamelogic.models.tanks.*;
@@ -28,6 +29,7 @@ public class Spawner extends GameObject {
         if (frameIndex == 1) {
             return false;
         }
+        --GameVariables.remainingTanks;
         frameIndex = 1;
         GridHandler.getInstance().addGameObject(this);
         TimerWrapper.getInstance().schedule(new TimerTask() {

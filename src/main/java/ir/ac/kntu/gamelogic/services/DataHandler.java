@@ -68,6 +68,9 @@ public class DataHandler {
                     if (character == 'p' && gameObject instanceof PlayerTank playerTank) {
                         GameVariables.playerTank2 = playerTank;
                     }
+                    if (gameObject instanceof EnemyTank) {
+                        --GameVariables.remainingTanks;
+                    }
                 }
                 y++;
             }

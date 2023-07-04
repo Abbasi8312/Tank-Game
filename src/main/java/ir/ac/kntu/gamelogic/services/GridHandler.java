@@ -91,9 +91,6 @@ public class GridHandler {
                 updatedStatics.add(gameObject);
             }
             added.add(gameObject);
-            if (gameObject instanceof EnemyTank) {
-                --GameVariables.remainingTanks;
-            }
         }
         for (GameObject gameObject : removeQueue) {
             grid.removeGameObject(gameObject);
