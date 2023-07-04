@@ -2,7 +2,7 @@ package ir.ac.kntu.scenes;
 
 import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
 import ir.ac.kntu.gamelogic.models.GameObject;
-import ir.ac.kntu.gamelogic.services.BoardHandler;
+import ir.ac.kntu.gamelogic.services.GridHandler;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -11,43 +11,14 @@ public class Game {
     private final GraphicsContext staticGC;
 
     private final GraphicsContext movingGC;
+    private final AnimationTimer animationTimer;
 
     public Game(GraphicsContext staticGC, GraphicsContext movingGC) {
         this.staticGC = staticGC;
         this.movingGC = movingGC;
         staticGC.fillRect(0, 0, GameVariables.gameWidth, GameVariables.gameHeight);
-    }
 
-    private void clearStatics() {
-        for (GameObject gameObject : BoardHandler.getInstance().getUpdatedStatics()) {
-            staticGC.setFill(Color.BLACK);
-            staticGC.fillRect(gameObject.getX() - gameObject.getWidth() / 2,
-                    gameObject.getY() - gameObject.getHeight() / 2, gameObject.getWidth(), gameObject.getHeight());
-        }
-    }
-
-    private void clearMovables() {
-        for (GameObject gameObject : BoardHandler.getInstance().getMovables()) {
-            movingGC.clearRect(gameObject.getX() - gameObject.getWidth() / 2,
-                    gameObject.getY() - gameObject.getHeight() / 2, gameObject.getWidth(), gameObject.getHeight());
-        }
-    }
-
-    private void drawStatics() {
-        for (GameObject gameObject : BoardHandler.getInstance().getUpdatedStatics()) {
-            gameObject.draw(staticGC);
-        }
-        BoardHandler.getInstance().clearUpdatedStatics();
-    }
-
-    private void drawMovables() {
-        for (GameObject gameObject : BoardHandler.getInstance().getMovables()) {
-            gameObject.draw(movingGC);
-        }
-    }
-
-    public void start() {
-        new AnimationTimer() {
+        animationTimer = new AnimationTimer() {
             long lastTime = System.currentTimeMillis();
 
             int frameCount = 0;
@@ -67,9 +38,45 @@ public class Game {
                 clearStatics();
                 drawStatics();
                 clearMovables();
-                BoardHandler.getInstance().updateFrame();
+                GridHandler.getInstance().updateFrame();
                 drawMovables();
             }
-        }.start();
+        };
+    }
+
+    private void clearStatics() {
+        for (GameObject gameObject : GridHandler.getInstance().getUpdatedStatics()) {
+            staticGC.setFill(Color.BLACK);
+            staticGC.fillRect(gameObject.getX() - gameObject.getWidth() / 2,
+                    gameObject.getY() - gameObject.getHeight() / 2, gameObject.getWidth(), gameObject.getHeight());
+        }
+    }
+
+    private void clearMovables() {
+        for (GameObject gameObject : GridHandler.getInstance().getMovables()) {
+            movingGC.clearRect(gameObject.getX() - gameObject.getWidth() / 2,
+                    gameObject.getY() - gameObject.getHeight() / 2, gameObject.getWidth(), gameObject.getHeight());
+        }
+    }
+
+    private void drawStatics() {
+        for (GameObject gameObject : GridHandler.getInstance().getUpdatedStatics()) {
+            gameObject.draw(staticGC);
+        }
+        GridHandler.getInstance().clearUpdatedStatics();
+    }
+
+    private void drawMovables() {
+        for (GameObject gameObject : GridHandler.getInstance().getMovables()) {
+            gameObject.draw(movingGC);
+        }
+    }
+
+    public void start() {
+        animationTimer.start();
+    }
+
+    public void stop() {
+        animationTimer.stop();
     }
 }

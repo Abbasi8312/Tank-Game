@@ -2,10 +2,12 @@ package ir.ac.kntu.gamelogic.models.tanks;
 
 import ir.ac.kntu.SceneHandler;
 import ir.ac.kntu.gamecontroller.PlayerController;
-import ir.ac.kntu.gamelogic.models.Bullet;
-import ir.ac.kntu.gamelogic.models.Direction;
-import ir.ac.kntu.gamelogic.models.Unit;
-import ir.ac.kntu.gamelogic.services.BoardHandler;
+import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
+import ir.ac.kntu.gamelogic.models.*;
+import ir.ac.kntu.gamelogic.models.elements.Element;
+import ir.ac.kntu.gamelogic.models.terrains.Wall;
+import ir.ac.kntu.gamelogic.services.GridHandler;
+import ir.ac.kntu.gamelogic.services.CollisionHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -26,9 +28,13 @@ public class PlayerTank extends Unit {
     }
 
     @Override public void update() {
+        if (GameVariables.gameStatus == GameVariables.GameStatus.PAUSED) {
+            return;
+        }
+
         firingDistance += distance;
 
-        if (firingDistance >= 0.5 * velocity && isFiring) {
+        if (firingDistance >= 15 * velocity && isFiring) {
             fire();
             firingDistance = 0;
         }
@@ -48,14 +54,30 @@ public class PlayerTank extends Unit {
             }
         }
         Bullet bullet = new Bullet(x, y, damage, direction, Bullet.Origin.PLAYER);
-        BoardHandler.getInstance().addGameObject(bullet);
+        GridHandler.getInstance().addGameObject(bullet);
     }
 
     @Override public void move() {
-        if (isMoving) {
-            super.move();
-        } else {
+        if (!isMoving) {
             lastTime = System.nanoTime();
+            return;
+        }
+        distance = velocity;
+        GameObject collided = CollisionHandler.getINSTANCE().checkCollision(this);
+        if (collided == null || collided instanceof Bullet) {
+            ++frameIndex;
+            switch (direction) {
+                case UP -> y -= velocity;
+                case DOWN -> y += velocity;
+                case RIGHT -> x += velocity;
+                case LEFT -> x -= velocity;
+                default -> {
+                }
+            }
+        } else if (collided instanceof Wall || collided instanceof Flag) {
+            moveHelper(collided);
+        } else if (collided instanceof Element element) {
+            element.apply(this);
         }
     }
 

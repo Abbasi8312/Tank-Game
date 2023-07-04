@@ -1,10 +1,11 @@
 package ir.ac.kntu.gamelogic.models;
 
 import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
+import ir.ac.kntu.gamelogic.models.elements.Element;
 import ir.ac.kntu.gamelogic.models.tanks.EnemyTank;
 import ir.ac.kntu.gamelogic.models.tanks.PlayerTank;
 import ir.ac.kntu.gamelogic.models.terrains.BrickWall;
-import ir.ac.kntu.gamelogic.services.BoardHandler;
+import ir.ac.kntu.gamelogic.services.GridHandler;
 import ir.ac.kntu.gamelogic.services.CollisionHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
@@ -35,17 +36,18 @@ public class Bullet extends Unit {
     }
 
     @Override public void update() {
+        if (GameVariables.gameStatus == GameVariables.GameStatus.PAUSED) {
+            return;
+        }
+
         move();
     }
 
     @Override public void move() {
-        long currentTime = System.nanoTime();
-        double deltaTime = (currentTime - lastTime) / 1e9;
-        double velocity = this.velocity * deltaTime;
         distance += velocity;
-        GameObject collided = CollisionHandler.getINSTANCE().checkCollision(this, velocity);
+        GameObject collided = CollisionHandler.getINSTANCE().checkCollision(this);
         if (collided == null || collided instanceof PlayerTank && origin == Origin.PLAYER ||
-                collided instanceof EnemyTank && origin == Origin.ENEMY) {
+                collided instanceof EnemyTank && origin == Origin.ENEMY || collided instanceof Element) {
             ++frameIndex;
             switch (direction) {
                 case UP -> this.y -= velocity;
@@ -57,16 +59,15 @@ public class Bullet extends Unit {
             }
         } else if (collided instanceof PlayerTank || collided instanceof EnemyTank || collided instanceof Bullet) {
             ((Unit) collided).damage(damage);
-            BoardHandler.getInstance().removeGameObject(this);
+            GridHandler.getInstance().removeGameObject(this);
         } else if (collided instanceof BrickWall brickWall) {
             brickWall.damage(direction);
-            BoardHandler.getInstance().removeGameObject(this);
+            GridHandler.getInstance().removeGameObject(this);
         } else if (collided instanceof Flag flag) {
             flag.damage();
         } else {
-            BoardHandler.getInstance().removeGameObject(this);
+            GridHandler.getInstance().removeGameObject(this);
         }
-        lastTime = currentTime;
     }
 
     public enum Origin {

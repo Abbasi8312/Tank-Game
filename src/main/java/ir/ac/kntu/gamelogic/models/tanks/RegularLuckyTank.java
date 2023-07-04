@@ -3,7 +3,7 @@ package ir.ac.kntu.gamelogic.models.tanks;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class RegularLuckyTank extends EnemyTank {
+public class RegularLuckyTank extends LuckyTank {
     public RegularLuckyTank(double x, double y) {
         super(x, y);
         health = 1;

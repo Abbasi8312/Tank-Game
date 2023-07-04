@@ -1,20 +1,21 @@
 package ir.ac.kntu.gamelogic.services;
 
-import ir.ac.kntu.gamelogic.Board;
+import ir.ac.kntu.gamelogic.Grid;
 import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
 import ir.ac.kntu.gamelogic.models.GameObject;
 import ir.ac.kntu.gamelogic.models.Unit;
+import ir.ac.kntu.gamelogic.models.elements.Element;
 import ir.ac.kntu.gamelogic.models.interfaces.Movable;
 import ir.ac.kntu.gamelogic.models.terrains.Border;
-import ir.ac.kntu.gamelogic.models.terrains.BrickWall;
+import ir.ac.kntu.gamelogic.models.terrains.Wall;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BoardHandler {
-    private final static BoardHandler INSTANCE = new BoardHandler();
+public class GridHandler {
+    private final static GridHandler INSTANCE = new GridHandler();
 
-    private final Board board;
+    private final Grid grid;
 
     private final List<GameObject> updatedStatics;
 
@@ -24,15 +25,15 @@ public class BoardHandler {
 
     private final List<GameObject> removeQueue;
 
-    private BoardHandler() {
-        board = new Board();
+    private GridHandler() {
+        grid = new Grid();
         updatedStatics = new ArrayList<>();
         movables = new ArrayList<>();
         addQueue = new ArrayList<>();
         removeQueue = new ArrayList<>();
     }
 
-    public static BoardHandler getInstance() {
+    public static GridHandler getInstance() {
         return INSTANCE;
     }
 
@@ -65,7 +66,7 @@ public class BoardHandler {
         List<GameObject> added = new ArrayList<>();
         List<GameObject> removed = new ArrayList<>();
         for (GameObject gameObject : addQueue) {
-            board.addGameObject(gameObject);
+            grid.addGameObject(gameObject);
             if (gameObject instanceof Movable) {
                 movables.add(gameObject);
             } else {
@@ -74,10 +75,10 @@ public class BoardHandler {
             added.add(gameObject);
         }
         for (GameObject gameObject : removeQueue) {
-            board.removeGameObject(gameObject);
+            grid.removeGameObject(gameObject);
             if (gameObject instanceof Movable) {
                 movables.remove(gameObject);
-            } else if (gameObject instanceof BrickWall) {
+            } else {
                 updatedStatics.add(gameObject);
             }
             removed.add(gameObject);
@@ -109,6 +110,6 @@ public class BoardHandler {
     }
 
     public List<GameObject> getGameObjects() {
-        return board.getGameObjects();
+        return grid.getGameObjects();
     }
 }

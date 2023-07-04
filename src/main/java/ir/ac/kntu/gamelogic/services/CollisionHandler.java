@@ -13,12 +13,12 @@ public class CollisionHandler {
         return INSTANCE;
     }
 
-    public GameObject checkCollision(Collidable collidable, double velocity) {
-        for (GameObject gameObject : BoardHandler.getInstance().getGameObjects()) {
+    public GameObject checkCollision(Collidable collidable) {
+        for (GameObject gameObject : GridHandler.getInstance().getGameObjects()) {
             if (gameObject.equals(collidable)) {
                 continue;
             }
-            if (collidable.isColliding(gameObject, velocity)) {
+            if (collidable.isColliding(gameObject)) {
                 //System.out.println("Collided with: " + gameObject.getId());
                 return gameObject;
             }
@@ -27,7 +27,7 @@ public class CollisionHandler {
     }
 
     public GameObject checkPoint(double x, double y) {
-        for (GameObject gameObject : BoardHandler.getInstance().getGameObjects()) {
+        for (GameObject gameObject : GridHandler.getInstance().getGameObjects()) {
             if (gameObject.isAtPoint(x, y)) {
                 return gameObject;
             }

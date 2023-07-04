@@ -1,7 +1,7 @@
 package ir.ac.kntu.gamelogic.models.terrains;
 
 import ir.ac.kntu.gamelogic.models.Direction;
-import ir.ac.kntu.gamelogic.services.BoardHandler;
+import ir.ac.kntu.gamelogic.services.GridHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -42,9 +42,9 @@ public class BrickWall extends Wall {
             default -> rightDamage();
         }
         if (frameIndex == 0) {
-            BoardHandler.getInstance().removeGameObject(this);
+            GridHandler.getInstance().removeGameObject(this);
         } else {
-            BoardHandler.getInstance().updateStatic(this);
+            GridHandler.getInstance().updateStatic(this);
         }
     }
 

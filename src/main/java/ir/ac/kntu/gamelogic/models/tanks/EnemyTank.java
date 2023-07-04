@@ -1,9 +1,10 @@
 package ir.ac.kntu.gamelogic.models.tanks;
 
+import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
 import ir.ac.kntu.gamelogic.models.Bullet;
 import ir.ac.kntu.gamelogic.models.Direction;
 import ir.ac.kntu.gamelogic.models.Unit;
-import ir.ac.kntu.gamelogic.services.BoardHandler;
+import ir.ac.kntu.gamelogic.services.GridHandler;
 import ir.ac.kntu.gamelogic.services.PlayerHandler;
 
 import java.util.Random;
@@ -23,16 +24,20 @@ public abstract class EnemyTank extends Unit {
     }
 
     @Override public void update() {
+        if (GameVariables.gameStatus != GameVariables.GameStatus.RUNNING) {
+            return;
+        }
+
         turningDistance += distance;
         firingDistance += distance;
 
-        if (turningDistance >= 2 * velocity) {
+        if (turningDistance >= 60 * velocity) {
             changeDirection();
-            turningDistance -= 2 * velocity;
+            turningDistance -= 60 * velocity;
         }
-        if (firingDistance >= 0.5 * velocity) {
+        if (firingDistance >= 15 * velocity) {
             fire();
-            firingDistance -= 0.5 * velocity;
+            firingDistance -= 15 * velocity;
         }
 
         move();
@@ -50,7 +55,7 @@ public abstract class EnemyTank extends Unit {
             }
         }
         Bullet bullet = new Bullet(x, y, damage, direction, Bullet.Origin.ENEMY);
-        BoardHandler.getInstance().addGameObject(bullet);
+        GridHandler.getInstance().addGameObject(bullet);
     }
 
     @Override public void die() {

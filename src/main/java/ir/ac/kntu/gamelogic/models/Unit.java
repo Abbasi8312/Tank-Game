@@ -1,11 +1,12 @@
 package ir.ac.kntu.gamelogic.models;
 
 import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
+import ir.ac.kntu.gamelogic.models.elements.Element;
 import ir.ac.kntu.gamelogic.models.interfaces.Collidable;
 import ir.ac.kntu.gamelogic.models.interfaces.Movable;
 import ir.ac.kntu.gamelogic.models.terrains.Wall;
-import ir.ac.kntu.gamelogic.services.BoardHandler;
 import ir.ac.kntu.gamelogic.services.CollisionHandler;
+import ir.ac.kntu.gamelogic.services.GridHandler;
 
 public abstract class Unit extends GameObject implements Collidable, Movable {
     protected double velocity = GameVariables.VELOCITY;
@@ -33,10 +34,10 @@ public abstract class Unit extends GameObject implements Collidable, Movable {
     }
 
     public void die() {
-        BoardHandler.getInstance().removeGameObject(this);
+        GridHandler.getInstance().removeGameObject(this);
     }
 
-    @Override public boolean isColliding(GameObject gameObject, double velocity) {
+    @Override public boolean isColliding(GameObject gameObject) {
         double x = this.x;
         double y = this.y;
         switch (direction) {
@@ -56,12 +57,9 @@ public abstract class Unit extends GameObject implements Collidable, Movable {
     public abstract void update();
 
     @Override public void move() {
-        long currentTime = System.nanoTime();
-        double deltaTime = (currentTime - lastTime) / 1e9;
-        double velocity = this.velocity * deltaTime;
         distance = velocity;
-        GameObject collided = CollisionHandler.getINSTANCE().checkCollision(this, velocity);
-        if (collided == null || collided instanceof Bullet) {
+        GameObject collided = CollisionHandler.getINSTANCE().checkCollision(this);
+        if (collided == null || collided instanceof Bullet || collided instanceof Element) {
             ++frameIndex;
             switch (direction) {
                 case UP -> y -= velocity;
@@ -72,12 +70,11 @@ public abstract class Unit extends GameObject implements Collidable, Movable {
                 }
             }
         } else if (collided instanceof Wall || collided instanceof Flag) {
-            moveHelper(velocity, collided);
+            moveHelper(collided);
         }
-        lastTime = currentTime;
     }
 
-    private void moveHelper(double velocity, GameObject collided) {
+    protected void moveHelper(GameObject collided) {
         switch (direction) {
             case UP -> upHelper(velocity, collided);
             case DOWN -> downHelper(velocity, collided);

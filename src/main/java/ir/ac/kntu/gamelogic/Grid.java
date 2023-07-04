@@ -5,14 +5,14 @@ import ir.ac.kntu.gamelogic.models.GameObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Board {
+public class Grid {
     private List<GameObject> gameObjects;
 
-    public Board() {
+    public Grid() {
         gameObjects = new ArrayList<>();
     }
 
-    public Board(List<GameObject> gameObjects) {
+    public Grid(List<GameObject> gameObjects) {
         this.gameObjects = new ArrayList<>(gameObjects);
     }
 

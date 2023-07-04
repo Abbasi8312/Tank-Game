@@ -2,7 +2,7 @@ package ir.ac.kntu;
 
 import ir.ac.kntu.gamecontroller.EventHandler;
 import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
-import ir.ac.kntu.gamelogic.services.BoardHandler;
+import ir.ac.kntu.gamelogic.services.GridHandler;
 import ir.ac.kntu.scenes.*;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -60,7 +60,7 @@ public class SceneHandler {
     }
 
     public void game() {
-        BoardHandler.getInstance().init();
+        GridHandler.getInstance().init();
 
         Group root = new Group();
         Scene scene = new Scene(root);
