@@ -1,9 +1,12 @@
 package ir.ac.kntu.gamelogic.models.tanks;
 
 import ir.ac.kntu.gamelogic.gamevariables.GameVariables;
+import ir.ac.kntu.gamelogic.models.elements.Element;
+import ir.ac.kntu.gamelogic.models.elements.Firepower;
+import ir.ac.kntu.gamelogic.models.elements.Health;
 import ir.ac.kntu.gamelogic.models.elements.TimeFreeze;
-import ir.ac.kntu.gamelogic.services.GridHandler;
 import ir.ac.kntu.gamelogic.services.CollisionHandler;
+import ir.ac.kntu.gamelogic.services.GridHandler;
 
 import java.util.Random;
 
@@ -23,6 +26,7 @@ public abstract class LuckyTank extends EnemyTank {
             x = (x + 0.5) * GameVariables.TILE_SIZE;
             y = (y + 0.5) * GameVariables.TILE_SIZE;
         } while (CollisionHandler.getINSTANCE().checkPoint(x, y) != null);
-        GridHandler.getInstance().addGameObject(new TimeFreeze(x, y));
+        Element[] elements = {new TimeFreeze(x, y), new Firepower(x, y), new Health(x, y)};
+        GridHandler.getInstance().addGameObject(elements[random.nextInt(elements.length)]);
     }
 }

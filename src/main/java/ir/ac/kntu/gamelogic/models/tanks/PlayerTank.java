@@ -103,6 +103,7 @@ public class PlayerTank extends Unit {
 
     @Override public void die() {
         super.die();
+        damage = 1;
         SceneHandler.getINSTANCE().gameOver();
     }
 
